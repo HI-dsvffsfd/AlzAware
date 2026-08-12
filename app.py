@@ -257,7 +257,10 @@ def health():
 def test():
     return render_template("test.html")
 
-
+@app.route("/training")
+def training():
+    return render_template("training.html")
+    
 @app.route("/predict", methods=["POST"])
 def predict():
     payload = request.get_json()
