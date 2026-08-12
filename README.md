@@ -107,6 +107,7 @@ Install "Expo Go" in your mobile. This is a software for development testing.
 From the mobile app project folder:
 
 ```bash
+cd .\app\alzheimer-risk-app-latest\
 npm install
 npx expo start
 ```
