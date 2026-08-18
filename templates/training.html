@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlzAware Training</title>
+  <style>
+    :root {
+      --primary: #0f766e;
+      --primary-dark: #0b5f59;
+      --bg: #f6faf9;
+      --text: #111827;
+      --muted: #64748b;
+      --border: #dbe7e5;
+      --card-border: #e5e7eb;
+      --danger: #991b1b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .topNav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navInner {
+      max-width: 980px;
+      min-height: 58px;
+      margin: 0 auto;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brandLink {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .navLinks {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .navLinks a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .brandLink:hover,
+    .navLinks a:hover {
+      color: var(--primary);
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px 18px 40px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .hero,
+    .panel,
+    .card,
+    .resultCard,
+    .reviewCard {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+    }
+
+    .hero {
+      padding: 22px 24px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .note {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 22px;
+    }
+
+    .gameGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .card {
+      padding: 16px;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      border-color: var(--primary);
+      background: #fbfffd;
+    }
+
+    .cardTitle {
+      margin: 0 0 6px;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .cardText {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .panel {
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .progress {
+      margin: 0 0 16px;
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: min(330px, calc(100vw - 36px));
+      height: min(330px, calc(100vw - 36px));
+      margin: 0 auto 16px;
+    }
+
+    .cell {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .cell.active {
+      background: #ecfdf5;
+      border-color: var(--primary);
+    }
+
+    .cell.selected,
+    .cell.reviewActive {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .cell.disabled {
+      cursor: default;
+    }
+
+    .symbolBox {
+      min-height: 150px;
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .symbolLarge {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: 2px;
+    }
+
+    .memoryHint {
+      margin: 0 0 14px;
+      text-align: center;
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 20px;
+    }
+
+    .button {
+      width: 100%;
+      min-height: 54px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .button:hover {
+      background: var(--primary-dark);
+    }
+
+    .button.secondary {
+      background: #ffffff;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .button.secondary:hover {
+      background: #f6faf9;
+    }
+
+    .choice {
+      min-height: 52px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .choice:hover {
+      border-color: var(--primary);
+      background: #f6faf9;
+    }
+
+    .message {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      color: #334155;
+      margin-bottom: 12px;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .answerBox {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .answerBox p {
+      margin: 0 0 6px;
+      color: #334155;
+      font-weight: 800;
+    }
+
+    .resultCard,
+    .reviewCard {
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .scoreText {
+      margin: 0 0 6px;
+      font-size: 18px;
+      line-height: 28px;
+      color: #334155;
+      font-weight: 800;
+    }
+
+    .mistakeItem {
+      border-top: 1px solid var(--card-border);
+      padding-top: 12px;
+      margin-top: 12px;
+    }
+
+    .mistakeTitle {
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .mistakeText {
+      margin: 0 0 4px;
+      font-size: 14px;
+      line-height: 20px;
+      color: #475569;
+    }
+
+    .reviewActions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .modalBackdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      z-index: 20;
+    }
+
+    .modalCard {
+      width: 100%;
+      max-width: 360px;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .modalTitle {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .modalText {
+      margin: 0 0 16px;
+      color: #475569;
+      font-size: 15px;
+      line-height: 22px;
+    }
+
+    .modalActions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .navInner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 18px;
+        gap: 10px;
+      }
+
+      .navLinks {
+        flex-wrap: wrap;
+        gap: 10px 16px;
+      }
+
+      main {
+        padding: 18px 14px 34px;
+      }
+
+      .gameGrid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topNav">
+    <div class="navInner">
+      <a class="brandLink" href="https://www.alzaware.org/">AlzAware</a>
+      <nav class="navLinks">
+        <a href="https://www.alzaware.org/">Home</a>
+        <a href="https://www.alzaware.org/about">About</a>
+        <a href="https://www.alzaware.org/privacy-policy">Privacy Policy</a>
+        <a href="https://www.alzaware.org/contact">Contact</a>
+        <a href="#" id="trainingNav">Training</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="menuView">
+      <div class="hero">
+        <h1>Brain Training</h1>
+        <p class="note">
+          Short cognitive activities for engagement and practice. Each activity has
+          20 rounds. These activities are not medical treatment and do not diagnose,
+          treat, or prevent disease.
+        </p>
+      </div>
+
+      <div class="gameGrid" id="gameMenu"></div>
+    </section>
+
+    <section id="gameView" class="hidden">
+      <div class="panel">
+        <h1 id="gameTitle"></h1>
+        <p class="progress" id="progressText"></p>
+        <div id="gameContent"></div>
+        <div id="messageBox"></div>
+        <button class="button hidden" id="nextRoundButton">Next Round</button>
+        <button class="button secondary" id="backButton">Back to Training</button>
+      </div>
+    </section>
+
+    <section id="summaryView" class="hidden">
+      <div class="resultCard">
+        <h1>Training Complete</h1>
+        <p class="note" id="summaryGameTitle"></p>
+        <p class="scoreText" id="correctText"></p>
+        <p class="scoreText" id="incorrectText"></p>
+        <p class="note">Total: 20 rounds</p>
+      </div>
+
+      <div id="summaryReview"></div>
+
+      <button class="button" id="playAgainButton">Play Again</button>
+      <button class="button secondary" id="summaryBackButton">Back to Training</button>
+    </section>
+
+    <section id="patternReviewView" class="hidden">
+      <div class="resultCard">
+        <h1>Review Wrong Answers</h1>
+        <p class="note" id="reviewRoundText"></p>
+        <p class="mistakeText" id="reviewHelpText"></p>
+      </div>
+
+      <div class="reviewCard">
+        <h2>Correct Pattern</h2>
+        <div id="correctPatternBoard"></div>
+      </div>
+
+      <div class="reviewCard">
+        <h2>Your Answer</h2>
+        <div id="yourPatternBoard"></div>
+      </div>
+
+      <div class="reviewActions">
+        <button class="button secondary" id="reviewBackButton"></button>
+        <button class="button" id="reviewNextButton"></button>
+      </div>
+    </section>
+  </main>
+
+  <div class="modalBackdrop hidden" id="resetModal">
+    <div class="modalCard">
+      <h2 class="modalTitle">Training in Progress</h2>
+      <p class="modalText">
+        Press Continue to reset this activity and return to the main training
+        page, or Cancel to keep your current activity.
+      </p>
+      <div class="modalActions">
+        <button class="button secondary" id="cancelResetButton">Cancel</button>
+        <button class="button" id="continueResetButton">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const PRIMARY = "#0f766e";
+    const TOTAL_ROUNDS = 20;
+    const LETTERS = "BCDFGHJKLMNPQRSTVWXYZ";
+
+    const games = [
+      {
+        key: "pattern",
+        title: "Pattern Recall",
+        subtitle: "Remember highlighted squares, then tap them."
+      },
+      {
+        key: "match",
+        title: "Quick Match",
+        subtitle: "Remember letters, then decide whether the next letters match."
+      },
+      {
+        key: "color",
+        title: "Color Focus",
+        subtitle: "Select the text color, not the word meaning."
+      }
+    ];
+
+    const colors = [
+      { name: "Red", color: "#dc2626" },
+      { name: "Blue", color: "#2563eb" },
+      { name: "Green", color: "#16a34a" },
+      { name: "Yellow", color: "#ca8a04" }
+    ];
+
+    const cellNames = [
+      "top left",
+      "top center",
+      "top right",
+      "middle left",
+      "center",
+      "middle right",
+      "bottom left",
+      "bottom center",
+      "bottom right"
+    ];
+
+    const state = {
+      game: "",
+      round: 1,
+      correct: 0,
+      incorrect: 0,
+      answered: false,
+      finished: false,
+      message: "",
+      mistakes: [],
+      pattern: [],
+      selectedPattern: [],
+      showingPattern: false,
+      sequenceIndex: -1,
+      matchPhase: "previous",
+      previousItem: "",
+      currentItem: "",
+      colorWord: colors[0],
+      textColor: colors[1],
+      timers: [],
+      patternReviewIndex: 0
+    };
+
+    const menuView = document.getElementById("menuView");
+    const gameView = document.getElementById("gameView");
+    const summaryView = document.getElementById("summaryView");
+    const patternReviewView = document.getElementById("patternReviewView");
+    const gameMenu = document.getElementById("gameMenu");
+    const gameTitle = document.getElementById("gameTitle");
+    const progressText = document.getElementById("progressText");
+    const gameContent = document.getElementById("gameContent");
+    const messageBox = document.getElementById("messageBox");
+    const nextRoundButton = document.getElementById("nextRoundButton");
+    const backButton = document.getElementById("backButton");
+    const resetModal = document.getElementById("resetModal");
+
+    function randomItem(items) {
+      return items[Math.floor(Math.random() * items.length)];
+    }
+
+    function shuffle(items) {
+      return [...items].sort(() => Math.random() - 0.5);
+    }
+
+    function randomLetters(length) {
+      return Array.from({ length })
+        .map(() => LETTERS[Math.floor(Math.random() * LETTERS.length)])
+        .join("");
+    }
+
+    function randomDifferentLetters(length, previous) {
+      let next = randomLetters(length);
+      let attempts = 0;
+
+      while (next === previous && attempts < 20) {
+        next = randomLetters(length);
+        attempts += 1;
+      }
+
+      if (next !== previous) {
+        return next;
+      }
+
+      return `${previous.slice(0, -1)}${previous.endsWith("X") ? "Z" : "X"}`;
+    }
+
+    function buildPattern(round) {
+      const count = round <= 7 ? 3 : round <= 14 ? 4 : 5;
+      return shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8]).slice(0, count);
+    }
+
+    function patternToText(pattern) {
+      return pattern.map((index) => cellNames[index]).join(", ");
+    }
+
+    function getMatchLength(round) {
+      if (round <= 10) return 1;
+      if (round <= 15) return 3;
+      return 5;
+    }
+
+    function getMatchMemoryMs(round) {
+      if (round <= 10) return 1200;
+      if (round <= 15) return 1700;
+      return 2200;
+    }
+
+    function clearTimers() {
+      state.timers.forEach((timer) => clearTimeout(timer));
+      state.timers = [];
+    }
+
+    function showView(view) {
+      [menuView, gameView, summaryView, patternReviewView].forEach((item) => {
+        item.classList.add("hidden");
+      });
+
+      view.classList.remove("hidden");
+    }
+
+    function currentGame() {
+      return games.find((item) => item.key === state.game);
+    }
+
+    function patternMistakes() {
+      return state.mistakes.filter(
+        (item) =>
+          item.gameKey === "pattern" &&
+          Array.isArray(item.expectedPattern) &&
+          Array.isArray(item.answerPattern)
+      );
+    }
+
+    function resetToMenu() {
+      clearTimers();
+      state.game = "";
+      state.round = 1;
+      state.correct = 0;
+      state.incorrect = 0;
+      state.answered = false;
+      state.finished = false;
+      state.message = "";
+      state.mistakes = [];
+      state.pattern = [];
+      state.selectedPattern = [];
+      state.showingPattern = false;
+      state.sequenceIndex = -1;
+      state.matchPhase = "previous";
+      state.previousItem = "";
+      state.currentItem = "";
+      state.colorWord = colors[0];
+      state.textColor = colors[1];
+      state.patternReviewIndex = 0;
+      resetModal.classList.add("hidden");
+      renderMenu();
+      showView(menuView);
+    }
+
+    function showResetPrompt() {
+      resetModal.classList.remove("hidden");
+    }
+
+    function requestBackToTraining() {
+      if (state.game && !state.finished) {
+        showResetPrompt();
+        return;
+      }
+
+      resetToMenu();
+    }
+
+    function renderMenu() {
+      gameMenu.innerHTML = "";
+
+      games.forEach((item) => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "card";
+        card.innerHTML = `
+          <p class="cardTitle">${item.title}</p>
+          <p class="cardText">${item.subtitle}</p>
+        `;
+        card.addEventListener("click", () => startGame(item.key));
+        gameMenu.appendChild(card);
+      });
+    }
+
+    function startGame(nextGame) {
+      clearTimers();
+      state.game = nextGame;
+      state.round = 1;
+      state.correct = 0;
+      state.incorrect = 0;
+      state.answered = false;
+      state.finished = false;
+      state.message = "";
+      state.mistakes = [];
+      state.patternReviewIndex = 0;
+
+      if (nextGame === "pattern") {
+        state.pattern = buildPattern(1);
+        state.selectedPattern = [];
+        renderGame();
+        startPatternDisplay();
+      }
+
+      if (nextGame === "match") {
+        setupMatchRound(1);
+      }
+
+      if (nextGame === "color") {
+        setupColorRound();
+        renderGame();
+      }
+
+      showView(gameView);
+    }
+
+    function startPatternDisplay() {
+      clearTimers();
+      state.selectedPattern = [];
+
+      if (state.round <= 10) {
+        state.showingPattern = true;
+        state.sequenceIndex = -1;
+        renderGame();
+
+        state.timers.push(
+          setTimeout(() => {
+            state.showingPattern = false;
+            renderGame();
+          }, 1200)
+        );
+
+        return;
+      }
+
+      state.showingPattern = true;
+      state.sequenceIndex = 0;
+      renderGame();
+
+      state.pattern.forEach((_, index) => {
+        state.timers.push(
+          setTimeout(() => {
+            state.sequenceIndex = index;
+            renderGame();
+          }, index * 650)
+        );
+      });
+
+      state.timers.push(
+        setTimeout(() => {
+          state.showingPattern = false;
+          state.sequenceIndex = -1;
+          renderGame();
+        }, state.pattern.length * 650 + 250)
+      );
+    }
+
+    function setupMatchRound(nextRound) {
+      clearTimers();
+      const length = getMatchLength(nextRound);
+      const previous = randomLetters(length);
+      const shouldMatch = Math.random() < 0.5;
+      const current = shouldMatch ? previous : randomDifferentLetters(length, previous);
+
+      state.previousItem = previous;
+      state.currentItem = current;
+      state.matchPhase = "previous";
+
+      renderGame();
+
+      state.timers.push(
+        setTimeout(() => {
+          if (state.game === "match" && !state.answered && !state.finished) {
+            state.matchPhase = "current";
+            renderGame();
+          }
+        }, getMatchMemoryMs(nextRound))
+      );
+    }
+
+    function setupColorRound() {
+      state.colorWord = randomItem(colors);
+      state.textColor = randomItem(colors);
+    }
+
+    function recordAnswer(isCorrect, mistake) {
+      if (state.answered || state.finished) {
+        return;
+      }
+
+      if (isCorrect) {
+        state.correct += 1;
+        state.message = "Correct.";
+      } else {
+        state.incorrect += 1;
+        state.mistakes.push(mistake);
+        state.message = "Good try. Review this question at the end.";
+      }
+
+      state.answered = true;
+
+      if (state.round >= TOTAL_ROUNDS) {
+        state.finished = true;
+        renderSummary();
+        showView(summaryView);
+        return;
+      }
+
+      renderGame();
+    }
+
+    function nextRound() {
+      clearTimers();
+      state.round += 1;
+      state.answered = false;
+      state.message = "";
+
+      if (state.game === "pattern") {
+        state.pattern = buildPattern(state.round);
+        state.selectedPattern = [];
+        renderGame();
+        startPatternDisplay();
+      }
+
+      if (state.game === "match") {
+        setupMatchRound(state.round);
+      }
+
+      if (state.game === "color") {
+        setupColorRound();
+        renderGame();
+      }
+    }
+
+    function renderBoard(options) {
+      const {
+        pattern = [],
+        selected = [],
+        mode = "set",
+        showing = false,
+        sequenceIndex = -1,
+        clickable = false,
+        review = false
+      } = options;
+
+      const board = document.createElement("div");
+      board.className = "board";
+
+      for (let index = 0; index < 9; index += 1) {
+        const cell = document.createElement("button");
+        cell.type = "button";
+        cell.className = "cell";
+
+        const activeInGame =
+          showing &&
+          (mode === "set"
+            ? pattern.includes(index)
+            : pattern[sequenceIndex] === index);
+
+        const selectedInGame = selected.includes(index);
+        const activeInReview = review && pattern.includes(index);
+
+        if (activeInGame) cell.classList.add("active");
+        if (selectedInGame) cell.classList.add("selected");
+        if (activeInReview) cell.classList.add("reviewActive");
+        if (!clickable) cell.classList.add("disabled");
+
+        if (review && mode === "sequence" && activeInReview) {
+          cell.textContent = String(pattern.indexOf(index) + 1);
+        }
+
+        if (clickable) {
+          cell.addEventListener("click", () => tapPatternCell(index));
+        }
+
+        board.appendChild(cell);
+      }
+
+      return board;
+    }
+
+    function tapPatternCell(index) {
+      if (
+        state.showingPattern ||
+        state.answered ||
+        state.finished ||
+        state.selectedPattern.includes(index)
+      ) {
+        return;
+      }
+
+      state.selectedPattern.push(index);
+
+      if (state.selectedPattern.length !== state.pattern.length) {
+        renderGame();
+        return;
+      }
+
+      const isCorrect =
+        state.round <= 10
+          ? state.pattern.every((item) => state.selectedPattern.includes(item)) &&
+            state.selectedPattern.every((item) => state.pattern.includes(item))
+          : state.pattern.every(
+              (item, itemIndex) => item === state.selectedPattern[itemIndex]
+            );
+
+      recordAnswer(isCorrect, {
+        game: "Pattern Recall",
+        gameKey: "pattern",
+        round: state.round,
+        mode: state.round <= 10 ? "set" : "sequence",
+        expectedPattern: [...state.pattern],
+        answerPattern: [...state.selectedPattern],
+        expected: patternToText(state.pattern),
+        answer: patternToText(state.selectedPattern)
+      });
+    }
+
+    function answerMatch(answerSame) {
+      const expectedSame = state.previousItem === state.currentItem;
+
+      recordAnswer(expectedSame === answerSame, {
+        game: "Quick Match",
+        round: state.round,
+        expected: expectedSame ? "Same" : "Different",
+        answer: answerSame ? "Same" : "Different",
+        detail: `Previous: ${state.previousItem}; Current: ${state.currentItem}`
+      });
+    }
+
+    function answerColor(choice) {
+      recordAnswer(choice === state.textColor.name, {
+        game: "Color Focus",
+        round: state.round,
+        expected: state.textColor.name,
+        answer: choice,
+        detail: `Word shown: ${state.colorWord.name}`
+      });
+    }
+
+    function renderGame() {
+      const game = currentGame();
+      gameTitle.textContent = game.title;
+      progressText.textContent = `Round ${state.round} of ${TOTAL_ROUNDS} | Correct ${state.correct}`;
+      messageBox.innerHTML = state.message
+        ? `<div class="message">${state.message}</div>`
+        : "";
+
+      nextRoundButton.classList.toggle("hidden", !state.answered);
+      gameContent.innerHTML = "";
+
+      if (state.game === "pattern") {
+        const note = document.createElement("p");
+        note.className = "note";
+        note.textContent =
+          state.round <= 10
+            ? state.showingPattern
+              ? "Remember the highlighted squares."
+              : "Now tap the squares you remember."
+            : state.showingPattern
+              ? "Remember the order of the highlighted squares."
+              : "Now tap the squares in the same order.";
+
+        gameContent.appendChild(note);
+        gameContent.appendChild(
+          renderBoard({
+            pattern: state.pattern,
+            selected: state.selectedPattern,
+            mode: state.round <= 10 ? "set" : "sequence",
+            showing: state.showingPattern,
+            sequenceIndex: state.sequenceIndex,
+            clickable: !state.showingPattern && !state.answered
+          })
+        );
+      }
+
+      if (state.game === "match") {
+        if (state.matchPhase === "previous") {
+          gameContent.innerHTML = `
+            <p class="note">Remember these letters.</p>
+            <div class="symbolBox">
+              <div class="symbolLarge">${state.previousItem}</div>
+            </div>
+            <p class="memoryHint">Current letters will appear automatically.</p>
+          `;
+        } else {
+          gameContent.innerHTML = `
+            <p class="note">Are these letters the same as the previous letters?</p>
+            <div class="symbolBox">
+              <div class="symbolLarge">${state.currentItem}</div>
+            </div>
+          `;
+
+          if (!state.answered) {
+            const sameButton = document.createElement("button");
+            sameButton.className = "button";
+            sameButton.textContent = "Same";
+            sameButton.addEventListener("click", () => answerMatch(true));
+
+            const differentButton = document.createElement("button");
+            differentButton.className = "button secondary";
+            differentButton.textContent = "Different";
+            differentButton.addEventListener("click", () => answerMatch(false));
+
+            gameContent.appendChild(sameButton);
+            gameContent.appendChild(differentButton);
+          } else {
+            gameContent.innerHTML += `
+              <div class="answerBox">
+                <p>Previous: ${state.previousItem}</p>
+                <p>Current: ${state.currentItem}</p>
+              </div>
+            `;
+          }
+        }
+      }
+
+      if (state.game === "color") {
+        gameContent.innerHTML = `
+          <p class="note">Select the color of the text.</p>
+          <div class="symbolBox">
+            <div class="symbolLarge" style="color: ${state.textColor.color}">
+              ${state.colorWord.name}
+            </div>
+          </div>
+        `;
+
+        colors.forEach((item) => {
+          const choice = document.createElement("button");
+          choice.className = "choice";
+          choice.style.color = item.color;
+          choice.textContent = item.name;
+          choice.disabled = state.answered;
+          choice.addEventListener("click", () => answerColor(item.name));
+          gameContent.appendChild(choice);
+        });
+      }
+    }
+
+    function renderSummary() {
+      document.getElementById("summaryGameTitle").textContent = currentGame().title;
+      document.getElementById("correctText").textContent = `Correct: ${state.correct}`;
+      document.getElementById("incorrectText").textContent = `Incorrect: ${state.incorrect}`;
+
+      const summaryReview = document.getElementById("summaryReview");
+      summaryReview.innerHTML = "";
+
+      if (state.mistakes.length === 0) {
+        summaryReview.innerHTML = `<div class="message">No missed questions.</div>`;
+        return;
+      }
+
+      if (state.game === "pattern") {
+        summaryReview.innerHTML = `
+          <div class="reviewCard">
+            <h2>Would you like to review the wrong ones?</h2>
+            <p class="mistakeText">
+              Review each missed Pattern Recall round with the correct pattern and
+              your answer shown as grids.
+            </p>
+            <button class="button" id="reviewPatternButton">Review Wrong Answers</button>
+          </div>
+        `;
+
+        document.getElementById("reviewPatternButton").addEventListener("click", () => {
+          state.patternReviewIndex = 0;
+          renderPatternReview();
+          showView(patternReviewView);
+        });
+
+        return;
+      }
+
+      const card = document.createElement("div");
+      card.className = "reviewCard";
+      card.innerHTML = `<h2>Missed Questions</h2>`;
+
+      state.mistakes.forEach((item, index) => {
+        const mistake = document.createElement("div");
+        mistake.className = "mistakeItem";
+        mistake.innerHTML = `
+          <p class="mistakeTitle">Round ${item.round}: ${item.game}</p>
+          ${item.detail ? `<p class="mistakeText">${item.detail}</p>` : ""}
+          <p class="mistakeText">Correct answer: ${item.expected}</p>
+          <p class="mistakeText">Your answer: ${item.answer}</p>
+        `;
+        card.appendChild(mistake);
+      });
+
+      summaryReview.appendChild(card);
+    }
+
+    function renderPatternReview() {
+      const items = patternMistakes();
+      const item = items[state.patternReviewIndex];
+
+      document.getElementById("reviewRoundText").textContent =
+        `Pattern Recall | Round ${item.round} of ${TOTAL_ROUNDS}`;
+
+      document.getElementById("reviewHelpText").textContent =
+        item.mode === "sequence"
+          ? "Order matters. The numbers show the tap sequence."
+          : "These are the squares that were highlighted.";
+
+      const correctBoard = document.getElementById("correctPatternBoard");
+      const yourBoard = document.getElementById("yourPatternBoard");
+
+      correctBoard.innerHTML = "";
+      yourBoard.innerHTML = "";
+
+      correctBoard.appendChild(
+        renderBoard({
+          pattern: item.expectedPattern,
+          mode: item.mode,
+          review: true
+        })
+      );
+
+      yourBoard.appendChild(
+        renderBoard({
+          pattern: item.answerPattern,
+          mode: item.mode,
+          review: true
+        })
+      );
+
+      const isFirst = state.patternReviewIndex === 0;
+      const isLast = state.patternReviewIndex === items.length - 1;
+
+      const backButton = document.getElementById("reviewBackButton");
+      const nextButton = document.getElementById("reviewNextButton");
+
+      backButton.textContent = isFirst ? "Back to Summary" : "Back";
+      nextButton.textContent = isLast ? "Done" : "Next";
+    }
+
+    gameMenu.addEventListener("click", (event) => {
+      const key = event.target.closest("[data-game]")?.dataset.game;
+      if (key) startGame(key);
+    });
+
+    nextRoundButton.addEventListener("click", nextRound);
+    backButton.addEventListener("click", requestBackToTraining);
+
+    document.getElementById("playAgainButton").addEventListener("click", () => {
+      startGame(state.game);
+    });
+
+    document.getElementById("summaryBackButton").addEventListener("click", resetToMenu);
+
+    document.getElementById("reviewBackButton").addEventListener("click", () => {
+      if (state.patternReviewIndex === 0) {
+        renderSummary();
+        showView(summaryView);
+        return;
+      }
+
+      state.patternReviewIndex -= 1;
+      renderPatternReview();
+    });
+
+    document.getElementById("reviewNextButton").addEventListener("click", () => {
+      const items = patternMistakes();
+
+      if (state.patternReviewIndex >= items.length - 1) {
+        renderSummary();
+        showView(summaryView);
+        return;
+      }
+
+      state.patternReviewIndex += 1;
+      renderPatternReview();
+    });
+
+    document.getElementById("trainingNav").addEventListener("click", (event) => {
+      event.preventDefault();
+
+      if (state.game && !state.finished) {
+        showResetPrompt();
+        return;
+      }
+
+      resetToMenu();
+    });
+
+    document.getElementById("cancelResetButton").addEventListener("click", () => {
+      resetModal.classList.add("hidden");
+    });
+
+    document.getElementById("continueResetButton").addEventListener("click", resetToMenu);
+
+    renderMenu();
+  </script>
+</body>
+</html>

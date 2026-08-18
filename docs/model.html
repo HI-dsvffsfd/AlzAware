@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Model | AlzAware</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-shell">
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt="AlzAware logo" /><span>AlzAware</span></a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="innovation.html">Innovation</a>
+      <a class="active" href="model.html">Model</a>
+      <a href="business.html">Business</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a class="nav-cta" href="assessment.html">Start Assessment</a>
+  </div>
+</header>
+
+<main class="page">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Model approach</p>
+      <h1>Machine learning made interpretable for public risk awareness</h1>
+      <p class="lead">
+        AlzAware uses demographic information, education, medication count, and self-reported medical history to generate a model-based reference score.
+      </p>
+      <p class="lead">
+        The score is designed to support triage and awareness, not to replace clinical cognitive testing.
+      </p>
+    </div>
+
+    <div class="visual-board">
+      <div class="mock-window">
+        <div class="mock-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="mock-body">
+          <p class="eyebrow">Model pipeline</p>
+          <div class="timeline">
+            <div class="timeline-item"><h3>Input features</h3><p>Questionnaire and health-history variables.</p></div>
+            <div class="timeline-item"><h3>XGBoost model</h3><p>Trained on processed matrix data with one-hot encoded predictors.</p></div>
+            <div class="timeline-item"><h3>Reference output</h3><p>Score compared with AD and non-AD groups.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft sky">
+    <div class="section-head">
+      <p class="eyebrow">Technical foundation</p>
+      <h2>Two model versions for comparison</h2>
+      <p>
+        The project evaluates both a full model with cognitive game variables and a questionnaire-only model without game variables. This helps determine whether short digital cognitive tasks add meaningful predictive value.
+      </p>
+    </div>
+
+    <div class="card-grid two">
+      <div class="card">
+        <h3>With-game model</h3>
+        <p>Uses 26 original predictors, including reaction-time and memory-game performance variables after preprocessing.</p>
+      </div>
+      <div class="card">
+        <h3>Without-game model</h3>
+        <p>Uses 24 original predictors and supports a simpler assessment flow when game data is unavailable.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="split">
+      <div>
+        <p class="eyebrow">Evaluation</p>
+        <h2>Why AUC matters more than raw accuracy</h2>
+        <p>
+          Alzheimer’s datasets often contain many more non-AD observations than AD observations. In this setting, raw accuracy can look high even when a model misses many AD cases.
+        </p>
+        <p>
+          AlzAware therefore emphasizes ROC-AUC and reference-score behavior, which better measure how well the model separates higher-risk and lower-risk individuals.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Primary reporting metrics</h3>
+        <p>ROC-AUC for discrimination, train/test comparison for generalization, and score distribution analysis for interpretability.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="section-head">
+      <p class="eyebrow">Output design</p>
+      <h2>The score is useful because it is contextualized</h2>
+      <p>
+        The final user-facing output avoids unsupported diagnostic language. It explains that a higher score means higher model-estimated risk, then compares the user’s score with people in the AD and non-AD reference groups.
+      </p>
+    </div>
+    <div class="callout">
+      <p>
+        “Higher score means more model-estimated risk of AD. In a large reference dataset, xx% of AD participants and yy% of non-AD participants had scores higher than yours.”
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p><a href="contact.html">alzaware.info@gmail.com</a></p>
+  <p>© 2026 AlzAware. All rights reserved.</p>
+</footer>
+</body>
+</html>
