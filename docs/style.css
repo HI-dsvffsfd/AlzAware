@@ -485,3 +485,37 @@ p {
     padding-right: 28px;
   }
 }
+
+.team-section p + p {
+  margin-top: 22px;
+}
+
+.team-visual {
+  background: #eaf8f2;
+  border: 1px solid #9ee7dd;
+  border-radius: 8px;
+  padding: 48px;
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+}
+
+.team-visual img {
+  width: min(260px, 80%);
+  height: auto;
+  object-fit: contain;
+}
+
+.educational-note {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+}
+
+.educational-note h2 {
+  color: #101827;
+}
+
+.educational-note p {
+  color: #2f4156;
+}
