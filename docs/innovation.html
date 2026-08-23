@@ -9,16 +9,18 @@
 <body>
 <header class="site-header">
   <div class="nav-shell">
-    <a class="brand" href="index.html"><img src="assets/logo.png" alt="AlzAware logo" /><span>AlzAware</span></a>
-      <nav class="site-nav">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a class="active" href="innovation.html">Innovation</a>
-          <a href="model.html">Model</a>
-          <a href="assessment.html">Assessment</a>
-          <a href="business.html">Business</a>
-          <a href="privacy.html">Privacy</a>
-      </nav>
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="AlzAware logo" />
+      <span>AlzAware</span>
+    </a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a class="active" href="innovation.html">Innovation</a>
+      <a href="model.html">Model</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="business.html">Business</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
   </div>
 </header>
 
@@ -28,15 +30,42 @@
       <p class="eyebrow">Innovation overview</p>
       <h1>Digital triage for earlier Alzheimer’s risk awareness</h1>
       <p class="lead">
-        AlzAware transforms self-reported health information into an interpretable reference score, helping users understand relative cognitive risk before deciding whether to seek formal evaluation.
+        AlzAware helps users understand early Alzheimer’s risk signals through a short health-history assessment and a model-based reference result.
+      </p>
+      <p class="lead">
+        Instead of giving a diagnosis, the platform compares each result with AD and non-AD populations in a large reference dataset.
       </p>
     </div>
 
     <div class="workflow">
-      <div class="step"><div class="step-number">1</div><div><h3>Questionnaire</h3><p>Age, education, medications, and self-reported medical history.</p></div></div>
-      <div class="step"><div class="step-number">2</div><div><h3>Model score</h3><p>A trained machine-learning model estimates a risk-reference score.</p></div></div>
-      <div class="step"><div class="step-number">3</div><div><h3>Reference comparison</h3><p>The score is compared with AD and non-AD populations.</p></div></div>
-      <div class="step"><div class="step-number">4</div><div><h3>Next step</h3><p>Users receive responsible, educational guidance to consider professional follow-up.</p></div></div>
+      <div class="step">
+        <div class="step-number">1</div>
+        <div>
+          <h3>Questionnaire</h3>
+          <p>Users enter age, education, medication count, and self-reported medical history.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div>
+          <h3>Model score</h3>
+          <p>A trained machine-learning model generates a cognitive risk reference score.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div>
+          <h3>Reference comparison</h3>
+          <p>The score is compared with AD and non-AD groups from the reference dataset.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div>
+          <h3>Next step</h3>
+          <p>Users receive responsible guidance about whether professional follow-up may be worth considering.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -46,13 +75,16 @@
         <p class="eyebrow">The problem</p>
         <h2>Early cognitive changes are often noticed too late</h2>
         <p>
-          Formal cognitive evaluation can be expensive, time-consuming, and difficult to access, especially for rural communities, under-resourced clinics, and senior-care facilities. As a result, many people wait until symptoms interfere with daily life before seeking help.
+          Formal cognitive evaluation can be expensive, time-consuming, and difficult to access, especially for rural communities, under-resourced clinics, and senior-care facilities.
+        </p>
+        <p>
+          As a result, many people wait until memory or attention changes begin to affect daily life before seeking help.
         </p>
       </div>
       <div class="card">
         <h3>The gap</h3>
         <p>
-          Healthcare systems need a low-cost, scalable way to support early risk awareness without overclaiming diagnosis or replacing professional assessment.
+          Healthcare systems need a low-cost, scalable first step that supports early awareness without replacing professional assessment.
         </p>
       </div>
     </div>
@@ -62,21 +94,83 @@
     <div class="split">
       <div>
         <p class="eyebrow">Our solution</p>
-        <h2>A reference-based score that users can understand</h2>
+        <h2>A reference-based result that users can understand</h2>
         <p>
-          AlzAware does not simply tell users a raw probability. It contextualizes the score by showing how many people with AD and without AD in a large reference dataset had higher scores.
+          AlzAware does not simply return a raw diagnosis or unsupported probability. It contextualizes the user’s model-based score by comparing it with people with AD and without AD in a reference dataset.
         </p>
         <p>
-          This makes the output easier to interpret and safer for public communication: the result becomes a comparative risk-awareness signal, not a diagnosis.
+          This makes the result easier to interpret and safer for public communication: the output becomes a comparative risk-awareness signal, not a medical conclusion.
         </p>
       </div>
 
       <div class="visual-board">
         <h3>Example output</h3>
-        <p>Higher score means more model-estimated risk of AD.</p>
-        <div class="score">0.0100</div>
+        <p>Higher score means higher model-estimated risk of Alzheimer’s disease.</p>
+        <div class="score">42%</div>
         <p>
-          In a large reference dataset, 58% of AD participants and 14% of non-AD participants had scores higher than yours.
+          In our reference dataset, your score is higher than 42% of AD participants and 18% of non-AD participants.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="section-head">
+      <p class="eyebrow">Mission, vision, values</p>
+      <h2>Designed for awareness, not diagnosis</h2>
+      <p>
+        AlzAware is built around a clear boundary: it helps people understand model-based cognitive risk signals and decide whether professional evaluation may be worth considering.
+      </p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>Mission</h3>
+        <p>
+          Make early cognitive risk awareness easier to access through a simple digital assessment and interpretable model output.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Vision</h3>
+        <p>
+          Create a scalable triage layer that helps families, clinics, and care organizations identify cognitive risk earlier.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Values</h3>
+        <p>
+          Accessibility, transparency, privacy, responsible AI, and respect for the difference between risk awareness and medical diagnosis.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <p class="eyebrow">Who it helps</p>
+      <h2>A first-step tool for families, clinics, and senior-care settings</h2>
+      <p>
+        AlzAware is designed for people and organizations that may not have immediate access to formal neuropsychological testing but still need a responsible way to start the conversation.
+      </p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>Older adults and families</h3>
+        <p>
+          Users can better understand whether their health profile suggests a reason to discuss cognitive concerns with a healthcare professional.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Primary-care clinics</h3>
+        <p>
+          Clinics can use a short digital tool to support triage conversations and prioritize follow-up when formal testing capacity is limited.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Senior-care organizations</h3>
+        <p>
+          Facilities can use repeatable digital assessments to support routine cognitive risk awareness and care navigation.
         </p>
       </div>
     </div>
@@ -87,22 +181,28 @@
       <p class="eyebrow">Prototype</p>
       <h2>Built as a working digital system</h2>
       <p>
-        The current prototype includes a public website, browser assessment page, cloud-hosted prediction backend, and trained model files that produce a reference score.
+        The current prototype includes a public website, browser assessment page, cloud-hosted prediction backend, and trained model files that produce a reference result.
       </p>
     </div>
 
     <div class="card-grid">
       <div class="card">
         <h3>Public website</h3>
-        <p>Communicates the mission, feasibility, responsible-use boundaries, and public health value of the project.</p>
+        <p>
+          Communicates the mission, feasibility, responsible-use boundaries, and public health value of the project.
+        </p>
       </div>
       <div class="card">
         <h3>Assessment tool</h3>
-        <p>Collects user-selected demographic and health-history inputs through a simple browser interface.</p>
+        <p>
+          Collects user-selected demographic and health-history inputs through a simple browser interface.
+        </p>
       </div>
       <div class="card">
         <h3>Prediction backend</h3>
-        <p>Runs the trained model and returns reference-population comparisons through an API-style workflow.</p>
+        <p>
+          Runs the trained model and returns reference-population comparisons through an API-style workflow.
+        </p>
       </div>
     </div>
   </section>
@@ -117,9 +217,18 @@
         </p>
       </div>
       <div class="metric-strip">
-        <div class="metric"><strong>3-5 min</strong><p>Target assessment time</p></div>
-        <div class="metric"><strong>250K+</strong><p>Reference-scale records used in development</p></div>
-        <div class="metric"><strong>Low cost</strong><p>Digital delivery with minimal marginal cost</p></div>
+        <div class="metric">
+          <strong>3-5 min</strong>
+          <p>Target assessment time</p>
+        </div>
+        <div class="metric">
+          <strong>250K+</strong>
+          <p>Reference-scale records used in development</p>
+        </div>
+        <div class="metric">
+          <strong>Low cost</strong>
+          <p>Digital delivery with minimal marginal cost</p>
+        </div>
       </div>
     </div>
   </section>
