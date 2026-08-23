@@ -272,6 +272,11 @@
       padding: 0;
     }
 
+    .modal-close:hover {
+      background: transparent;
+      color: #0f766e;
+    }
+
     .modal-header {
       text-align: center;
       margin-bottom: 24px;
@@ -301,10 +306,6 @@
       line-height: 1.65;
       margin: 0 0 12px;
       color: #2f4156;
-    }
-
-    .result-summary p:last-child {
-      margin-bottom: 0;
     }
 
     .percent-row {
@@ -427,6 +428,8 @@
     .modal-actions {
       display: flex;
       justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
       margin-top: 24px;
     }
 
@@ -434,16 +437,29 @@
       width: auto;
       min-height: 44px;
       padding: 0 22px;
-      border: 0;
       border-radius: 8px;
-      background: #0f766e;
-      color: #ffffff;
       font-weight: 900;
       cursor: pointer;
     }
 
-    .modal-actions button:hover {
+    .btn-modal-primary {
+      border: 0;
+      background: #0f766e;
+      color: #ffffff;
+    }
+
+    .btn-modal-primary:hover {
       background: #0b5f59;
+    }
+
+    .btn-modal-secondary {
+      background: #ffffff;
+      color: #0f766e;
+      border: 1px solid #0f766e;
+    }
+
+    .btn-modal-secondary:hover {
+      background: #eaf8f2;
     }
 
     @media (max-width: 720px) {
@@ -677,7 +693,12 @@
     </div>
 
     <div class="modal-actions">
-      <button id="closeModalBottom" type="button">Close</button>
+      <button class="btn-modal-secondary" id="newAssessmentButton" type="button">
+        Start new assessment
+      </button>
+      <button class="btn-modal-primary" id="closeModalBottom" type="button">
+        Close
+      </button>
     </div>
   </div>
 </div>
@@ -745,6 +766,7 @@
   const guidanceText = document.getElementById("guidanceText");
   const closeModalTop = document.getElementById("closeModalTop");
   const closeModalBottom = document.getElementById("closeModalBottom");
+  const newAssessmentButton = document.getElementById("newAssessmentButton");
 
   function validateAge() {
     const age = Number(ageInput.value);
@@ -801,11 +823,13 @@
   function openModal() {
     resultModal.classList.add("show");
     resultModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
   }
 
   function closeModal() {
     resultModal.classList.remove("show");
     resultModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
   }
 
   function showResult(result) {
@@ -830,6 +854,30 @@
         adBar.style.width = `${adPercent}%`;
         nonAdBar.style.width = `${nonAdPercent}%`;
       });
+    });
+  }
+
+  function startNewAssessment() {
+    const form = document.getElementById("riskForm");
+
+    form.reset();
+    ageError.style.display = "none";
+    ageInput.setCustomValidity("");
+
+    errorBox.style.display = "none";
+    errorBox.textContent = "";
+
+    adBar.style.width = "0%";
+    nonAdBar.style.width = "0%";
+
+    submitButton.disabled = false;
+    submitButton.textContent = "Calculate Reference Score";
+
+    closeModal();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
     });
   }
 
@@ -882,6 +930,7 @@
 
   closeModalTop.addEventListener("click", closeModal);
   closeModalBottom.addEventListener("click", closeModal);
+  newAssessmentButton.addEventListener("click", startNewAssessment);
 
   resultModal.addEventListener("click", (event) => {
     if (event.target === resultModal) {
