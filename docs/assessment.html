@@ -493,6 +493,38 @@
         font-size: 26px;
       }
     }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .modal-actions button {
+      width: auto;
+      min-width: 120px;
+    }
+
+    .btn-modal-primary {
+      background: #0f766e;
+      color: #ffffff;
+    }
+
+    .btn-modal-primary:hover {
+      background: #0b5f59;
+    }
+
+    .btn-modal-secondary {
+      background: #ffffff;
+      color: #0f766e;
+      border: 1px solid #0f766e;
+    }
+
+    .btn-modal-secondary:hover {
+      background: #eaf8f2;
+    }
   </style>
 </head>
 <body>
@@ -676,9 +708,14 @@
       <p id="guidanceText"></p>
     </div>
 
-    <div class="modal-actions">
-      <button id="closeModalBottom" type="button">Close</button>
-    </div>
+      <div class="modal-actions">
+          <button class="btn-modal-secondary" id="newAssessmentButton" type="button">
+              Start new assessment
+          </button>
+          <button class="btn-modal-primary" id="closeResultButton" type="button">
+              Close
+          </button>
+      </div>
   </div>
 </div>
 
@@ -735,6 +772,9 @@
   const ageInput = document.getElementById("ageInput");
   const ageError = document.getElementById("ageError");
   const submitButton = document.getElementById("submitButton");
+  const resultModal = document.getElementById("resultModal");
+  const closeResultButton = document.getElementById("closeResultButton");
+  const newAssessmentButton = document.getElementById("newAssessmentButton");
   const errorBox = document.getElementById("errorBox");
 
   const resultModal = document.getElementById("resultModal");
@@ -894,6 +934,43 @@
       closeModal();
     }
   });
+
+    function closeResultModal() {
+      resultModal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+
+    function startNewAssessment() {
+      const form = document.getElementById("riskForm");
+      const errorBox = document.getElementById("errorBox");
+
+      form.reset();
+
+      ageError.style.display = "none";
+      ageInput.setCustomValidity("");
+
+      errorBox.style.display = "none";
+      errorBox.textContent = "";
+
+      submitButton.disabled = false;
+      submitButton.textContent = "Calculate Reference Score";
+
+      closeResultModal();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    closeResultButton.addEventListener("click", closeResultModal);
+    newAssessmentButton.addEventListener("click", startNewAssessment);
+
+    resultModal.addEventListener("click", (event) => {
+      if (event.target === resultModal) {
+        closeResultModal();
+      }
+    });
 </script>
 </body>
 </html>
