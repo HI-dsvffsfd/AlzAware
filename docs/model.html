@@ -5,20 +5,305 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Model | AlzAware</title>
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .demo-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .demo-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .demo-pill {
+      background: #ffffff;
+      border: 1px solid #d8e5e2;
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .demo-pill strong {
+      display: block;
+      color: #0f766e;
+      font-size: 13px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .demo-pill span {
+      color: #2f4156;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .demo-action-card {
+      background: #ffffff;
+      border: 1px solid #d8e5e2;
+      border-radius: 8px;
+      padding: 26px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .demo-action-card p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .demo-button {
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      border-radius: 8px;
+      background: #0f766e;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .demo-button:hover {
+      background: #0b5f59;
+    }
+
+    .demo-button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.55);
+      z-index: 100;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .result-modal {
+      width: min(760px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 32px;
+      box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      border: 0;
+      background: transparent;
+      color: #64748b;
+      font-size: 30px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .modal-header h2 {
+      margin-bottom: 8px;
+      color: #101827;
+    }
+
+    .modal-header p {
+      font-size: 16px;
+      color: #687789;
+    }
+
+    .score-display {
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    .score-display strong {
+      display: block;
+      color: #0f766e;
+      font-size: 48px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .score-display span {
+      color: #687789;
+      font-size: 15px;
+    }
+
+    .result-text {
+      background: #f7fbfa;
+      border: 1px solid #d8e5e2;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 22px;
+    }
+
+    .result-text p {
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .comparison-bars {
+      display: grid;
+      gap: 18px;
+      margin: 22px 0;
+    }
+
+    .comparison-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: #2f4156;
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .comparison-track {
+      height: 14px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .comparison-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      transition: width 1.1s ease;
+    }
+
+    .risk-low .comparison-fill,
+    .risk-low .guidance-card {
+      border-color: #86efac;
+    }
+
+    .risk-low .comparison-fill {
+      background: #16a34a;
+    }
+
+    .risk-medium .comparison-fill {
+      background: #f59e0b;
+    }
+
+    .risk-high .comparison-fill {
+      background: #dc2626;
+    }
+
+    .guidance-card {
+      border: 1px solid;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 22px;
+    }
+
+    .risk-low .guidance-card {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+
+    .risk-medium .guidance-card {
+      background: #fffbeb;
+      border-color: #fcd34d;
+    }
+
+    .risk-high .guidance-card {
+      background: #fef2f2;
+      border-color: #fca5a5;
+    }
+
+    .guidance-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .risk-low .guidance-card h3 {
+      color: #166534;
+    }
+
+    .risk-medium .guidance-card h3 {
+      color: #b45309;
+    }
+
+    .risk-high .guidance-card h3 {
+      color: #991b1b;
+    }
+
+    .guidance-card p {
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 24px;
+    }
+
+    .modal-actions button {
+      min-height: 44px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 8px;
+      background: #0f766e;
+      color: #ffffff;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .modal-actions button:hover {
+      background: #0b5f59;
+    }
+
+    @media (max-width: 900px) {
+      .demo-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-details {
+        grid-template-columns: 1fr;
+      }
+
+      .result-modal {
+        padding: 24px;
+      }
+
+      .score-display strong {
+        font-size: 40px;
+      }
+    }
+  </style>
 </head>
 <body>
 <header class="site-header">
   <div class="nav-shell">
     <a class="brand" href="index.html"><img src="assets/logo.png" alt="AlzAware logo" /><span>AlzAware</span></a>
-      <nav class="site-nav">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="innovation.html">Innovation</a>
-          <a class="active" href="model.html">Model</a>
-          <a href="assessment.html">Assessment</a>
-          <a href="business.html">Business</a>
-          <a href="privacy.html">Privacy</a>
-      </nav>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="innovation.html">Innovation</a>
+      <a class="active" href="model.html">Model</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="business.html">Business</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
   </div>
 </header>
 
@@ -64,11 +349,246 @@
       </p>
     </div>
   </section>
+
+  <section class="section">
+    <div class="demo-panel">
+      <div>
+        <p class="eyebrow">Interactive demo</p>
+        <h2>Try a sample model input</h2>
+        <p>
+          This demo uses a pre-filled survey profile to show how AlzAware converts health information into a reference score and population comparison.
+        </p>
+
+        <div class="demo-details">
+          <div class="demo-pill"><strong>Age</strong><span>72</span></div>
+          <div class="demo-pill"><strong>Sex</strong><span>Female</span></div>
+          <div class="demo-pill"><strong>Race</strong><span>White</span></div>
+          <div class="demo-pill"><strong>Education</strong><span>Some College</span></div>
+          <div class="demo-pill"><strong>Daily medications</strong><span>Two</span></div>
+          <div class="demo-pill"><strong>Medical history</strong><span>Hypertension, memory problems, sleep problems</span></div>
+        </div>
+      </div>
+
+      <div class="demo-action-card">
+        <h3>Run demo assessment</h3>
+        <p>
+          Submit this sample profile to the prediction backend and view the result in a guided pop-up window.
+        </p>
+        <button class="demo-button" id="runDemoButton" type="button">Run Demo</button>
+      </div>
+    </div>
+  </section>
 </main>
+
+<div class="modal-overlay" id="resultModal" aria-hidden="true">
+  <div class="result-modal">
+    <button class="modal-close" id="closeModalTop" type="button" aria-label="Close result modal">&times;</button>
+
+    <div class="modal-header">
+      <h2>AlzAware Demo Results</h2>
+      <p>Prediction based on a pre-filled health-information sample</p>
+    </div>
+
+    <div class="score-display">
+      <strong id="modalScore">--</strong>
+      <span>Model-based reference score</span>
+    </div>
+
+    <div class="result-text">
+      <p><strong>Higher score means higher model-estimated risk of Alzheimer’s disease.</strong></p>
+      <p id="modalSummary"></p>
+    </div>
+
+    <div class="comparison-bars" id="comparisonBars">
+      <div>
+        <div class="comparison-label">
+          <span>Your score is higher than AD group</span>
+          <span id="adPercentLabel">0%</span>
+        </div>
+        <div class="comparison-track">
+          <div class="comparison-fill" id="adBar"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="comparison-label">
+          <span>Your score is higher than non-AD group</span>
+          <span id="nonAdPercentLabel">0%</span>
+        </div>
+        <div class="comparison-track">
+          <div class="comparison-fill" id="nonAdBar"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guidance-card">
+      <h3>Clinical Guidance</h3>
+      <p id="guidanceText"></p>
+    </div>
+
+    <div class="modal-actions">
+      <button id="closeModalBottom" type="button">Close</button>
+    </div>
+  </div>
+</div>
 
 <footer class="footer">
   <p><a href="mailto:alzaware.info@gmail.com">alzaware.info@gmail.com</a></p>
   <p>© 2026 AlzAware. All rights reserved.</p>
 </footer>
+
+<script>
+  const API_URL = "https://alzaware.onrender.com/predict";
+
+  const demoPayload = {
+    age: "72",
+    sex: "Female",
+    race: "White",
+    hispanic_latino: "No",
+    number_of_daily_medications: "Two",
+    handedness: "right",
+    highest_education_level_completed: "Some College (Some University)",
+    cancer: "FALSE",
+    depression_anxiety: "FALSE",
+    hypertension: "TRUE",
+    loss_of_consciousness: "FALSE",
+    memory_problems: "TRUE",
+    seizures: "FALSE",
+    smoking: "FALSE",
+    type_1_diabetes: "FALSE",
+    brain_disease: "FALSE",
+    chronic_stress: "FALSE",
+    heart_disease: "FALSE",
+    parkinsons_disease: "FALSE",
+    sleep_problems: "TRUE",
+    stroke: "FALSE",
+    type_2_diabetes: "FALSE",
+    no_conditions: "FALSE"
+  };
+
+  const runDemoButton = document.getElementById("runDemoButton");
+  const resultModal = document.getElementById("resultModal");
+  const modalScore = document.getElementById("modalScore");
+  const modalSummary = document.getElementById("modalSummary");
+  const adPercentLabel = document.getElementById("adPercentLabel");
+  const nonAdPercentLabel = document.getElementById("nonAdPercentLabel");
+  const adBar = document.getElementById("adBar");
+  const nonAdBar = document.getElementById("nonAdBar");
+  const comparisonBars = document.getElementById("comparisonBars");
+  const guidanceText = document.getElementById("guidanceText");
+  const closeModalTop = document.getElementById("closeModalTop");
+  const closeModalBottom = document.getElementById("closeModalBottom");
+
+  function clampPercent(value) {
+    const numberValue = Number(value);
+    if (!Number.isFinite(numberValue)) return 0;
+    return Math.max(0, Math.min(100, numberValue));
+  }
+
+  function getRiskClass(adPercent) {
+    if (adPercent < 10) return "risk-low";
+    if (adPercent <= 30) return "risk-medium";
+    return "risk-high";
+  }
+
+  function getGuidance(adPercent) {
+    if (adPercent < 10) {
+      return "This sample result falls in a lower reference range. The health profile appears comparatively reassuring in this model, but this tool is not a diagnosis. If there are memory or cognitive concerns, a qualified healthcare professional should still be consulted.";
+    }
+
+    if (adPercent <= 30) {
+      return "This sample result suggests a moderate reference signal. We recommend seeking a professional cognitive screening or medical evaluation in the near future, especially if memory, attention, or daily functioning concerns are present.";
+    }
+
+    return "This sample result suggests a higher reference signal. We strongly recommend arranging a professional cognitive evaluation as soon as possible. AlzAware is not a diagnostic tool, but this result may indicate that clinical follow-up is important.";
+  }
+
+  function openModal() {
+    resultModal.classList.add("show");
+    resultModal.setAttribute("aria-hidden", "false");
+  }
+
+  function closeModal() {
+    resultModal.classList.remove("show");
+    resultModal.setAttribute("aria-hidden", "true");
+  }
+
+  function showResult(result) {
+    const score = Number(result.score);
+    const adPercent = clampPercent(result.ad_lower_or_equal_percent);
+    const nonAdPercent = clampPercent(result.non_ad_lower_or_equal_percent);
+    const riskClass = getRiskClass(adPercent);
+
+    resultModal.classList.remove("risk-low", "risk-medium", "risk-high");
+    resultModal.classList.add(riskClass);
+    comparisonBars.classList.remove("risk-low", "risk-medium", "risk-high");
+    comparisonBars.classList.add(riskClass);
+
+    modalScore.textContent = Number.isFinite(score) ? score.toFixed(6) : "--";
+
+    modalSummary.innerHTML =
+      `In our reference dataset, your score is higher than <strong>${adPercent.toFixed(1)}%</strong> of <strong>AD</strong> participants and ` +
+      `<strong>${nonAdPercent.toFixed(1)}%</strong> of <strong>non-AD</strong> participants.`;
+
+    adPercentLabel.textContent = `${adPercent.toFixed(1)}%`;
+    nonAdPercentLabel.textContent = `${nonAdPercent.toFixed(1)}%`;
+    guidanceText.textContent = getGuidance(adPercent);
+
+    adBar.style.width = "0%";
+    nonAdBar.style.width = "0%";
+
+    openModal();
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        adBar.style.width = `${adPercent}%`;
+        nonAdBar.style.width = `${nonAdPercent}%`;
+      });
+    });
+  }
+
+  async function runDemo() {
+    runDemoButton.disabled = true;
+    runDemoButton.textContent = "Running...";
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(demoPayload)
+      });
+
+      if (!response.ok) {
+        throw new Error("Prediction failed");
+      }
+
+      const result = await response.json();
+      showResult(result);
+    } catch (error) {
+      alert("Prediction failed. Please check that the prediction service is available and try again.");
+    } finally {
+      runDemoButton.disabled = false;
+      runDemoButton.textContent = "Run Demo";
+    }
+  }
+
+  runDemoButton.addEventListener("click", runDemo);
+  closeModalTop.addEventListener("click", closeModal);
+  closeModalBottom.addEventListener("click", closeModal);
+
+  resultModal.addEventListener("click", (event) => {
+    if (event.target === resultModal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeModal();
+    }
+  });
+</script>
 </body>
 </html>
