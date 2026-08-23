@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assessment | AlzAware</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6faf9;
+      color: #111827;
+    }
+
+    .topNav {
+      background: #ffffff;
+      border-bottom: 1px solid #dbe7e5;
+    }
+
+    .navInner {
+      max-width: 980px;
+      min-height: 58px;
+      margin: 0 auto;
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+
+    .brandLink {
+      color: #0f766e;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 800;
+      grid-column: 1;
+      justify-self: start;
+    }
+
+    .navLinks {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      justify-content: center;
+      grid-column: 2;
+    }
+
+    .navLinks a {
+      color: #111827;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .brandLink:hover,
+    .navLinks a:hover {
+      color: #0f766e;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px 18px 40px;
+    }
+
+    .hero {
+      margin: 0 0 18px;
+      padding: 22px 24px;
+      background: #ffffff;
+      border: 1px solid #dbe7e5;
+      border-radius: 8px;
+    }
+
+    .heroContent {
+      max-width: 760px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.2;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .note {
+      margin: 0;
+      color: #475569;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    form {
+      margin: 0;
+      padding: 0;
+    }
+
+    section:not(.hero) {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 18px;
+      color: #111827;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field {
+      margin-bottom: 6px;
+    }
+
+    .fieldTitle {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #334155;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 15px;
+      background: #ffffff;
+      color: #111827;
+    }
+
+    input[type="number"]:focus,
+    select:focus {
+      outline: none;
+      border-color: #0f766e;
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+
+    .hint {
+      font-size: 14px;
+      font-weight: 400;
+      color: #64748b;
+    }
+
+    .checkboxItem {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .checkboxItem:hover {
+      border-color: #0f766e;
+      background: #f6faf9;
+    }
+
+    .checkboxItem input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: #0f766e;
+    }
+
+    .checkboxItem span {
+      line-height: 1.3;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px 18px;
+      border: 0;
+      border-radius: 8px;
+      background: #0f766e;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0b5f59;
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .result {
+      display: none;
+      background: #ecfdf5;
+      border: 1px solid #bbf7d0;
+      color: #14532d;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 18px;
+      line-height: 1.6;
+      font-size: 17px;
+    }
+
+    .result strong {
+      font-size: 20px;
+    }
+
+    .error {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 18px;
+    }
+
+    .fieldError {
+      display: none;
+      margin-top: 8px;
+      color: #991b1b;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    @media (max-width: 720px) {
+      .navInner {
+        min-height: auto;
+        padding: 14px 18px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .navLinks {
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        justify-content: flex-end;
+      }
+
+      main {
+        padding: 18px 14px 34px;
+      }
+
+      .hero {
+        padding: 18px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .note {
+        font-size: 15px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<header class="topNav">
+  <div class="navInner">
+    <a class="brandLink" href="index.html">AlzAware</a>
+
+    <nav class="navLinks">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="innovation.html">Innovation</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="heroContent">
+      <h1>AlzAware</h1>
+      <p class="note">
+        AlzAware provides a model-based cognitive risk reference score. The result
+        compares your score with AD and non-AD reference populations. It is designed
+        for education and risk awareness, not diagnosis.
+      </p>
+    </div>
+  </section>
+
+  <form id="riskForm">
+    <section>
+      <h2>Basic Information</h2>
+      <div class="grid">
+        <div class="field">
+          <label class="fieldTitle">Age</label>
+          <input id="ageInput" name="age" type="number" min="18" max="110" required />
+          <div class="fieldError" id="ageError">Please enter an age of 18 or older.</div>
+        </div>
+
+        <div class="field">
+          <label class="fieldTitle">Sex</label>
+          <select name="sex" required>
+            <option value="" disabled selected>Select</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="fieldTitle">Race</label>
+          <select name="race" required>
+            <option value="" disabled selected>Select</option>
+            <option value="White">White</option>
+            <option value="Black or African American">Black or African American</option>
+            <option value="Asian">Asian</option>
+            <option value="Native Hawaiian or Other Pacific Islander">Native Hawaiian or Other Pacific Islander</option>
+            <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
+            <option value="Multiracial or Mixed Race">Multiracial or Mixed Race</option>
+            <option value="I prefer not to answer">I prefer not to answer</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="fieldTitle">Hispanic or Latino</label>
+          <select name="hispanic_latino" required>
+            <option value="" disabled selected>Select</option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+            <option value="Prefer not to answer">Prefer not to answer</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="fieldTitle">Number of Daily Medications</label>
+          <select name="number_of_daily_medications" required>
+            <option value="" disabled selected>Select</option>
+            <option value="None">None</option>
+            <option value="One">One</option>
+            <option value="Two">Two</option>
+            <option value="Three">Three</option>
+            <option value="More than three">More than three</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="fieldTitle">Handedness</label>
+          <select name="handedness" required>
+            <option value="" disabled selected>Select</option>
+            <option value="right">Right</option>
+            <option value="left">Left</option>
+            <option value="both">Both</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="fieldTitle">Highest Education Level Completed</label>
+          <select name="highest_education_level_completed" required>
+            <option value="" disabled selected>Select</option>
+            <option value="Up to 8 Years">Up to 8 Years</option>
+            <option value="Completed 8th Grade (Elementary or Primary School Graduate)">Completed 8th Grade</option>
+            <option value="Some High School">Some High School</option>
+            <option value="High School Diploma (Baccalaureate)">High School Diploma</option>
+            <option value="Some College (Some University)">Some College</option>
+            <option value="College Degree (University Graduate)">College Degree</option>
+            <option value="Post Graduate Degree (Masters or Doctorate)">Post Graduate Degree</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>
+        Medical History
+        <span class="hint">Which of the following have you experienced or are currently experiencing? (check <strong>all</strong> that apply)</span>
+      </h2>
+      <div class="grid" id="medicalGrid"></div>
+    </section>
+
+    <button id="submitButton" type="submit">Calculate Reference Score</button>
+  </form>
+
+  <div class="result" id="resultBox">
+    <p><strong>Higher score means more model-estimated risk of AD.</strong></p>
+    <p id="mainResult"></p>
+    <p id="secondaryResult"></p>
+    <p>This result is for reference only and is not a medical diagnosis.</p>
+  </div>
+
+  <div class="error" id="errorBox"></div>
+</main>
+
+<script>
+  const API_URL = "https://alzaware.onrender.com/predict";
+
+  const medicalFields = [
+    ["cancer", "Cancer"],
+    ["depression_anxiety", "Depression or Anxiety"],
+    ["hypertension", "Hypertension"],
+    ["loss_of_consciousness", "Loss of Consciousness"],
+    ["memory_problems", "Memory Problems"],
+    ["seizures", "Seizures"],
+    ["smoking", "Smoking"],
+    ["type_1_diabetes", "Type 1 Diabetes"],
+    ["brain_disease", "Brain Disease"],
+    ["chronic_stress", "Chronic Stress"],
+    ["heart_disease", "Heart Disease"],
+    ["parkinsons_disease", "Parkinson's Disease"],
+    ["sleep_problems", "Sleep Problems"],
+    ["stroke", "Stroke"],
+    ["type_2_diabetes", "Type 2 Diabetes"],
+    ["no_conditions", "No Listed Conditions"]
+  ];
+
+  const medicalGrid = document.getElementById("medicalGrid");
+
+  medicalFields.forEach(([name, label]) => {
+    const item = document.createElement("label");
+    item.className = "checkboxItem";
+    item.innerHTML = `
+      <input type="checkbox" name="${name}" />
+      <span>${label}</span>
+    `;
+    medicalGrid.appendChild(item);
+  });
+
+  document.getElementById("riskForm").addEventListener("change", (event) => {
+    if (event.target.name === "no_conditions" && event.target.checked) {
+      medicalFields.forEach(([name]) => {
+        if (name !== "no_conditions") {
+          const input = document.querySelector(`input[name="${name}"]`);
+          if (input) input.checked = false;
+        }
+      });
+    }
+
+    if (event.target.name !== "no_conditions" && event.target.checked) {
+      const noConditions = document.querySelector('input[name="no_conditions"]');
+      if (noConditions) noConditions.checked = false;
+    }
+  });
+
+  const ageInput = document.getElementById("ageInput");
+  const ageError = document.getElementById("ageError");
+  const submitButton = document.getElementById("submitButton");
+
+  function validateAge() {
+    const age = Number(ageInput.value);
+
+    if (!ageInput.value) {
+      ageError.style.display = "none";
+      ageInput.setCustomValidity("");
+      return true;
+    }
+
+    if (!Number.isFinite(age) || age < 18) {
+      ageError.textContent = "Please enter an age of 18 or older.";
+      ageError.style.display = "block";
+      ageInput.setCustomValidity("Please enter an age of 18 or older.");
+      return false;
+    }
+
+    if (age > 110) {
+      ageError.textContent = "Please enter an age of 110 or younger.";
+      ageError.style.display = "block";
+      ageInput.setCustomValidity("Please enter an age of 110 or younger.");
+      return false;
+    }
+
+    ageError.style.display = "none";
+    ageInput.setCustomValidity("");
+    return true;
+  }
+
+  ageInput.addEventListener("input", validateAge);
+  ageInput.addEventListener("invalid", validateAge);
+
+  document.getElementById("riskForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!validateAge()) {
+      ageInput.reportValidity();
+      return;
+    }
+
+    const resultBox = document.getElementById("resultBox");
+    const errorBox = document.getElementById("errorBox");
+    const mainResult = document.getElementById("mainResult");
+    const secondaryResult = document.getElementById("secondaryResult");
+
+    resultBox.style.display = "none";
+    errorBox.style.display = "none";
+    submitButton.disabled = true;
+    submitButton.textContent = "Calculating...";
+
+    const formData = new FormData(event.target);
+    const payload = Object.fromEntries(formData.entries());
+
+    medicalFields.forEach(([name]) => {
+      payload[name] = formData.has(name) ? "TRUE" : "FALSE";
+    });
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error("Prediction failed");
+      }
+
+      const result = await response.json();
+
+      mainResult.textContent =
+        `Your score is: ${Number(result.score).toFixed(6)}.`;
+
+      secondaryResult.textContent =
+        `Compared with the reference dataset, your score is higher than ${result.ad_lower_or_equal_percent}% of people with AD and ` +
+        `${result.non_ad_lower_or_equal_percent}% of people without AD.`;
+
+      resultBox.style.display = "block";
+      resultBox.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (error) {
+      errorBox.textContent =
+        "Prediction failed. Please check that the prediction service is available and try again.";
+      errorBox.style.display = "block";
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "Calculate Reference Score";
+    }
+  });
+</script>
+</body>
+</html>
