@@ -5,37 +5,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Model | AlzAware</title>
   <link rel="stylesheet" href="style.css" />
-
   <style>
-    .demo-panel {
+    .evidence-block {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.7fr);
-      gap: 32px;
-      align-items: start;
+      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+      gap: 36px;
+      align-items: center;
     }
 
-    .demo-action-card {
+    .chart-placeholder {
+      min-height: 300px;
       background: #ffffff;
-      border: 1px solid #d8e5e2;
+      border: 1px solid #9ee7dd;
       border-radius: 8px;
-      padding: 26px;
+      padding: 28px;
+      display: grid;
+      place-items: center;
+      text-align: center;
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
     }
 
-    .demo-action-card p {
+    .chart-placeholder img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      opacity: 0.88;
+      margin-bottom: 18px;
+    }
+
+    .chart-placeholder h3 {
+      color: #0f766e;
+    }
+
+    .chart-placeholder p {
+      font-size: 15px;
+      max-width: 420px;
+    }
+
+    .auc-number {
+      color: #0f766e;
+      font-size: 62px;
+      font-weight: 900;
+      line-height: 1;
+      margin: 18px 0;
+    }
+
+    .mini-disclaimer {
+      font-size: 14px;
+      color: #687789;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+
+    .demo-panel {
+      background: #ffffff;
+      border: 1px solid #9ee7dd;
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .demo-panel p {
       font-size: 16px;
-      margin-bottom: 20px;
+      max-width: 720px;
+    }
+
+    .demo-actions {
+      margin-top: 24px;
     }
 
     .demo-button {
-      width: 100%;
-      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 22px;
       border: 0;
       border-radius: 8px;
       background: #0f766e;
       color: #ffffff;
-      font-weight: 900;
       font-size: 16px;
+      font-weight: 900;
       cursor: pointer;
     }
 
@@ -46,6 +96,17 @@
     .demo-button:disabled {
       opacity: 0.7;
       cursor: not-allowed;
+    }
+
+    .demo-error {
+      display: none;
+      margin-top: 18px;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 15px;
     }
 
     .modal-overlay {
@@ -84,6 +145,12 @@
       font-size: 30px;
       line-height: 1;
       cursor: pointer;
+      width: auto;
+      padding: 0;
+    }
+
+    .modal-close:hover {
+      color: #0f766e;
     }
 
     .modal-header {
@@ -94,6 +161,7 @@
     .modal-header h2 {
       margin-bottom: 8px;
       color: #101827;
+      font-size: 28px;
     }
 
     .modal-header p {
@@ -112,11 +180,8 @@
     .result-summary p {
       font-size: 17px;
       line-height: 1.65;
-      margin-bottom: 12px;
-    }
-
-    .result-summary p:last-child {
-      margin-bottom: 0;
+      margin: 0 0 12px;
+      color: #2f4156;
     }
 
     .percent-row {
@@ -214,7 +279,7 @@
     }
 
     .guidance-card h3 {
-      margin-bottom: 10px;
+      margin: 0 0 10px;
     }
 
     .risk-low .guidance-card h3 {
@@ -232,34 +297,48 @@
     .guidance-card p {
       font-size: 16px;
       line-height: 1.65;
+      margin: 0;
+      color: #2f4156;
     }
 
     .modal-actions {
       display: flex;
       justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
       margin-top: 24px;
     }
 
     .modal-actions button {
+      width: auto;
       min-height: 44px;
       padding: 0 22px;
-      border: 0;
       border-radius: 8px;
-      background: #0f766e;
-      color: #ffffff;
       font-weight: 900;
       cursor: pointer;
     }
 
-    .modal-actions button:hover {
+    .btn-modal-primary {
+      border: 0;
+      background: #0f766e;
+      color: #ffffff;
+    }
+
+    .btn-modal-primary:hover {
       background: #0b5f59;
     }
 
     @media (max-width: 900px) {
-      .demo-panel {
+      .evidence-block {
         grid-template-columns: 1fr;
       }
 
+      .auc-number {
+        font-size: 48px;
+      }
+    }
+
+    @media (max-width: 720px) {
       .result-modal {
         padding: 24px;
       }
@@ -278,7 +357,10 @@
 <body>
 <header class="site-header">
   <div class="nav-shell">
-    <a class="brand" href="index.html"><img src="assets/logo.png" alt="AlzAware logo" /><span>AlzAware</span></a>
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="AlzAware logo" />
+      <span>AlzAware</span>
+    </a>
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a class="active" href="model.html">Model</a>
@@ -304,14 +386,79 @@
 
     <div class="visual-board">
       <div class="mock-window">
-        <div class="mock-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="mock-top">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
         <div class="mock-body">
           <p class="eyebrow">Model pipeline</p>
           <div class="timeline">
-            <div class="timeline-item"><h3>Input features</h3><p>Questionnaire and health-history variables.</p></div>
-            <div class="timeline-item"><h3>XGBoost model</h3><p>Trained on processed matrix data with one-hot encoded predictors.</p></div>
-            <div class="timeline-item"><h3>Reference output</h3><p>Score compared with AD and non-AD groups.</p></div>
+            <div class="timeline-item">
+              <h3>Input features</h3>
+              <p>Questionnaire and health-history variables.</p>
+            </div>
+            <div class="timeline-item">
+              <h3>XGBoost model</h3>
+              <p>Trained on processed matrix data with one-hot encoded predictors.</p>
+            </div>
+            <div class="timeline-item">
+              <h3>Reference output</h3>
+              <p>Score compared with AD and non-AD groups.</p>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft sky">
+    <div class="evidence-block">
+      <div>
+        <p class="eyebrow">Model performance</p>
+        <h2>A strong AUC supports screening potential</h2>
+        <p>
+          ROC-AUC measures how well a model separates AD and non-AD participants across possible thresholds. A value closer to 1.0 indicates stronger discrimination.
+        </p>
+        <div class="auc-number">0.89</div>
+        <p>
+          AlzAware's current XGBoost prototype reaches an approximate testing AUC of 0.89, suggesting strong potential as a first-step risk triage tool.
+        </p>
+        <p class="mini-disclaimer">
+          Final reported values should be updated with the exact training run, confidence interval, and model version used in the final submission.
+        </p>
+      </div>
+
+      <div class="chart-placeholder">
+        <div>
+          <img src="assets/logo.png" alt="AUC chart placeholder" />
+          <h3>AUC visualization placeholder</h3>
+          <p>
+            Replace this logo with a ROC curve or AUC card showing model performance on the testing dataset.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="evidence-block">
+      <div>
+        <p class="eyebrow">Score behavior</p>
+        <h2>Reference distributions make the result interpretable</h2>
+        <p>
+          A combined boxplot and violin plot can show how model scores are distributed among AD and non-AD participants in the reference dataset.
+        </p>
+        <p>
+          This is useful because it communicates both model separation and uncertainty: AD participants tend to receive higher scores, but overlap remains. That is why AlzAware is positioned as risk triage, not diagnosis.
+        </p>
+      </div>
+
+      <div class="chart-placeholder">
+        <div>
+          <img src="assets/logo.png" alt="Score distribution chart placeholder" />
+          <h3>Boxplot + violin placeholder</h3>
+          <p>
+            Replace this logo with the score distribution chart comparing AD and non-AD reference populations.
+          </p>
         </div>
       </div>
     </div>
@@ -322,33 +469,27 @@
       <p class="eyebrow">Output design</p>
       <h2>The score is useful because it is contextualized</h2>
       <p>
-        The final user-facing output avoids unsupported diagnostic language. It explains that a higher score means higher model-estimated risk, then compares the user’s score with people in the AD and non-AD reference groups.
+        The final user-facing output avoids unsupported diagnostic language. It explains that a higher score means higher model-estimated risk, then compares the user's score with people in the AD and non-AD reference groups.
       </p>
     </div>
     <div class="callout">
       <p>
-        “Higher score means more model-estimated risk of AD. In a large reference dataset, xx% of AD participants and yy% of non-AD participants had scores higher than yours.”
+        "Higher score means higher model-estimated risk of Alzheimer's disease. In our reference dataset, your score is higher than xx% of AD participants and yy% of non-AD participants."
       </p>
     </div>
   </section>
 
   <section class="section">
     <div class="demo-panel">
-      <div>
-        <p class="eyebrow">Interactive demo</p>
-        <h2>Try a sample model result</h2>
-        <p>
-          Run a pre-filled survey example to see how AlzAware presents a model-based reference result. The demo is designed to show the result format, population comparison, and clinical guidance language.
-        </p>
-      </div>
-
-      <div class="demo-action-card">
-        <h3>Run demo assessment</h3>
-        <p>
-          Submit a prepared survey example to the prediction backend and view the result in a guided pop-up window.
-        </p>
+      <p class="eyebrow">Interactive model demo</p>
+      <h2>Run a sample assessment result</h2>
+      <p>
+        This demo submits a pre-loaded survey profile to the prediction backend and shows the same reference-style result used in the public assessment page.
+      </p>
+      <div class="demo-actions">
         <button class="demo-button" id="runDemoButton" type="button">Run Demo</button>
       </div>
+      <div class="demo-error" id="demoError"></div>
     </div>
   </section>
 </main>
@@ -359,11 +500,11 @@
 
     <div class="modal-header">
       <h2>AlzAware Demo Results</h2>
-      <p>Reference result generated by the AlzAware model</p>
+      <p>Reference result generated from a pre-loaded survey profile</p>
     </div>
 
     <div class="result-summary">
-      <p><strong>Higher score means higher model-estimated risk of Alzheimer’s disease.</strong></p>
+      <p><strong>Higher score means higher model-estimated risk of Alzheimer's disease.</strong></p>
       <p>In our reference dataset:</p>
 
       <div class="percent-row">
@@ -409,14 +550,14 @@
     </div>
 
     <div class="modal-actions">
-      <button id="closeModalBottom" type="button">Close</button>
+      <button class="btn-modal-primary" id="closeModalBottom" type="button">Close</button>
     </div>
   </div>
 </div>
 
 <footer class="footer">
   <p><a href="mailto:alzaware.info@gmail.com">alzaware.info@gmail.com</a></p>
-  <p>© 2026 AlzAware. All rights reserved.</p>
+  <p>&copy; 2026 AlzAware. All rights reserved.</p>
 </footer>
 
 <script>
@@ -449,6 +590,7 @@
   };
 
   const runDemoButton = document.getElementById("runDemoButton");
+  const demoError = document.getElementById("demoError");
   const resultModal = document.getElementById("resultModal");
   const adSummaryPercent = document.getElementById("adSummaryPercent");
   const nonAdSummaryPercent = document.getElementById("nonAdSummaryPercent");
@@ -485,11 +627,13 @@
   function openModal() {
     resultModal.classList.add("show");
     resultModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
   }
 
   function closeModal() {
     resultModal.classList.remove("show");
     resultModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
   }
 
   function showResult(result) {
@@ -517,7 +661,9 @@
     });
   }
 
-  async function runDemo() {
+  runDemoButton.addEventListener("click", async () => {
+    demoError.style.display = "none";
+    demoError.textContent = "";
     runDemoButton.disabled = true;
     runDemoButton.textContent = "Running...";
 
@@ -537,14 +683,14 @@
       const result = await response.json();
       showResult(result);
     } catch (error) {
-      alert("Prediction failed. Please check that the prediction service is available and try again.");
+      demoError.textContent = "Demo prediction failed. Please check that the prediction service is available and try again.";
+      demoError.style.display = "block";
     } finally {
       runDemoButton.disabled = false;
       runDemoButton.textContent = "Run Demo";
     }
-  }
+  });
 
-  runDemoButton.addEventListener("click", runDemo);
   closeModalTop.addEventListener("click", closeModal);
   closeModalBottom.addEventListener("click", closeModal);
 

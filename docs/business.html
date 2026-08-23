@@ -57,48 +57,10 @@
       text-align: center;
     }
 
-    .evidence-block {
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
-      gap: 36px;
-      align-items: center;
-    }
-
-    .chart-placeholder {
-      min-height: 300px;
-      background: #ffffff;
-      border: 1px solid #9ee7dd;
-      border-radius: 8px;
-      padding: 28px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-    }
-
-    .chart-placeholder img {
-      width: 150px;
-      height: 150px;
-      object-fit: contain;
-      opacity: 0.88;
-      margin-bottom: 18px;
-    }
-
-    .chart-placeholder h3 {
+    .source-note a {
       color: #0f766e;
-    }
-
-    .chart-placeholder p {
-      font-size: 15px;
-      max-width: 420px;
-    }
-
-    .auc-number {
-      color: #0f766e;
-      font-size: 62px;
-      font-weight: 900;
-      line-height: 1;
-      margin: 18px 0;
+      font-weight: 700;
+      text-decoration: none;
     }
 
     .value-grid {
@@ -159,25 +121,10 @@
       font-weight: 900;
     }
 
-    .mini-disclaimer {
-      font-size: 14px;
-      color: #687789;
-      line-height: 1.6;
-      margin-top: 12px;
-    }
-
     @media (max-width: 900px) {
       .impact-stats,
       .value-grid {
         grid-template-columns: 1fr;
-      }
-
-      .evidence-block {
-        grid-template-columns: 1fr;
-      }
-
-      .auc-number {
-        font-size: 48px;
       }
     }
   </style>
@@ -227,7 +174,10 @@
     </div>
 
     <p class="source-note">
-      Sources: Alzheimer's Association 2026 Facts and Figures; Alzheimer's Association 2025 caregiving estimates.
+      Sources:
+      <a href="https://www.alz.org/alzheimers-dementia/facts-figures">Alzheimer's Association Facts and Figures</a>
+      and
+      <a href="https://www.alz.org/professionals/public-health/public-health-approach">Public Health Approach to Alzheimer's</a>.
     </p>
   </section>
 
@@ -254,82 +204,28 @@
 
   <section class="section">
     <div class="section-head">
-      <p class="eyebrow">Technology</p>
-      <h2>How AlzAware works</h2>
+      <p class="eyebrow">Solution</p>
+      <h2>A scalable first step before higher-cost evaluation</h2>
       <p>
-        The prototype uses questionnaire-based health information and a trained XGBoost model to generate a cognitive risk reference score. The result is then compared with AD and non-AD populations from a large reference dataset.
+        AlzAware does not replace doctors or clinical testing. It creates a low-friction triage layer that helps users interpret risk signals before deciding whether to pursue professional screening.
       </p>
     </div>
 
     <div class="card-grid">
       <div class="card">
         <div class="icon-mark">1</div>
-        <h3>Collect</h3>
-        <p>Users enter age, education, medication count, and self-reported medical history through a short digital assessment.</p>
+        <h3>Accessible</h3>
+        <p>Runs through a browser-based assessment and requires no specialized equipment.</p>
       </div>
       <div class="card">
         <div class="icon-mark">2</div>
-        <h3>Score</h3>
-        <p>The machine-learning model produces a reference score based on processed predictors from the training dataset.</p>
+        <h3>Interpretable</h3>
+        <p>Compares each result against AD and non-AD reference populations instead of presenting an unsupported diagnosis.</p>
       </div>
       <div class="card">
         <div class="icon-mark">3</div>
-        <h3>Compare</h3>
-        <p>The output shows where the user's score falls compared with AD and non-AD reference groups.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section soft sky">
-    <div class="evidence-block">
-      <div>
-        <p class="eyebrow">Model performance</p>
-        <h2>A strong AUC supports screening potential</h2>
-        <p>
-          ROC-AUC measures how well a model separates AD and non-AD participants across possible thresholds. A value closer to 1.0 indicates stronger discrimination.
-        </p>
-        <div class="auc-number">0.89</div>
-        <p>
-          AlzAware's current XGBoost prototype reaches an approximate testing AUC of 0.89, suggesting strong potential as a first-step risk triage tool.
-        </p>
-        <p class="mini-disclaimer">
-          Final reported values should be updated with the exact training run, confidence interval, and model version used in the final submission.
-        </p>
-      </div>
-
-      <div class="chart-placeholder">
-        <div>
-          <img src="assets/logo.png" alt="AUC chart placeholder" />
-          <h3>AUC visualization placeholder</h3>
-          <p>
-            Replace this logo with a ROC curve or AUC card showing model performance on the testing dataset.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="evidence-block">
-      <div>
-        <p class="eyebrow">Score behavior</p>
-        <h2>Reference distributions make the result interpretable</h2>
-        <p>
-          A combined boxplot and violin plot can show how model scores are distributed among AD and non-AD participants in the reference dataset.
-        </p>
-        <p>
-          This is useful because it communicates both model separation and uncertainty: AD participants tend to receive higher scores, but overlap remains. That is why AlzAware is positioned as risk triage, not diagnosis.
-        </p>
-      </div>
-
-      <div class="chart-placeholder">
-        <div>
-          <img src="assets/logo.png" alt="Score distribution chart placeholder" />
-          <h3>Boxplot + violin placeholder</h3>
-          <p>
-            Replace this logo with the score distribution chart comparing AD and non-AD reference populations.
-          </p>
-        </div>
+        <h3>Scalable</h3>
+        <p>Can be used by families, clinics, senior-care facilities, and community health programs at low marginal cost.</p>
       </div>
     </div>
   </section>
