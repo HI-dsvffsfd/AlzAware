@@ -519,3 +519,30 @@ p {
 .educational-note p {
   color: #2f4156;
 }
+
+.hero-home {
+  min-height: calc(100vh - 76px);
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 76px calc(50vw - 610px);
+  background: #eaf8f2;
+  border-top: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(380px, 0.98fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.hero-home .visual-board {
+  background: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .hero-home {
+    min-height: auto;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 56px 28px;
+    grid-template-columns: 1fr;
+  }
+}
