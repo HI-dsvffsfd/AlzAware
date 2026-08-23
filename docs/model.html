@@ -375,9 +375,10 @@
   <section class="hero">
     <div>
       <p class="eyebrow">Model approach</p>
-      <h1>Machine learning made interpretable for public risk awareness</h1>
+      <h1>A data-driven cognitive risk model built for early triage</h1>
       <p class="lead">
-        AlzAware uses demographic information, education, medication count, and self-reported medical history to generate a model-based reference score.
+        AlzAware transforms demographic and health-history inputs into a machine-learning risk reference score trained on a large cognitive-health dataset.
+        The model is designed to identify patterns associated with Alzheimer’s disease and translate them into an interpretable comparison against AD and non-AD reference groups.
       </p>
       <p class="lead">
         The score is designed to support triage and awareness, not to replace clinical cognitive testing.
@@ -390,19 +391,22 @@
           <span class="dot"></span><span class="dot"></span><span class="dot"></span>
         </div>
         <div class="mock-body">
-          <p class="eyebrow">Model pipeline</p>
+          <p class="eyebrow">Technical pipeline</p>
           <div class="timeline">
             <div class="timeline-item">
-              <h3>Input features</h3>
-              <p>Questionnaire and health-history variables.</p>
+                <h3>Structured predictors</h3>
+                <p>Age, education, medication count, demographic variables, and self-reported medical history are
+                    converted into model-ready features.</p>
             </div>
             <div class="timeline-item">
-              <h3>XGBoost model</h3>
-              <p>Trained on processed matrix data with one-hot encoded predictors.</p>
+                <h3>XGBoost classifier</h3>
+                <p>A gradient-boosted tree model learns nonlinear risk patterns from processed matrix data and outputs a
+                    continuous reference score.</p>
             </div>
             <div class="timeline-item">
-              <h3>Reference output</h3>
-              <p>Score compared with AD and non-AD groups.</p>
+                <h3>Reference calibration</h3>
+                <p>The score is contextualized against AD and non-AD score distributions to make the output easier to
+                    interpret.</p>
             </div>
           </div>
         </div>
@@ -461,21 +465,6 @@
           </p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="section soft">
-    <div class="section-head">
-      <p class="eyebrow">Output design</p>
-      <h2>The score is useful because it is contextualized</h2>
-      <p>
-        The final user-facing output avoids unsupported diagnostic language. It explains that a higher score means higher model-estimated risk, then compares the user's score with people in the AD and non-AD reference groups.
-      </p>
-    </div>
-    <div class="callout">
-      <p>
-        "Higher score means higher model-estimated risk of Alzheimer's disease. In our reference dataset, your score is higher than xx% of AD participants and yy% of non-AD participants."
-      </p>
     </div>
   </section>
 
