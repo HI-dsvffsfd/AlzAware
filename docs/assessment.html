@@ -15,6 +15,7 @@
       background: #f6faf9;
       color: #111827;
     }
+
     .site-header {
       background: rgba(255, 255, 255, 0.96);
       border-bottom: 1px solid #d8e5e2;
@@ -65,13 +66,6 @@
     .site-nav a:hover,
     .site-nav .active {
       color: #0f766e;
-    }
-
-    .navLinks a {
-      color: #111827;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 700;
     }
 
     main {
@@ -169,6 +163,25 @@
       color: #64748b;
     }
 
+    .checkboxItem {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .checkboxItem:hover {
+      border-color: #0f766e;
+      background: #f6faf9;
+    }
+
     .checkboxItem input {
       width: 18px;
       height: 18px;
@@ -201,22 +214,6 @@
       cursor: not-allowed;
     }
 
-    .result {
-      display: none;
-      background: #ecfdf5;
-      border: 1px solid #bbf7d0;
-      color: #14532d;
-      border-radius: 8px;
-      padding: 20px;
-      margin-top: 18px;
-      line-height: 1.6;
-      font-size: 17px;
-    }
-
-    .result strong {
-      font-size: 20px;
-    }
-
     .error {
       display: none;
       background: #fef2f2;
@@ -235,39 +232,266 @@
       line-height: 20px;
     }
 
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.55);
+      z-index: 100;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .result-modal {
+      width: min(760px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 32px;
+      box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      border: 0;
+      background: transparent;
+      color: #64748b;
+      font-size: 30px;
+      line-height: 1;
+      cursor: pointer;
+      width: auto;
+      padding: 0;
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .modal-header h2 {
+      margin-bottom: 8px;
+      color: #101827;
+      font-size: 28px;
+    }
+
+    .modal-header p {
+      font-size: 16px;
+      color: #687789;
+    }
+
+    .result-summary {
+      background: #f7fbfa;
+      border: 1px solid #d8e5e2;
+      border-radius: 8px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+
+    .result-summary p {
+      font-size: 17px;
+      line-height: 1.65;
+      margin: 0 0 12px;
+      color: #2f4156;
+    }
+
+    .result-summary p:last-child {
+      margin-bottom: 0;
+    }
+
+    .percent-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: baseline;
+      padding: 12px 0;
+      border-top: 1px solid #d8e5e2;
+    }
+
+    .percent-row span {
+      color: #2f4156;
+      font-size: 16px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .percent-value {
+      color: #0f766e;
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .comparison-bars {
+      display: grid;
+      gap: 22px;
+      margin: 24px 0;
+    }
+
+    .comparison-label {
+      color: #2f4156;
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .comparison-track {
+      height: 14px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .comparison-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      transition: width 1.1s ease;
+    }
+
+    .comparison-ticks {
+      display: flex;
+      justify-content: space-between;
+      color: #94a3b8;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 7px;
+    }
+
+    .risk-low .comparison-fill {
+      background: #16a34a;
+    }
+
+    .risk-medium .comparison-fill {
+      background: #f59e0b;
+    }
+
+    .risk-high .comparison-fill {
+      background: #dc2626;
+    }
+
+    .guidance-card {
+      border: 1px solid;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 22px;
+    }
+
+    .risk-low .guidance-card {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+
+    .risk-medium .guidance-card {
+      background: #fffbeb;
+      border-color: #fcd34d;
+    }
+
+    .risk-high .guidance-card {
+      background: #fef2f2;
+      border-color: #fca5a5;
+    }
+
+    .guidance-card h3 {
+      margin: 0 0 10px;
+    }
+
+    .risk-low .guidance-card h3 {
+      color: #166534;
+    }
+
+    .risk-medium .guidance-card h3 {
+      color: #b45309;
+    }
+
+    .risk-high .guidance-card h3 {
+      color: #991b1b;
+    }
+
+    .guidance-card p {
+      font-size: 16px;
+      line-height: 1.65;
+      margin: 0;
+      color: #2f4156;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 24px;
+    }
+
+    .modal-actions button {
+      width: auto;
+      min-height: 44px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 8px;
+      background: #0f766e;
+      color: #ffffff;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .modal-actions button:hover {
+      background: #0b5f59;
+    }
+
     @media (max-width: 720px) {
-        .nav-shell {
-            align-items: flex-start;
-            flex-wrap: wrap;
-            padding: 14px 18px;
-        }
+      .nav-shell {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: 14px 18px;
+      }
 
-        .site-nav {
-            order: 3;
-            width: 100%;
-            flex-wrap: wrap;
-            gap: 12px 18px;
-        }
+      .site-nav {
+        order: 3;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+      }
 
-        main {
-            padding: 18px 14px 34px;
-        }
+      main {
+        padding: 18px 14px 34px;
+      }
 
-        .hero {
-            padding: 18px;
-        }
+      .hero {
+        padding: 18px;
+      }
 
-        h1 {
-            font-size: 28px;
-        }
+      h1 {
+        font-size: 28px;
+      }
 
-        .note {
-            font-size: 15px;
-        }
+      .note {
+        font-size: 15px;
+      }
 
-        .grid {
-            grid-template-columns: 1fr;
-        }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .result-modal {
+        padding: 24px;
+      }
+
+      .percent-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .percent-value {
+        font-size: 26px;
+      }
     }
   </style>
 </head>
@@ -394,15 +618,69 @@
     <button id="submitButton" type="submit">Calculate Reference Score</button>
   </form>
 
-  <div class="result" id="resultBox">
-    <p><strong>Higher score means more model-estimated risk of AD.</strong></p>
-    <p id="mainResult"></p>
-    <p id="secondaryResult"></p>
-    <p>This result is for reference only and is not a medical diagnosis.</p>
-  </div>
-
   <div class="error" id="errorBox"></div>
 </main>
+
+<div class="modal-overlay" id="resultModal" aria-hidden="true">
+  <div class="result-modal">
+    <button class="modal-close" id="closeModalTop" type="button" aria-label="Close result modal">&times;</button>
+
+    <div class="modal-header">
+      <h2>AlzAware Assessment Results</h2>
+      <p>Reference result generated from your submitted health information</p>
+    </div>
+
+    <div class="result-summary">
+      <p><strong>Higher score means higher model-estimated risk of Alzheimer’s disease.</strong></p>
+      <p>In our reference dataset:</p>
+
+      <div class="percent-row">
+        <span>The AD group your score is higher than:</span>
+        <strong class="percent-value" id="adSummaryPercent">--%</strong>
+      </div>
+
+      <div class="percent-row">
+        <span>The non-AD group your score is higher than:</span>
+        <strong class="percent-value" id="nonAdSummaryPercent">--%</strong>
+      </div>
+    </div>
+
+    <div class="comparison-bars">
+      <div>
+        <div class="comparison-label">AD reference group</div>
+        <div class="comparison-track">
+          <div class="comparison-fill" id="adBar"></div>
+        </div>
+        <div class="comparison-ticks">
+          <span>0%</span>
+          <span>50%</span>
+          <span>100%</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="comparison-label">Non-AD reference group</div>
+        <div class="comparison-track">
+          <div class="comparison-fill" id="nonAdBar"></div>
+        </div>
+        <div class="comparison-ticks">
+          <span>0%</span>
+          <span>50%</span>
+          <span>100%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guidance-card">
+      <h3>Clinical Guidance</h3>
+      <p id="guidanceText"></p>
+    </div>
+
+    <div class="modal-actions">
+      <button id="closeModalBottom" type="button">Close</button>
+    </div>
+  </div>
+</div>
 
 <script>
   const API_URL = "https://alzaware.onrender.com/predict";
@@ -457,6 +735,16 @@
   const ageInput = document.getElementById("ageInput");
   const ageError = document.getElementById("ageError");
   const submitButton = document.getElementById("submitButton");
+  const errorBox = document.getElementById("errorBox");
+
+  const resultModal = document.getElementById("resultModal");
+  const adSummaryPercent = document.getElementById("adSummaryPercent");
+  const nonAdSummaryPercent = document.getElementById("nonAdSummaryPercent");
+  const adBar = document.getElementById("adBar");
+  const nonAdBar = document.getElementById("nonAdBar");
+  const guidanceText = document.getElementById("guidanceText");
+  const closeModalTop = document.getElementById("closeModalTop");
+  const closeModalBottom = document.getElementById("closeModalBottom");
 
   function validateAge() {
     const age = Number(ageInput.value);
@@ -486,6 +774,65 @@
     return true;
   }
 
+  function clampPercent(value) {
+    const numberValue = Number(value);
+    if (!Number.isFinite(numberValue)) return 0;
+    return Math.max(0, Math.min(100, numberValue));
+  }
+
+  function getRiskClass(adPercent) {
+    if (adPercent < 10) return "risk-low";
+    if (adPercent <= 30) return "risk-medium";
+    return "risk-high";
+  }
+
+  function getGuidance(adPercent) {
+    if (adPercent < 10) {
+      return "Your result falls in a lower reference range. Your current health profile appears comparatively reassuring in this model, but this tool is not a diagnosis. If you have memory or cognitive concerns, please consult a qualified healthcare professional.";
+    }
+
+    if (adPercent <= 30) {
+      return "Your result suggests a moderate reference signal. We recommend seeking a professional cognitive screening or medical evaluation in the near future, especially if memory, attention, or daily functioning concerns are present.";
+    }
+
+    return "Your result suggests a higher reference signal. We strongly recommend arranging a professional cognitive evaluation as soon as possible. AlzAware is not a diagnostic tool, but this result may indicate that clinical follow-up is important.";
+  }
+
+  function openModal() {
+    resultModal.classList.add("show");
+    resultModal.setAttribute("aria-hidden", "false");
+  }
+
+  function closeModal() {
+    resultModal.classList.remove("show");
+    resultModal.setAttribute("aria-hidden", "true");
+  }
+
+  function showResult(result) {
+    const adPercent = clampPercent(result.ad_lower_or_equal_percent);
+    const nonAdPercent = clampPercent(result.non_ad_lower_or_equal_percent);
+    const riskClass = getRiskClass(adPercent);
+
+    resultModal.classList.remove("risk-low", "risk-medium", "risk-high");
+    resultModal.classList.add(riskClass);
+
+    adSummaryPercent.textContent = `${adPercent.toFixed(1)}%`;
+    nonAdSummaryPercent.textContent = `${nonAdPercent.toFixed(1)}%`;
+    guidanceText.textContent = getGuidance(adPercent);
+
+    adBar.style.width = "0%";
+    nonAdBar.style.width = "0%";
+
+    openModal();
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        adBar.style.width = `${adPercent}%`;
+        nonAdBar.style.width = `${nonAdPercent}%`;
+      });
+    });
+  }
+
   ageInput.addEventListener("input", validateAge);
   ageInput.addEventListener("invalid", validateAge);
 
@@ -497,12 +844,6 @@
       return;
     }
 
-    const resultBox = document.getElementById("resultBox");
-    const errorBox = document.getElementById("errorBox");
-    const mainResult = document.getElementById("mainResult");
-    const secondaryResult = document.getElementById("secondaryResult");
-
-    resultBox.style.display = "none";
     errorBox.style.display = "none";
     submitButton.disabled = true;
     submitButton.textContent = "Calculating...";
@@ -528,16 +869,7 @@
       }
 
       const result = await response.json();
-
-      mainResult.textContent =
-        `Your score is: ${Number(result.score).toFixed(6)}.`;
-
-      secondaryResult.textContent =
-        `Compared with the reference dataset, your score is higher than ${result.ad_lower_or_equal_percent}% of people with AD and ` +
-        `${result.non_ad_lower_or_equal_percent}% of people without AD.`;
-
-      resultBox.style.display = "block";
-      resultBox.scrollIntoView({ behavior: "smooth", block: "start" });
+      showResult(result);
     } catch (error) {
       errorBox.textContent =
         "Prediction failed. Please check that the prediction service is available and try again.";
@@ -545,6 +877,21 @@
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = "Calculate Reference Score";
+    }
+  });
+
+  closeModalTop.addEventListener("click", closeModal);
+  closeModalBottom.addEventListener("click", closeModal);
+
+  resultModal.addEventListener("click", (event) => {
+    if (event.target === resultModal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeModal();
     }
   });
 </script>
