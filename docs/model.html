@@ -8,17 +8,17 @@
   <style>
     .evidence-block {
       display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
       gap: 36px;
       align-items: center;
     }
 
     .chart-placeholder {
-      min-height: 300px;
+      min-height: 320px;
       background: #ffffff;
       border: 1px solid #9ee7dd;
       border-radius: 8px;
-      padding: 28px;
+      padding: 22px;
       display: grid;
       place-items: center;
       text-align: center;
@@ -26,10 +26,18 @@
     }
 
     .chart-placeholder img {
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .chart-placeholder .placeholder-logo {
       width: 150px;
       height: 150px;
       object-fit: contain;
-      opacity: 0.88;
+      opacity: 0.85;
       margin-bottom: 18px;
     }
 
@@ -42,12 +50,37 @@
       max-width: 420px;
     }
 
-    .auc-number {
+    .auc-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0 12px;
+    }
+
+    .auc-card {
+      background: #ffffff;
+      border: 1px solid #d8e5e2;
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .auc-card strong {
+      display: block;
       color: #0f766e;
-      font-size: 62px;
-      font-weight: 900;
+      font-size: 28px;
       line-height: 1;
-      margin: 18px 0;
+      margin-bottom: 8px;
+    }
+
+    .auc-card span {
+      color: #2f4156;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .auc-card.highlight {
+      border-color: #0f766e;
+      box-shadow: 0 12px 28px rgba(15, 118, 110, 0.14);
     }
 
     .mini-disclaimer {
@@ -333,8 +366,8 @@
         grid-template-columns: 1fr;
       }
 
-      .auc-number {
-        font-size: 48px;
+      .auc-metrics {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -374,14 +407,13 @@
 <main class="page">
   <section class="hero">
     <div>
-      <p class="eyebrow">Model approach</p>
+      <p class="eyebrow">Technical model overview</p>
       <h1>A data-driven cognitive risk model built for early triage</h1>
       <p class="lead">
         AlzAware transforms demographic and health-history inputs into a machine-learning risk reference score trained on a large cognitive-health dataset.
-        The model is designed to identify patterns associated with Alzheimer’s disease and translate them into an interpretable comparison against AD and non-AD reference groups.
       </p>
       <p class="lead">
-        The score is designed to support triage and awareness, not to replace clinical cognitive testing.
+        The model identifies patterns associated with Alzheimer’s disease and translates them into an interpretable comparison against AD and non-AD reference groups.
       </p>
     </div>
 
@@ -394,19 +426,16 @@
           <p class="eyebrow">Technical pipeline</p>
           <div class="timeline">
             <div class="timeline-item">
-                <h3>Structured predictors</h3>
-                <p>Age, education, medication count, demographic variables, and self-reported medical history are
-                    converted into model-ready features.</p>
+              <h3>Structured predictors</h3>
+              <p>Age, education, medication count, demographic variables, and self-reported medical history are converted into model-ready features.</p>
             </div>
             <div class="timeline-item">
-                <h3>XGBoost classifier</h3>
-                <p>A gradient-boosted tree model learns nonlinear risk patterns from processed matrix data and outputs a
-                    continuous reference score.</p>
+              <h3>XGBoost classifier</h3>
+              <p>A gradient-boosted tree model learns nonlinear risk patterns from processed matrix data and outputs a continuous reference score.</p>
             </div>
             <div class="timeline-item">
-                <h3>Reference calibration</h3>
-                <p>The score is contextualized against AD and non-AD score distributions to make the output easier to
-                    interpret.</p>
+              <h3>Reference calibration</h3>
+              <p>The score is contextualized against AD and non-AD score distributions to make the output easier to interpret.</p>
             </div>
           </div>
         </div>
@@ -418,27 +447,36 @@
     <div class="evidence-block">
       <div>
         <p class="eyebrow">Model performance</p>
-        <h2>A strong AUC supports screening potential</h2>
+        <h2>Testing performance supports first-step risk triage</h2>
         <p>
-          ROC-AUC measures how well a model separates AD and non-AD participants across possible thresholds. A value closer to 1.0 indicates stronger discrimination.
+          After an 80/20 stratified train-test split and 5-fold grid search, the XGBoost model achieved a testing ROC-AUC of 0.8511.
         </p>
-        <div class="auc-number">0.89</div>
         <p>
-          AlzAware's current XGBoost prototype reaches an approximate testing AUC of 0.89, suggesting strong potential as a first-step risk triage tool.
+          ROC-AUC measures how well the model separates AD and non-AD participants across possible thresholds. A testing AUC above 0.85 suggests strong discrimination for a first-step risk triage tool, while still requiring clinical follow-up for any medical decision.
         </p>
+
+        <div class="auc-metrics">
+          <div class="auc-card">
+            <strong>0.8879</strong>
+            <span>Training AUC</span>
+          </div>
+          <div class="auc-card highlight">
+            <strong>0.8511</strong>
+            <span>Testing AUC</span>
+          </div>
+          <div class="auc-card">
+            <strong>0.8805</strong>
+            <span>All Data AUC</span>
+          </div>
+        </div>
+
         <p class="mini-disclaimer">
-          Final reported values should be updated with the exact training run, confidence interval, and model version used in the final submission.
+          The testing AUC is the primary public-facing performance metric because it evaluates the model on held-out data that was not used for final training.
         </p>
       </div>
 
       <div class="chart-placeholder">
-        <div>
-          <img src="assets/logo.png" alt="AUC chart placeholder" />
-          <h3>AUC visualization placeholder</h3>
-          <p>
-            Replace this logo with a ROC curve or AUC card showing model performance on the testing dataset.
-          </p>
-        </div>
+        <img src="assets/roc_curve_test_24.png" alt="ROC curve showing testing AUC" />
       </div>
     </div>
   </section>
@@ -458,7 +496,7 @@
 
       <div class="chart-placeholder">
         <div>
-          <img src="assets/logo.png" alt="Score distribution chart placeholder" />
+          <img class="placeholder-logo" src="assets/logo.png" alt="Score distribution chart placeholder" />
           <h3>Boxplot + violin placeholder</h3>
           <p>
             Replace this logo with the score distribution chart comparing AD and non-AD reference populations.
@@ -468,7 +506,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section soft">
     <div class="demo-panel">
       <p class="eyebrow">Interactive model demo</p>
       <h2>Run a sample assessment result</h2>
