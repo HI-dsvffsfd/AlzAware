@@ -29,7 +29,7 @@
       <p class="eyebrow">Digital cognitive risk triage</p>
       <h1>AlzAware</h1>
       <p class="lead">
-        Providing early Alzheimer’s risk estimation through simple health information.
+        Providing an early cognitive risk reference through simple health information.
       </p>
       <p class="lead">
         AlzAware generates a model-based reference score and compares it with AD and non-AD populations in a large study.
@@ -45,13 +45,42 @@
         <div class="mock-top">
           <span class="dot"></span><span class="dot"></span><span class="dot"></span>
         </div>
+
         <div class="mock-body">
-          <p class="eyebrow">Reference score preview</p>
-          <h3>Higher score means higher model-estimated AD risk.</h3>
-          <div class="mini-label"><span>Your score is higher than AD group</span><span>62%</span></div>
-          <div class="bar"><span style="width:62%"></span></div>
-          <div class="mini-label"><span>Your score is higher than non-AD group</span><span>18%</span></div>
-          <div class="bar blue"><span style="width:18%"></span></div>
+          <p class="eyebrow">Prototype workflow</p>
+          <h3>How AlzAware turns simple inputs into a reference score</h3>
+
+          <div class="flow-card">
+            <div class="flow-number">1</div>
+            <div>
+              <h4>Answer health questions</h4>
+              <p>Age, education, medical history, and optional cognitive game results.</p>
+            </div>
+          </div>
+
+          <div class="flow-card">
+            <div class="flow-number">2</div>
+            <div>
+              <h4>Generate a model score</h4>
+              <p>XGBoost uses processed predictors to produce a model-based score.</p>
+            </div>
+          </div>
+
+          <div class="flow-card">
+            <div class="flow-number">3</div>
+            <div>
+              <h4>Compare with reference groups</h4>
+              <p>The score is compared with AD and non-AD populations in a large study.</p>
+            </div>
+          </div>
+
+          <div class="sample-result">
+            <p>Example output format</p>
+            <strong>Your score is: 0.0100</strong>
+            <span>
+              In a large study, xx% of the AD population and yy% of the non-AD population had scores higher than yours.
+            </span>
+          </div>
         </div>
       </div>
     </div>
