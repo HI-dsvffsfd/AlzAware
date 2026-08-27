@@ -615,7 +615,7 @@ p {
 }
 
 .hero-home .mock-body {
-  padding: 24px 28px;
+  padding: 20px 24px;
 }
 
 .hero-home .mock-body h3 {
@@ -625,8 +625,7 @@ p {
 }
 
 .hero-home .flow-card {
-  padding: 10px 0;
-  gap: 12px;
+  padding: 8px 0;
 }
 
 .hero-home .flow-number {
