@@ -609,3 +609,49 @@ p {
 .sample-result strong {
   margin-bottom: 6px;
 }
+
+.hero-home .mock-window {
+  max-width: 560px;
+}
+
+.hero-home .mock-body {
+  padding: 24px 28px;
+}
+
+.hero-home .mock-body h3 {
+  font-size: 22px;
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.hero-home .flow-card {
+  padding: 10px 0;
+  gap: 12px;
+}
+
+.hero-home .flow-number {
+  width: 26px;
+  height: 26px;
+  font-size: 13px;
+}
+
+.hero-home .flow-card h4 {
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.hero-home .flow-card p {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.hero-home .sample-result {
+  margin-top: 12px;
+  padding: 12px;
+}
+
+.hero-home .sample-result span,
+.hero-home .sample-result strong {
+  font-size: 14px;
+  line-height: 1.35;
+}
