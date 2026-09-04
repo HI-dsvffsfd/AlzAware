@@ -746,24 +746,32 @@
       <p>Reference result generated from a pre-loaded survey profile</p>
     </div>
 
-    <div class="result-summary">
-      <p><strong>Higher score means higher model-estimated risk of Alzheimer's disease.</strong></p>
-      <p>In our reference dataset:</p>
+      <div class="result-layout">
+          <div class="result-summary">
+              <p><strong>Higher score means higher model-estimated risk of Alzheimer's disease.</strong></p>
+              <p>In our reference dataset:</p>
 
-      <div class="percent-result">
-        <div class="percent-card">
-          <span>AD reference group</span>
-          <strong id="adSummaryPercent">--%</strong>
-          <small>Your score is higher than this percentage of the AD group.</small>
-        </div>
+              <div class="percent-row">
+                  <span>In the AD sample your score is higher than:</span>
+                  <strong class="percent-value" id="adSummaryPercent">--%</strong>
+              </div>
 
-        <div class="percent-card">
-          <span>Non-AD reference group</span>
-          <strong id="nonAdSummaryPercent">--%</strong>
-          <small>Your score is higher than this percentage of the non-AD group.</small>
-        </div>
+              <div class="percent-row">
+                  <span>In the non-AD sample your score is higher than:</span>
+                  <strong class="percent-value" id="nonAdSummaryPercent">--%</strong>
+              </div>
+          </div>
+
+          <div class="score-chart-card">
+              <h3>Your Score on the Reference Distribution</h3>
+              <div class="score-chart-wrap">
+                  <img src="assets/score_distribution_density_24_newColor.png"
+                       alt="Model score density distribution by AD and non-AD reference sample"/>
+                  <div class="score-marker" id="modalScoreMarker" aria-hidden="true"></div>
+              </div>
+              <p class="chart-note">Yellow line indicates the predicted score.</p>
+          </div>
       </div>
-    </div>
 
     <div class="modal-actions">
       <button class="btn-modal-secondary" id="goAssessmentButton" type="button">Go to Assessment</button>
@@ -815,6 +823,7 @@
   const closeModalBottom = document.getElementById("closeModalBottom");
   const goAssessmentButton = document.getElementById("goAssessmentButton");
   const scoreMarker = document.getElementById("scoreMarker");
+  const modalScoreMarker = document.getElementById("modalScoreMarker");
 
   function clampPercent(value) {
     const numberValue = Number(value);
@@ -863,17 +872,21 @@
       return plotLeftPercent + fraction * (plotRightPercent - plotLeftPercent);
   }
 
-  function updateScoreMarker(result) {
+  function placeMarker(marker, result) {
       const score = getModelScore(result);
 
-      if (score === null) {
-          scoreMarker.classList.remove("show");
+      if (!marker || score === null) {
+          if (marker) marker.classList.remove("show");
           return;
       }
 
-      const markerLeft = scoreToMarkerLeft(score);
-      scoreMarker.style.left = `${markerLeft}%`;
-      scoreMarker.classList.add("show");
+      marker.style.left = `${scoreToMarkerLeft(score)}%`;
+      marker.classList.add("show");
+  }
+
+  function updateScoreMarker(result) {
+      placeMarker(scoreMarker, result);
+      placeMarker(modalScoreMarker, result);
   }
 
   function openModal() {
