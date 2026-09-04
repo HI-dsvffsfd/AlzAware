@@ -5,105 +5,155 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Model | AlzAware</title>
   <link rel="stylesheet" href="style.css" />
+
   <style>
+    .model-page {
+      max-width: none;
+      padding: 0;
+      background: #eff8ff;
+    }
+
+    .model-page > .hero,
+    .model-page > .section {
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      padding-left: max(28px, calc(50vw - 610px));
+      padding-right: max(28px, calc(50vw - 610px));
+      background: #eff8ff;
+      border-top: 1px solid #d7e6f2;
+    }
+
+    .model-page > .hero {
+      min-height: calc(100vh - 76px);
+      border-top: 0;
+      padding-top: 86px;
+      padding-bottom: 96px;
+    }
+
+    .model-page > .section {
+      padding-top: 92px;
+      padding-bottom: 92px;
+    }
+
     .model-page h1 {
-      font-size: 52px;
-      line-height: 1.04;
-      color: #0f172a;
+      font-size: clamp(48px, 5vw, 68px);
+      line-height: 1.05;
+      color: #101827;
     }
 
     .model-page h2 {
-      font-size: 30px;
-      line-height: 1.16;
-      color: #0f172a;
+      font-size: clamp(32px, 3.2vw, 42px);
+      line-height: 1.15;
+      color: #101827;
     }
 
     .model-page h3 {
-      font-size: 19px;
-      line-height: 1.28;
+      font-size: 23px;
+      line-height: 1.25;
     }
 
     .model-page p,
     .model-page li {
-      font-size: 16px;
+      font-size: 20px;
       line-height: 1.65;
-      color: var(--text);
-    }
-
-    .model-page .lead {
-      font-size: 19px;
-      line-height: 1.6;
     }
 
     .model-page .eyebrow {
-      color: #0891b2;
+      color: #0488a8;
+      font-size: 15px;
+      letter-spacing: 0.16em;
+    }
+
+    .model-page .lead {
+      max-width: 760px;
+      font-size: 23px;
+      line-height: 1.62;
     }
 
     .model-facts {
       background: #ffffff;
-      border: 1px solid #bae6fd;
+      border: 1px solid #b8dcff;
       border-radius: 8px;
-      padding: 32px;
-      box-shadow: var(--shadow);
+      padding: 42px;
+      box-shadow: 0 22px 48px rgba(15, 23, 42, 0.08);
     }
 
-    .model-facts h3 {
+    .model-facts h2 {
       color: #1463ff;
-      font-size: 28px;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
     }
 
     .model-facts ul {
       margin: 0;
-      padding-left: 22px;
+      padding-left: 24px;
     }
 
     .model-facts li {
-      margin-bottom: 12px;
+      margin-bottom: 18px;
+      color: #183153;
     }
 
-    .model-demo-section {
-      padding-top: 36px;
-      padding-bottom: 36px;
+    .model-facts li:last-child {
+      margin-bottom: 0;
     }
 
     .demo-panel {
       background: #ffffff;
-      border: 1px solid #bae6fd;
+      border: 1px solid #b8dcff;
       border-radius: 8px;
-      padding: 30px;
-      box-shadow: var(--shadow);
+      padding: 42px;
+      box-shadow: 0 22px 48px rgba(15, 23, 42, 0.08);
+    }
+
+    .demo-panel p {
+      max-width: 980px;
+      font-size: 19px;
     }
 
     .demo-actions {
-      margin-top: 24px;
+      margin-top: 28px;
       display: flex;
-      gap: 14px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
-    .demo-button {
+    .demo-button,
+    .demo-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 46px;
-      padding: 0 22px;
-      border: 0;
+      min-height: 48px;
+      padding: 0 26px;
       border-radius: 8px;
-      background: linear-gradient(135deg, #0891b2, #1463ff);
-      color: #ffffff;
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 900;
       cursor: pointer;
+      text-decoration: none;
+    }
+
+    .demo-button {
+      border: 0;
+      background: #1463ff;
+      color: #ffffff;
     }
 
     .demo-button:hover {
-      background: linear-gradient(135deg, #087ea4, #0f4ed8);
+      background: #0f4ed8;
     }
 
     .demo-button:disabled {
       opacity: 0.7;
       cursor: not-allowed;
+    }
+
+    .demo-link {
+      background: #ffffff;
+      color: #1463ff;
+      border: 1px solid #1463ff;
+    }
+
+    .demo-link:hover {
+      background: #edf6ff;
     }
 
     .demo-error {
@@ -119,126 +169,124 @@
 
     .evidence-block {
       display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
-      gap: 36px;
+      grid-template-columns: minmax(0, 0.92fr) minmax(380px, 1.08fr);
+      gap: 56px;
       align-items: center;
     }
 
     .model-bullets {
-      margin: 18px 0 0;
+      margin: 24px 0 0;
       padding-left: 24px;
     }
 
+    .model-bullets li {
+      margin-bottom: 8px;
+    }
+
     .model-bullets ul {
-      margin-top: 6px;
-    }
-
-    .chart-placeholder {
-      min-height: 320px;
-      background: #ffffff;
-      border: 1px solid #bae6fd;
-      border-radius: 8px;
-      padding: 22px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-
-    .chart-placeholder img {
-      width: 100%;
-      max-width: 520px;
-      height: auto;
-      border-radius: 8px;
-      object-fit: contain;
+      margin-top: 8px;
+      padding-left: 26px;
     }
 
     .auc-metrics {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin: 24px 0 12px;
+      gap: 18px;
+      margin: 34px 0 0;
     }
 
     .auc-card {
       background: #ffffff;
-      border: 1px solid #d8e5e2;
+      border: 1px solid #d7e6f2;
       border-radius: 8px;
-      padding: 18px;
+      padding: 24px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
     }
 
     .auc-card strong {
       display: block;
       color: #1463ff;
-      font-size: 30px;
+      font-size: 38px;
       line-height: 1;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .auc-card span {
-      color: #2f4156;
-      font-size: 13px;
-      font-weight: 800;
+      color: #183153;
+      font-size: 17px;
+      font-weight: 900;
     }
 
     .auc-card.highlight {
       border-color: #1463ff;
-      box-shadow: 0 12px 28px rgba(20, 99, 255, 0.14);
+      box-shadow: 0 14px 34px rgba(20, 99, 255, 0.14);
     }
 
-    .distribution-frame {
+    .chart-placeholder {
+      min-height: 340px;
+      background: #ffffff;
+      border: 1px solid #b8dcff;
+      border-radius: 8px;
+      padding: 32px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      box-shadow: 0 22px 48px rgba(15, 23, 42, 0.08);
+    }
+
+    .chart-placeholder img {
+      width: 100%;
+      max-width: 620px;
+      height: auto;
+      border-radius: 8px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .score-chart-wrap {
       position: relative;
       width: 100%;
-      max-width: 560px;
-      margin: 0 auto;
-    }
-
-    .distribution-frame img {
-      display: block;
-      width: 100%;
-      max-width: 560px;
+      max-width: 620px;
     }
 
     .score-marker {
-      position: absolute;
-      top: 12%;
-      bottom: 10%;
-      left: 12%;
       display: none;
-      width: 4px;
-      background: #dc2626;
-      border-radius: 999px;
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.16);
+      position: absolute;
+      top: 18%;
+      bottom: 17%;
+      width: 0;
+      pointer-events: none;
       transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .score-marker.show {
+      display: block;
     }
 
     .score-marker::before {
       content: "";
       position: absolute;
-      top: 42%;
-      left: 50%;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #dc2626;
-      border: 4px solid #ffffff;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 8px 20px rgba(220, 38, 38, 0.32);
+      top: 0;
+      bottom: 0;
+      left: -2px;
+      width: 4px;
+      border-radius: 999px;
+      background: #ef4444;
+      box-shadow: 0 0 14px rgba(239, 68, 68, 0.25);
     }
 
     .score-marker::after {
-      content: "Demo score";
+      content: "";
       position: absolute;
-      top: -34px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #0f172a;
-      color: #ffffff;
-      border-radius: 6px;
-      padding: 5px 8px;
-      font-size: 12px;
-      font-weight: 900;
-      white-space: nowrap;
+      top: 42%;
+      left: -10px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #ef4444;
+      border: 4px solid #ffffff;
+      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.3);
     }
 
     .modal-overlay {
@@ -257,12 +305,12 @@
     }
 
     .result-modal {
-      width: min(700px, 100%);
+      width: min(820px, 100%);
       max-height: 92vh;
       overflow: auto;
       background: #ffffff;
       border-radius: 8px;
-      padding: 32px;
+      padding: 40px;
       box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
       position: relative;
     }
@@ -287,81 +335,102 @@
 
     .modal-header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .modal-header h2 {
       margin-bottom: 8px;
       color: #101827;
-      font-size: 28px;
+      font-size: 34px;
     }
 
     .modal-header p {
-      font-size: 15px;
+      font-size: 17px;
       color: #687789;
     }
 
     .result-summary {
-      background: #f7fbff;
-      border: 1px solid #bfdbfe;
+      background: #f3f9ff;
+      border: 1px solid #b8dcff;
       border-radius: 8px;
-      padding: 24px;
-      margin-bottom: 24px;
+      padding: 30px;
     }
 
     .result-summary p {
-      font-size: 16px;
+      font-size: 18px;
       line-height: 1.65;
-      margin: 0 0 14px;
+      margin: 0 0 16px;
       color: #2f4156;
     }
 
-    .result-summary strong {
-      color: #0f172a;
+    .result-summary p:last-child {
+      margin-bottom: 0;
     }
 
     .percent-result {
       display: grid;
-      gap: 12px;
-      margin-top: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
     }
 
-    .percent-result p {
-      margin: 0;
-      font-size: 17px;
+    .percent-card {
+      background: #ffffff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 20px;
     }
 
-    .percent-result strong {
+    .percent-card span {
+      display: block;
+      color: #183153;
+      font-size: 16px;
+      line-height: 1.4;
+      font-weight: 900;
+    }
+
+    .percent-card strong {
+      display: block;
+      margin-top: 12px;
       color: #1463ff;
-      font-size: 20px;
+      font-size: 36px;
+      line-height: 1;
+    }
+
+    .percent-card small {
+      display: block;
+      margin-top: 12px;
+      color: #64748b;
+      font-size: 14px;
+      line-height: 1.45;
     }
 
     .modal-actions {
       display: flex;
       justify-content: flex-end;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
-      margin-top: 24px;
+      margin-top: 28px;
     }
 
-    .modal-actions button,
-    .modal-actions a {
+    .modal-actions button {
       width: auto;
-      min-height: 44px;
-      padding: 0 22px;
+      min-height: 46px;
+      padding: 0 24px;
       border-radius: 8px;
       font-weight: 900;
       cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      font-size: 16px;
     }
 
     .btn-modal-primary {
       border: 0;
-      background: linear-gradient(135deg, #0891b2, #1463ff);
+      background: #1463ff;
       color: #ffffff;
+    }
+
+    .btn-modal-primary:hover {
+      background: #0f4ed8;
     }
 
     .btn-modal-secondary {
@@ -370,9 +439,15 @@
       border: 1px solid #1463ff;
     }
 
+    .btn-modal-secondary:hover {
+      background: #edf6ff;
+    }
+
     @media (max-width: 900px) {
-      .model-page h1 {
-        font-size: 40px;
+      .model-page > .hero,
+      .model-page > .section {
+        padding-left: 28px;
+        padding-right: 28px;
       }
 
       .evidence-block {
@@ -385,112 +460,45 @@
     }
 
     @media (max-width: 720px) {
-      .result-modal {
-        padding: 24px;
+      .model-page > .hero {
+        min-height: auto;
+        padding-top: 56px;
+        padding-bottom: 56px;
       }
-    }
-    .model-page .hero {
-      padding: 92px 0 84px;
-    }
 
-    .model-page .section {
-      padding-top: 88px;
-      padding-bottom: 88px;
-    }
+      .model-page > .section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
 
-    .model-demo-section {
-      padding-top: 78px !important;
-      padding-bottom: 78px !important;
-    }
+      .model-page h1 {
+        font-size: 42px;
+      }
 
-    .model-facts {
-      padding: 40px;
-    }
+      .model-page h2 {
+        font-size: 30px;
+      }
 
-    .demo-panel {
-      padding: 42px;
-    }
+      .model-page p,
+      .model-page li,
+      .model-page .lead {
+        font-size: 18px;
+      }
 
-    .evidence-block {
-      gap: 56px;
-    }
-
-    .chart-placeholder {
-      padding: 32px;
-    }
-
-    .model-bullets {
-      margin-top: 24px;
-      margin-bottom: 28px;
-    }
-
-    .model-bullets li {
-      margin-bottom: 8px;
-    }
-
-    .auc-metrics {
-      margin-top: 30px;
-    }
-
-    .result-modal {
-      width: min(820px, 100%);
-      padding: 40px;
-    }
-
-    .result-summary {
-      padding: 30px;
-    }
-
-    .percent-result {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 24px;
-    }
-
-    .percent-result p {
-      background: #ffffff;
-      border: 1px solid #bfdbfe;
-      border-radius: 8px;
-      padding: 18px;
-      font-size: 15px;
-      line-height: 1.45;
-    }
-
-    .percent-result strong {
-      display: block;
-      margin-top: 8px;
-      color: #1463ff;
-      font-size: 32px;
-      line-height: 1;
-    }
-
-    @media (max-width: 720px) {
-      .model-page .hero,
-      .model-page .section,
-      .model-demo-section {
-        padding-top: 56px !important;
-        padding-bottom: 56px !important;
+      .model-facts,
+      .demo-panel,
+      .chart-placeholder,
+      .result-modal {
+        padding: 26px;
       }
 
       .percent-result {
         grid-template-columns: 1fr;
       }
-
-      .result-modal {
-        padding: 26px;
-      }
-    }
-
-    .percent-result span {
-      display: block;
-      margin-top: 10px;
-      color: #64748b;
-      font-size: 14px;
-      line-height: 1.45;
     }
   </style>
 </head>
+
 <body>
 <header class="site-header">
   <div class="nav-shell">
@@ -498,6 +506,7 @@
       <img src="assets/logo.png" alt="AlzAware logo" />
       <span>AlzAware</span>
     </a>
+
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a class="active" href="model.html">Model</a>
@@ -519,7 +528,7 @@
     </div>
 
     <div class="model-facts">
-      <h3>Model built with</h3>
+      <h2>Model built with</h2>
       <ul>
         <li>More than 150,000 participants</li>
         <li>24 predictors</li>
@@ -528,26 +537,29 @@
     </div>
   </section>
 
-  <section class="section model-demo-section soft sky">
+  <section class="section model-demo-section">
     <div class="demo-panel">
       <p class="eyebrow">Model demo</p>
       <h2>Run a sample assessment result</h2>
       <p>
         This demo submits a pre-loaded survey profile to the prediction backend and displays the same reference-style result used in the public assessment page.
       </p>
+
       <div class="demo-actions">
         <button class="demo-button" id="runDemoButton" type="button">Run Demo</button>
-        <a class="btn-secondary" href="assessment.html">Go to Assessment</a>
+        <a class="demo-link" href="assessment.html">Go to Assessment</a>
       </div>
+
       <div class="demo-error" id="demoError"></div>
     </div>
   </section>
 
-  <section class="section soft sky">
+  <section class="section">
     <div class="evidence-block">
       <div>
         <p class="eyebrow">Model performance</p>
         <h2>Model performance</h2>
+
         <ul class="model-bullets">
           <li>Randomly split data as 80/20 for training/testing</li>
           <li>Train a model using training data only</li>
@@ -566,6 +578,7 @@
             <strong>0.888</strong>
             <span>Training AUC</span>
           </div>
+
           <div class="auc-card highlight">
             <strong>0.851</strong>
             <span>Testing AUC</span>
@@ -584,21 +597,24 @@
       <div>
         <p class="eyebrow">Output interpretation</p>
         <h2>Output interpretation</h2>
+
         <p>
           All participants' risk scores are predicted using the final model, and the score distributions for the two study samples, AD and non-AD, are visualized separately.
         </p>
+
         <p>
           The larger the score, the higher the model-estimated risk.
         </p>
+
         <p>
           Your predicted risk score is compared with the two reference samples to support decisions about whether professional cognitive evaluation may be worth considering.
         </p>
       </div>
 
       <div class="chart-placeholder">
-        <div class="distribution-frame">
-          <img src="assets/score_distribution_density_24_newColor.png" alt="Model score density distribution by AD and non-AD reference group" />
-          <div class="score-marker" id="scoreMarker"></div>
+        <div class="score-chart-wrap">
+          <img src="assets/score_distribution_density_24.png" alt="Model score density distribution by AD and non-AD reference group" />
+          <div class="score-marker" id="scoreMarker" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -618,22 +634,23 @@
       <p><strong>Higher score means higher model-estimated risk of Alzheimer's disease.</strong></p>
       <p>In our reference dataset:</p>
 
-        <div class="percent-result">
-            <p>
-                AD reference group
-                <strong id="adSummaryPercent">--%</strong>
-                <span>Your score is higher than this percentage of the AD group.</span>
-            </p>
-            <p>
-                Non-AD reference group
-                <strong id="nonAdSummaryPercent">--%</strong>
-                <span>Your score is higher than this percentage of the non-AD group.</span>
-            </p>
+      <div class="percent-result">
+        <div class="percent-card">
+          <span>AD reference group</span>
+          <strong id="adSummaryPercent">--%</strong>
+          <small>Your score is higher than this percentage of the AD group.</small>
         </div>
+
+        <div class="percent-card">
+          <span>Non-AD reference group</span>
+          <strong id="nonAdSummaryPercent">--%</strong>
+          <small>Your score is higher than this percentage of the non-AD group.</small>
+        </div>
+      </div>
     </div>
 
     <div class="modal-actions">
-      <a class="btn-modal-secondary" href="assessment.html">Go to Assessment</a>
+      <button class="btn-modal-secondary" id="goAssessmentButton" type="button">Go to Assessment</button>
       <button class="btn-modal-primary" id="closeModalBottom" type="button">Close</button>
     </div>
   </div>
@@ -673,8 +690,7 @@
     no_conditions: "FALSE"
   };
 
-  const SCORE_AXIS_MIN = 0;
-  const SCORE_AXIS_MAX = 1;
+  const DEMO_SCORE_FALLBACK = 0.01;
 
   const runDemoButton = document.getElementById("runDemoButton");
   const demoError = document.getElementById("demoError");
@@ -683,6 +699,7 @@
   const nonAdSummaryPercent = document.getElementById("nonAdSummaryPercent");
   const closeModalTop = document.getElementById("closeModalTop");
   const closeModalBottom = document.getElementById("closeModalBottom");
+  const goAssessmentButton = document.getElementById("goAssessmentButton");
   const scoreMarker = document.getElementById("scoreMarker");
 
   function clampPercent(value) {
@@ -691,17 +708,47 @@
     return Math.max(0, Math.min(100, numberValue));
   }
 
-  function scoreToMarkerLeft(score) {
-    const numericScore = Number(score);
+  function getModelScore(result) {
+    const possibleKeys = [
+      "score",
+      "xgb_score",
+      "risk_score",
+      "model_score",
+      "predicted_probability",
+      "predicted_probability_class_1",
+      "probability"
+    ];
 
-    if (!Number.isFinite(numericScore)) {
-      return 12;
+    for (const key of possibleKeys) {
+      if (Object.prototype.hasOwnProperty.call(result, key)) {
+        const value = Number(result[key]);
+        if (Number.isFinite(value)) {
+          return value;
+        }
+      }
     }
 
-    const scorePercent = ((numericScore - SCORE_AXIS_MIN) / (SCORE_AXIS_MAX - SCORE_AXIS_MIN)) * 100;
-    const clamped = clampPercent(scorePercent);
+    return DEMO_SCORE_FALLBACK;
+  }
 
-    return 8 + clamped * 0.86;
+  function scoreToMarkerLeft(score) {
+    const safeScore = Math.max(0.00001, Math.min(1, Number(score)));
+    const logMin = -5;
+    const logMax = 0;
+    const logScore = Math.log10(safeScore);
+    const fraction = (logScore - logMin) / (logMax - logMin);
+
+    const plotLeftPercent = 7.5;
+    const plotRightPercent = 94.5;
+    return plotLeftPercent + fraction * (plotRightPercent - plotLeftPercent);
+  }
+
+  function updateScoreMarker(result) {
+    const score = getModelScore(result);
+    const markerLeft = scoreToMarkerLeft(score);
+
+    scoreMarker.style.left = `${markerLeft}%`;
+    scoreMarker.classList.add("show");
   }
 
   function openModal() {
@@ -719,14 +766,11 @@
   function showResult(result) {
     const adPercent = clampPercent(result.ad_lower_or_equal_percent);
     const nonAdPercent = clampPercent(result.non_ad_lower_or_equal_percent);
-    const markerLeft = scoreToMarkerLeft(result.score);
 
     adSummaryPercent.textContent = `${adPercent.toFixed(1)}%`;
     nonAdSummaryPercent.textContent = `${nonAdPercent.toFixed(1)}%`;
 
-    scoreMarker.style.left = `${markerLeft}%`;
-    scoreMarker.style.display = "block";
-
+    updateScoreMarker(result);
     openModal();
   }
 
@@ -762,6 +806,10 @@
 
   closeModalTop.addEventListener("click", closeModal);
   closeModalBottom.addEventListener("click", closeModal);
+
+  goAssessmentButton.addEventListener("click", () => {
+    window.location.href = "assessment.html";
+  });
 
   resultModal.addEventListener("click", (event) => {
     if (event.target === resultModal) {
