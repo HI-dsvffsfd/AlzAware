@@ -534,6 +534,84 @@
       font-size: 18px;
       margin-bottom: 14px;
     }
+
+    .model-page h1 {
+      font-size: clamp(40px, 4.2vw, 56px);
+      line-height: 1.08;
+      color: #101827;
+    }
+
+    .model-page h2 {
+      font-size: clamp(28px, 2.8vw, 36px);
+      line-height: 1.16;
+      color: #101827;
+    }
+
+    .model-page h3 {
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    .model-page p,
+    .model-page li {
+      font-size: 18px;
+      line-height: 1.62;
+    }
+
+    .model-page .lead {
+      max-width: 720px;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .model-facts h2 {
+      font-size: 34px;
+    }
+
+    .model-facts li {
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    .score-marker {
+      display: none;
+      position: absolute;
+      top: 18%;
+      bottom: 17%;
+      width: 0;
+      pointer-events: none;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .score-marker.show {
+      display: block;
+    }
+
+    .score-marker::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -2px;
+      width: 4px;
+      border-radius: 999px;
+      background: #ef4444;
+      box-shadow: 0 0 14px rgba(239, 68, 68, 0.25);
+    }
+
+    .score-marker::after {
+      content: "";
+      position: absolute;
+      top: 42%;
+      left: -10px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #ef4444;
+      border: 4px solid #ffffff;
+      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.3);
+    }
   </style>
 </head>
 
@@ -728,8 +806,6 @@
     no_conditions: "FALSE"
   };
 
-  const DEMO_SCORE_FALLBACK = 0.01;
-
   const runDemoButton = document.getElementById("runDemoButton");
   const demoError = document.getElementById("demoError");
   const resultModal = document.getElementById("resultModal");
@@ -747,46 +823,57 @@
   }
 
   function getModelScore(result) {
-    const possibleKeys = [
-      "score",
-      "xgb_score",
-      "risk_score",
-      "model_score",
-      "predicted_probability",
-      "predicted_probability_class_1",
-      "probability"
-    ];
+      const possibleKeys = [
+          "score",
+          "xgb_score",
+          "risk_score",
+          "model_score",
+          "predicted_probability",
+          "predicted_probability_class_1",
+          "probability"
+      ];
 
-    for (const key of possibleKeys) {
-      if (Object.prototype.hasOwnProperty.call(result, key)) {
-        const value = Number(result[key]);
-        if (Number.isFinite(value)) {
-          return value;
-        }
+      for (const key of possibleKeys) {
+          if (Object.prototype.hasOwnProperty.call(result, key)) {
+              const value = Number(result[key]);
+              if (Number.isFinite(value) && value > 0) {
+                  return value;
+              }
+          }
       }
-    }
 
-    return DEMO_SCORE_FALLBACK;
+      return null;
   }
 
   function scoreToMarkerLeft(score) {
-    const safeScore = Math.max(0.00001, Math.min(1, Number(score)));
-    const logMin = -5;
-    const logMax = 0;
-    const logScore = Math.log10(safeScore);
-    const fraction = (logScore - logMin) / (logMax - logMin);
+      const safeScore = Math.max(0.00001, Math.min(1, Number(score)));
 
-    const plotLeftPercent = 7.5;
-    const plotRightPercent = 94.5;
-    return plotLeftPercent + fraction * (plotRightPercent - plotLeftPercent);
+      const logMin = -5;
+      const logMax = 0;
+      const logScore = Math.log10(safeScore);
+      const fraction = (logScore - logMin) / (logMax - logMin);
+
+      /*
+        These two values align the marker with the plotted x-axis inside
+        score_distribution_density_24.png, not the full image width.
+      */
+      const plotLeftPercent = 9.5;
+      const plotRightPercent = 93.5;
+
+      return plotLeftPercent + fraction * (plotRightPercent - plotLeftPercent);
   }
 
   function updateScoreMarker(result) {
-    const score = getModelScore(result);
-    const markerLeft = scoreToMarkerLeft(score);
+      const score = getModelScore(result);
 
-    scoreMarker.style.left = `${markerLeft}%`;
-    scoreMarker.classList.add("show");
+      if (score === null) {
+          scoreMarker.classList.remove("show");
+          return;
+      }
+
+      const markerLeft = scoreToMarkerLeft(score);
+      scoreMarker.style.left = `${markerLeft}%`;
+      scoreMarker.classList.add("show");
   }
 
   function openModal() {
