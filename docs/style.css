@@ -951,3 +951,18 @@ p {
 .hero-home .visual-board {
   transform: translateX(24px);
 }
+
+.hero-home .flow-card {
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.hero-home .flow-card p {
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.hero-home .mock-body {
+  padding-left: 40px;
+  padding-right: 40px;
+}
