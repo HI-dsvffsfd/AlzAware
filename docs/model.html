@@ -439,6 +439,26 @@
       text-align: center;
     }
 
+    .guidance-card {
+      border: 1px solid #b8dcff;
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 18px;
+      background: #f3f9ff;
+    }
+
+    .guidance-card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #1463ff;
+    }
+
+    .guidance-card p {
+      font-size: 15px;
+      line-height: 1.55;
+      margin: 0;
+      color: #2f4156;
+    }
     .modal-actions {
       display: flex;
       justify-content: flex-end;
@@ -695,10 +715,15 @@
       </div>
     </div>
 
-    <div class="modal-actions">
-      <button class="btn-modal-secondary" id="goAssessmentButton" type="button">Go to Assessment</button>
-      <button class="btn-modal-primary" id="closeModalBottom" type="button">Close</button>
-    </div>
+      <div class="guidance-card">
+          <h3>Interpretation</h3>
+          <p id="guidanceText"></p>
+      </div>
+
+      <div class="modal-actions">
+          <button class="btn-modal-secondary" id="goAssessmentButton" type="button">Go to Assessment</button>
+          <button class="btn-modal-primary" id="closeModalBottom" type="button">Close</button>
+      </div>
   </div>
 </div>
 
@@ -746,12 +771,31 @@
   const goAssessmentButton = document.getElementById("goAssessmentButton");
   const scoreMarker = document.getElementById("scoreMarker");
   const modalScoreMarker = document.getElementById("modalScoreMarker");
+  const guidanceText = document.getElementById("guidanceText");
 
   function clampPercent(value) {
     const numberValue = Number(value);
     if (!Number.isFinite(numberValue)) return 0;
     return Math.max(0, Math.min(100, numberValue));
   }
+
+    function getRiskClass(adPercent) {
+      if (adPercent < 10) return "risk-low";
+      if (adPercent <= 30) return "risk-medium";
+      return "risk-high";
+    }
+
+    function getGuidance(adPercent) {
+      if (adPercent < 10) {
+        return "Your predicted score falls in a lower reference range. If you have memory or cognitive concerns, please consult a qualified healthcare professional.";
+      }
+
+      if (adPercent <= 30) {
+        return "Your predicted score falls in a moderate reference range. If memory, attention, or daily functioning concerns are present, professional cognitive evaluation may be worth considering.";
+      }
+
+      return "Your predicted score falls in a higher reference range. We strongly recommend arranging a professional cognitive evaluation as soon as possible. AlzAware is not a diagnostic tool, but this result may indicate that clinical follow-up is necessary.";
+    }
 
   function getModelScore(result) {
     const possibleKeys = [
@@ -819,14 +863,19 @@
   }
 
   function showResult(result) {
-    const adPercent = clampPercent(result.ad_lower_or_equal_percent);
-    const nonAdPercent = clampPercent(result.non_ad_lower_or_equal_percent);
+      const adPercent = clampPercent(result.ad_lower_or_equal_percent);
+      const nonAdPercent = clampPercent(result.non_ad_lower_or_equal_percent);
+      const riskClass = getRiskClass(adPercent);
 
-    adSummaryPercent.textContent = `${adPercent.toFixed(1)}%`;
-    nonAdSummaryPercent.textContent = `${nonAdPercent.toFixed(1)}%`;
+      resultModal.classList.remove("risk-low", "risk-medium", "risk-high");
+      resultModal.classList.add(riskClass);
 
-    updateScoreMarker(result);
-    openModal();
+      adSummaryPercent.textContent = `${adPercent.toFixed(1)}%`;
+      nonAdSummaryPercent.textContent = `${nonAdPercent.toFixed(1)}%`;
+      guidanceText.textContent = getGuidance(adPercent);
+
+      updateScoreMarker(result);
+      openModal();
   }
 
   runDemoButton.addEventListener("click", async () => {
