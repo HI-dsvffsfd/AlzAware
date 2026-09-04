@@ -6,6 +6,70 @@
   <title>Model | AlzAware</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    .model-page h1 {
+      font-size: 52px;
+      line-height: 1.04;
+      color: #0f172a;
+    }
+
+    .model-page h2 {
+      font-size: 30px;
+      line-height: 1.16;
+      color: #0f172a;
+    }
+
+    .model-page h3 {
+      font-size: 19px;
+      line-height: 1.28;
+    }
+
+    .model-page p {
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .model-page .lead {
+      font-size: 19px;
+      line-height: 1.6;
+    }
+
+    .model-page .eyebrow {
+      color: #0891b2;
+    }
+
+    .model-page .btn-primary,
+    .model-page .demo-button,
+    .model-page .btn-modal-primary {
+      background: linear-gradient(135deg, #0891b2, #1463ff);
+      border-color: #1463ff;
+    }
+
+    .model-page .btn-primary:hover,
+    .model-page .demo-button:hover,
+    .model-page .btn-modal-primary:hover {
+      background: linear-gradient(135deg, #087ea4, #0f4ed8);
+    }
+
+    .model-page .btn-secondary,
+    .model-page .btn-modal-secondary {
+      color: #1463ff;
+      border-color: #1463ff;
+    }
+
+    .model-page .btn-secondary:hover,
+    .model-page .btn-modal-secondary:hover {
+      background: #eff6ff;
+    }
+
+    .model-page .icon-mark,
+    .model-page .flow-number {
+      background: linear-gradient(135deg, #0891b2, #1463ff);
+    }
+
+    .timeline-item {
+      border-left-color: #0891b2;
+    }
+
     .evidence-block {
       display: grid;
       grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
@@ -13,10 +77,64 @@
       align-items: center;
     }
 
+    .model-demo-section {
+      padding-top: 36px;
+      padding-bottom: 36px;
+    }
+
+    .demo-panel {
+      background: #ffffff;
+      border: 1px solid #bae6fd;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .demo-panel p {
+      max-width: 760px;
+    }
+
+    .demo-actions {
+      margin-top: 24px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .demo-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .demo-button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .demo-error {
+      display: none;
+      margin-top: 18px;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 15px;
+    }
+
     .chart-placeholder {
       min-height: 320px;
       background: #ffffff;
-      border: 1px solid #9ee7dd;
+      border: 1px solid #bae6fd;
       border-radius: 8px;
       padding: 22px;
       display: grid;
@@ -31,23 +149,6 @@
       height: auto;
       border-radius: 8px;
       object-fit: contain;
-    }
-
-    .chart-placeholder .placeholder-logo {
-      width: 150px;
-      height: 150px;
-      object-fit: contain;
-      opacity: 0.85;
-      margin-bottom: 18px;
-    }
-
-    .chart-placeholder h3 {
-      color: #0f766e;
-    }
-
-    .chart-placeholder p {
-      font-size: 15px;
-      max-width: 420px;
     }
 
     .auc-metrics {
@@ -66,7 +167,7 @@
 
     .auc-card strong {
       display: block;
-      color: #0f766e;
+      color: #1463ff;
       font-size: 28px;
       line-height: 1;
       margin-bottom: 8px;
@@ -74,72 +175,13 @@
 
     .auc-card span {
       color: #2f4156;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
     }
 
     .auc-card.highlight {
-      border-color: #0f766e;
-      box-shadow: 0 12px 28px rgba(15, 118, 110, 0.14);
-    }
-
-    .mini-disclaimer {
-      font-size: 14px;
-      color: #687789;
-      line-height: 1.6;
-      margin-top: 12px;
-    }
-
-    .demo-panel {
-      background: #ffffff;
-      border: 1px solid #9ee7dd;
-      border-radius: 8px;
-      padding: 28px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-    }
-
-    .demo-panel p {
-      font-size: 16px;
-      max-width: 720px;
-    }
-
-    .demo-actions {
-      margin-top: 24px;
-    }
-
-    .demo-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 0 22px;
-      border: 0;
-      border-radius: 8px;
-      background: #0f766e;
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    .demo-button:hover {
-      background: #0b5f59;
-    }
-
-    .demo-button:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
-    .demo-error {
-      display: none;
-      margin-top: 18px;
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #991b1b;
-      border-radius: 8px;
-      padding: 14px;
-      font-size: 15px;
+      border-color: #1463ff;
+      box-shadow: 0 12px 28px rgba(20, 99, 255, 0.14);
     }
 
     .modal-overlay {
@@ -183,7 +225,7 @@
     }
 
     .modal-close:hover {
-      color: #0f766e;
+      color: #1463ff;
     }
 
     .modal-header {
@@ -198,23 +240,30 @@
     }
 
     .modal-header p {
-      font-size: 16px;
+      font-size: 15px;
       color: #687789;
     }
 
     .result-summary {
-      background: #f7fbfa;
-      border: 1px solid #d8e5e2;
+      background: #f7fbff;
+      border: 1px solid #bfdbfe;
       border-radius: 8px;
       padding: 22px;
       margin-bottom: 24px;
     }
 
     .result-summary p {
-      font-size: 17px;
-      line-height: 1.65;
+      font-size: 16px;
+      line-height: 1.6;
       margin: 0 0 12px;
       color: #2f4156;
+    }
+
+    .score-line {
+      color: #1463ff;
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1;
     }
 
     .percent-row {
@@ -228,13 +277,13 @@
 
     .percent-row span {
       color: #2f4156;
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.45;
       font-weight: 700;
     }
 
     .percent-value {
-      color: #0f766e;
+      color: #1463ff;
       font-size: 28px;
       font-weight: 900;
       line-height: 1;
@@ -243,22 +292,23 @@
 
     .comparison-bars {
       display: grid;
-      gap: 22px;
-      margin: 24px 0;
+      gap: 28px;
+      margin: 26px 0;
     }
 
     .comparison-label {
       color: #2f4156;
       font-size: 15px;
       font-weight: 800;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .comparison-track {
-      height: 14px;
+      height: 16px;
       background: #e5e7eb;
       border-radius: 999px;
-      overflow: hidden;
+      position: relative;
+      overflow: visible;
     }
 
     .comparison-fill {
@@ -266,69 +316,61 @@
       height: 100%;
       border-radius: 999px;
       transition: width 1.1s ease;
+      background: linear-gradient(135deg, #0891b2, #1463ff);
+    }
+
+    .comparison-marker {
+      position: absolute;
+      top: 50%;
+      left: 0%;
+      width: 24px;
+      height: 24px;
+      border: 4px solid #ffffff;
+      border-radius: 999px;
+      background: #1463ff;
+      box-shadow: 0 8px 20px rgba(20, 99, 255, 0.32);
+      transform: translate(-50%, -50%);
+      transition: left 1.1s ease;
+    }
+
+    .comparison-marker span {
+      position: absolute;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      padding: 5px 8px;
+      border-radius: 6px;
+      background: #0f172a;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
     }
 
     .comparison-ticks {
       display: flex;
       justify-content: space-between;
       color: #94a3b8;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      margin-top: 7px;
-    }
-
-    .risk-low .comparison-fill {
-      background: #16a34a;
-    }
-
-    .risk-medium .comparison-fill {
-      background: #f59e0b;
-    }
-
-    .risk-high .comparison-fill {
-      background: #dc2626;
+      margin-top: 10px;
     }
 
     .guidance-card {
-      border: 1px solid;
+      border: 1px solid #bfdbfe;
       border-radius: 8px;
       padding: 20px;
       margin-top: 22px;
-    }
-
-    .risk-low .guidance-card {
-      background: #f0fdf4;
-      border-color: #86efac;
-    }
-
-    .risk-medium .guidance-card {
-      background: #fffbeb;
-      border-color: #fcd34d;
-    }
-
-    .risk-high .guidance-card {
-      background: #fef2f2;
-      border-color: #fca5a5;
+      background: #eff6ff;
     }
 
     .guidance-card h3 {
       margin: 0 0 10px;
-    }
-
-    .risk-low .guidance-card h3 {
-      color: #166534;
-    }
-
-    .risk-medium .guidance-card h3 {
-      color: #b45309;
-    }
-
-    .risk-high .guidance-card h3 {
-      color: #991b1b;
+      color: #1d4ed8;
     }
 
     .guidance-card p {
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.65;
       margin: 0;
       color: #2f4156;
@@ -342,26 +384,35 @@
       margin-top: 24px;
     }
 
-    .modal-actions button {
+    .modal-actions button,
+    .modal-actions a {
       width: auto;
       min-height: 44px;
       padding: 0 22px;
       border-radius: 8px;
       font-weight: 900;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .btn-modal-primary {
       border: 0;
-      background: #0f766e;
       color: #ffffff;
     }
 
-    .btn-modal-primary:hover {
-      background: #0b5f59;
+    .btn-modal-secondary {
+      background: #ffffff;
+      border: 1px solid #1463ff;
     }
 
     @media (max-width: 900px) {
+      .model-page h1 {
+        font-size: 40px;
+      }
+
       .evidence-block {
         grid-template-columns: 1fr;
       }
@@ -404,7 +455,7 @@
   </div>
 </header>
 
-<main class="page">
+<main class="page model-page">
   <section class="hero">
     <div>
       <p class="eyebrow">Technical model overview</p>
@@ -413,7 +464,7 @@
         AlzAware transforms demographic and health-history inputs into a machine-learning risk reference score trained on a large cognitive-health dataset.
       </p>
       <p class="lead">
-        The model identifies patterns associated with Alzheimer’s disease and translates them into an interpretable comparison against AD and non-AD reference groups.
+        The model identifies patterns associated with Alzheimer's disease and translates them into an interpretable comparison against AD and non-AD reference groups.
       </p>
     </div>
 
@@ -434,12 +485,27 @@
               <p>A gradient-boosted tree model learns nonlinear risk patterns from processed matrix data and outputs a continuous reference score.</p>
             </div>
             <div class="timeline-item">
-              <h3>Reference calibration</h3>
-              <p>The score is contextualized against AD and non-AD score distributions to make the output easier to interpret.</p>
+              <h3>Reference comparison</h3>
+              <p>The score is compared against AD and non-AD score distributions to make the output easier to interpret.</p>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section model-demo-section soft sky">
+    <div class="demo-panel">
+      <p class="eyebrow">Interactive model demo</p>
+      <h2>Run a sample assessment result</h2>
+      <p>
+        This demo submits a pre-loaded survey profile to the prediction backend and displays the same reference-style result used in the public assessment page.
+      </p>
+      <div class="demo-actions">
+        <button class="demo-button" id="runDemoButton" type="button">Run Demo</button>
+        <a class="btn-secondary" href="assessment.html">Go to Assessment</a>
+      </div>
+      <div class="demo-error" id="demoError"></div>
     </div>
   </section>
 
@@ -483,32 +549,16 @@
         <p class="eyebrow">Score behavior</p>
         <h2>Model scores separate AD and non-AD groups</h2>
         <p>
-            This distribution plot compares model scores for AD and non-AD participants in the reference dataset.
+          This distribution plot compares model scores for AD and non-AD participants in the reference dataset.
         </p>
         <p>
-            The AD curve is shifted to the right, meaning AD participants tend to receive higher model scores.
+          The AD curve is shifted to the right, meaning AD participants tend to receive higher model scores.
         </p>
       </div>
 
       <div class="chart-placeholder">
-        <div>
-          <img src="assets/score_distribution_density_24.png" alt="Model score density distribution by AD and non-AD reference group" />
-        </div>
+        <img src="assets/score_distribution_density_24.png" alt="Model score density distribution by AD and non-AD reference group" />
       </div>
-    </div>
-  </section>
-
-  <section class="section soft">
-    <div class="demo-panel">
-      <p class="eyebrow">Interactive model demo</p>
-      <h2>Run a sample assessment result</h2>
-      <p>
-        This demo submits a pre-loaded survey profile to the prediction backend and shows the same reference-style result used in the public assessment page.
-      </p>
-      <div class="demo-actions">
-        <button class="demo-button" id="runDemoButton" type="button">Run Demo</button>
-      </div>
-      <div class="demo-error" id="demoError"></div>
     </div>
   </section>
 </main>
@@ -524,7 +574,7 @@
 
     <div class="result-summary">
       <p><strong>Higher score means higher model-estimated risk of Alzheimer's disease.</strong></p>
-      <p>In our reference dataset:</p>
+      <p>Your score is: <span class="score-line" id="scoreValue">--</span></p>
 
       <div class="percent-row">
         <span>The AD group your score is higher than:</span>
@@ -542,6 +592,9 @@
         <div class="comparison-label">AD reference group</div>
         <div class="comparison-track">
           <div class="comparison-fill" id="adBar"></div>
+          <div class="comparison-marker" id="adMarker">
+            <span id="adMarkerLabel">--%</span>
+          </div>
         </div>
         <div class="comparison-ticks">
           <span>0%</span>
@@ -554,6 +607,9 @@
         <div class="comparison-label">Non-AD reference group</div>
         <div class="comparison-track">
           <div class="comparison-fill" id="nonAdBar"></div>
+          <div class="comparison-marker" id="nonAdMarker">
+            <span id="nonAdMarkerLabel">--%</span>
+          </div>
         </div>
         <div class="comparison-ticks">
           <span>0%</span>
@@ -569,6 +625,7 @@
     </div>
 
     <div class="modal-actions">
+      <a class="btn-modal-secondary" href="assessment.html">Go to Assessment</a>
       <button class="btn-modal-primary" id="closeModalBottom" type="button">Close</button>
     </div>
   </div>
@@ -611,10 +668,15 @@
   const runDemoButton = document.getElementById("runDemoButton");
   const demoError = document.getElementById("demoError");
   const resultModal = document.getElementById("resultModal");
+  const scoreValue = document.getElementById("scoreValue");
   const adSummaryPercent = document.getElementById("adSummaryPercent");
   const nonAdSummaryPercent = document.getElementById("nonAdSummaryPercent");
   const adBar = document.getElementById("adBar");
   const nonAdBar = document.getElementById("nonAdBar");
+  const adMarker = document.getElementById("adMarker");
+  const nonAdMarker = document.getElementById("nonAdMarker");
+  const adMarkerLabel = document.getElementById("adMarkerLabel");
+  const nonAdMarkerLabel = document.getElementById("nonAdMarkerLabel");
   const guidanceText = document.getElementById("guidanceText");
   const closeModalTop = document.getElementById("closeModalTop");
   const closeModalBottom = document.getElementById("closeModalBottom");
@@ -623,12 +685,6 @@
     const numberValue = Number(value);
     if (!Number.isFinite(numberValue)) return 0;
     return Math.max(0, Math.min(100, numberValue));
-  }
-
-  function getRiskClass(adPercent) {
-    if (adPercent < 10) return "risk-low";
-    if (adPercent <= 30) return "risk-medium";
-    return "risk-high";
   }
 
   function getGuidance(adPercent) {
@@ -658,17 +714,19 @@
   function showResult(result) {
     const adPercent = clampPercent(result.ad_lower_or_equal_percent);
     const nonAdPercent = clampPercent(result.non_ad_lower_or_equal_percent);
-    const riskClass = getRiskClass(adPercent);
+    const score = Number(result.score);
 
-    resultModal.classList.remove("risk-low", "risk-medium", "risk-high");
-    resultModal.classList.add(riskClass);
-
+    scoreValue.textContent = Number.isFinite(score) ? score.toFixed(4) : "--";
     adSummaryPercent.textContent = `${adPercent.toFixed(1)}%`;
     nonAdSummaryPercent.textContent = `${nonAdPercent.toFixed(1)}%`;
     guidanceText.textContent = getGuidance(adPercent);
 
     adBar.style.width = "0%";
     nonAdBar.style.width = "0%";
+    adMarker.style.left = "0%";
+    nonAdMarker.style.left = "0%";
+    adMarkerLabel.textContent = `${adPercent.toFixed(1)}%`;
+    nonAdMarkerLabel.textContent = `${nonAdPercent.toFixed(1)}%`;
 
     openModal();
 
@@ -676,6 +734,8 @@
       window.requestAnimationFrame(() => {
         adBar.style.width = `${adPercent}%`;
         nonAdBar.style.width = `${nonAdPercent}%`;
+        adMarker.style.left = `${adPercent}%`;
+        nonAdMarker.style.left = `${nonAdPercent}%`;
       });
     });
   }
