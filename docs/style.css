@@ -899,8 +899,8 @@ p {
 .score-marker::before {
   content: "";
   position: absolute;
-  top: 24%;
-  bottom: 7%;
+    top: 38%;
+    bottom: 13%;
   left: -2px;
   width: 4px;
   background: #f59e0b;
