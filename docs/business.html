@@ -5,19 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Business & Impact | AlzAware</title>
   <link rel="stylesheet" href="style.css" />
+
   <style>
+    .business-page {
+      padding-bottom: 20px;
+    }
+
     .business-hero {
       text-align: center;
-      padding: 74px 0 48px;
+      padding: 74px 0 52px;
     }
 
     .business-hero h1 {
-      color: #0f766e;
+      color: #1463ff;
+      font-size: clamp(42px, 4.4vw, 58px);
+      line-height: 1.08;
     }
 
     .business-hero .lead {
       margin-left: auto;
       margin-right: auto;
+      max-width: 850px;
     }
 
     .impact-stats {
@@ -29,7 +37,7 @@
 
     .stat-panel {
       background: #ffffff;
-      border: 1px solid #9ee7dd;
+      border: 1px solid #b8dcff;
       border-radius: 8px;
       padding: 24px;
       text-align: left;
@@ -38,7 +46,7 @@
 
     .stat-panel strong {
       display: block;
-      color: #0f766e;
+      color: #1463ff;
       font-size: 34px;
       line-height: 1;
       margin-bottom: 10px;
@@ -58,35 +66,94 @@
     }
 
     .source-note a {
-      color: #0f766e;
+      color: #1463ff;
       font-weight: 700;
       text-decoration: none;
     }
 
-    .value-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px;
+    .source-note a:hover {
+      text-decoration: underline;
     }
 
+    .section-head.compact {
+      max-width: 860px;
+      margin-bottom: 30px;
+    }
+
+    .section-head.compact h2 {
+      color: #101827;
+    }
+
+    .section-head.compact p {
+      max-width: 780px;
+    }
+
+    .highlight-card,
     .value-card {
       background: #ffffff;
-      border: 1px solid #d8e5e2;
+      border: 1px solid #d7e6f2;
       border-radius: 8px;
       padding: 26px;
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
     }
 
-    .value-card h3 {
-      color: #0f766e;
+    .highlight-card {
+      border-color: #b8dcff;
+      background: #f3f9ff;
     }
 
+    .highlight-card h3,
+    .value-card h3 {
+      color: #1463ff;
+    }
+
+    .highlight-card p,
     .value-card p {
       font-size: 16px;
     }
 
+    .solution-grid .card {
+      border-color: #d7e6f2;
+    }
+
+    .solution-grid .card h3 {
+      color: #1463ff;
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .market-card {
+      background: #ffffff;
+      border: 1px solid #d7e6f2;
+      border-radius: 8px;
+      padding: 26px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .market-card h3 {
+      color: #1463ff;
+    }
+
+    .market-card p {
+      font-size: 16px;
+    }
+
+    .market-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #0488a8;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
     .big-value {
-      color: #0f766e;
+      color: #1463ff;
       font-size: 42px;
       font-weight: 900;
       line-height: 1;
@@ -95,7 +162,7 @@
 
     .roadmap {
       display: grid;
-      gap: 20px;
+      gap: 18px;
     }
 
     .roadmap-step {
@@ -104,7 +171,7 @@
       gap: 18px;
       align-items: start;
       background: #ffffff;
-      border: 1px solid #9ee7dd;
+      border: 1px solid #b8dcff;
       border-radius: 8px;
       padding: 24px;
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
@@ -114,21 +181,34 @@
       width: 44px;
       height: 44px;
       border-radius: 8px;
-      background: #0f766e;
+      background: linear-gradient(135deg, #0891b2, #1463ff);
       color: #ffffff;
       display: grid;
       place-items: center;
       font-weight: 900;
     }
 
+    .roadmap-step h3 {
+      color: #1463ff;
+    }
+
+    .roadmap-step p {
+      font-size: 16px;
+    }
+
     @media (max-width: 900px) {
       .impact-stats,
-      .value-grid {
+      .market-grid {
         grid-template-columns: 1fr;
+      }
+
+      .business-hero {
+        padding: 56px 0 42px;
       }
     }
   </style>
 </head>
+
 <body>
 <header class="site-header">
   <div class="nav-shell">
@@ -136,6 +216,7 @@
       <img src="assets/logo.png" alt="AlzAware logo" />
       <span>AlzAware</span>
     </a>
+
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="model.html">Model</a>
@@ -146,12 +227,12 @@
   </div>
 </header>
 
-<main class="page">
+<main class="page business-page">
   <section class="business-hero">
-    <p class="eyebrow">Business & impact</p>
-    <h1>Turning early cognitive risk awareness into scalable public health value</h1>
+    <h1>Business & Impact</h1>
+
     <p class="lead">
-      AlzAware is designed as a low-cost digital triage platform that helps older adults, families, clinics, and senior-care organizations identify when professional cognitive evaluation may be worth considering.
+      AlzAware is designed as a low-cost digital triage platform that helps older adults, families, clinics, and senior-care organizations recognize when professional cognitive evaluation may be worth considering.
     </p>
 
     <div class="impact-stats">
@@ -159,14 +240,17 @@
         <strong>7.4M</strong>
         <p>Americans age 65 and older are estimated to be living with Alzheimer's dementia in 2026.</p>
       </div>
+
       <div class="stat-panel">
         <strong>$409B</strong>
         <p>Projected U.S. health and long-term care costs for Alzheimer's and other dementias in 2026.</p>
       </div>
+
       <div class="stat-panel">
         <strong>$1T</strong>
         <p>Projected annual U.S. dementia-related care costs by 2050 if the burden continues to rise.</p>
       </div>
+
       <div class="stat-panel">
         <strong>19B+</strong>
         <p>Hours of unpaid caregiving were provided by family and friends in 2025.</p>
@@ -181,87 +265,86 @@
     </p>
   </section>
 
-  <section class="section soft amber">
+  <section class="section soft">
     <div class="split">
       <div>
-        <p class="eyebrow">The problem</p>
-        <h2>Formal diagnosis is important, but first-step access is limited</h2>
+        <h2>The problem</h2>
         <p>
-          Alzheimer's disease is progressive and difficult to predict because risk is shaped by age, health history, cognitive performance, genetics, and many other factors.
+          Alzheimer's disease is often recognized after years of subtle cognitive change. Formal evaluation is clinically important, but it can involve appointments, cognitive testing, laboratory work, imaging, or specialist referral.
         </p>
         <p>
-          Current evaluation may involve cognitive testing, blood tests, brain imaging, amyloid PET scans, or spinal fluid testing. These tools are clinically important, but they can be expensive, time-consuming, and inaccessible for many older adults.
+          For many families, clinics, and senior-care settings, the first step is the hardest: knowing when a concern deserves follow-up.
         </p>
       </div>
-      <div class="card">
+
+      <div class="highlight-card">
         <h3>The opportunity</h3>
         <p>
-          A low-cost digital risk reference tool can help people decide when to seek formal evaluation, while helping clinics and care organizations prioritize limited clinical resources.
+          A low-cost digital reference tool can support earlier conversations, help prioritize limited clinical resources, and guide people toward appropriate professional evaluation without claiming to diagnose disease.
         </p>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="section-head">
-      <p class="eyebrow">Solution</p>
+    <div class="section-head compact">
       <h2>A scalable first step before higher-cost evaluation</h2>
       <p>
-        AlzAware does not replace doctors or clinical testing. It creates a low-friction triage layer that helps users interpret risk signals before deciding whether to pursue professional screening.
+        AlzAware creates a low-friction triage layer. Users answer simple health and demographic questions, receive a model-based reference score, and see how that score compares with AD and non-AD study samples.
       </p>
     </div>
 
-    <div class="card-grid">
+    <div class="card-grid solution-grid">
       <div class="card">
         <div class="icon-mark">1</div>
         <h3>Accessible</h3>
         <p>Runs through a browser-based assessment and requires no specialized equipment.</p>
       </div>
+
       <div class="card">
         <div class="icon-mark">2</div>
         <h3>Interpretable</h3>
-        <p>Compares each result against AD and non-AD reference populations instead of presenting an unsupported diagnosis.</p>
+        <p>Compares each result with reference score distributions instead of presenting an unsupported diagnosis.</p>
       </div>
+
       <div class="card">
         <div class="icon-mark">3</div>
         <h3>Scalable</h3>
-        <p>Can be used by families, clinics, senior-care facilities, and community health programs at low marginal cost.</p>
+        <p>Can support families, clinics, senior-care facilities, and community health programs at low marginal cost.</p>
       </div>
     </div>
   </section>
 
-  <section class="section soft">
-    <div class="section-head">
-      <p class="eyebrow">Who benefits</p>
-      <h2>Economic value across families, clinics, and care systems</h2>
+  <section class="section soft sky">
+    <div class="section-head compact">
+      <h2>Who pays and who benefits</h2>
       <p>
-        AlzAware's value is not limited to individual users. At scale, early risk awareness can support better care navigation, reduce delayed evaluation, and help organizations use clinical resources more efficiently.
+        The strongest early business path is B2B: serving organizations that already support older adults and need practical tools for cognitive risk awareness.
       </p>
     </div>
 
-    <div class="value-grid">
-      <div class="value-card">
-        <h3>Older adults and families</h3>
+    <div class="market-grid">
+      <div class="market-card">
+        <span class="market-label">Senior care</span>
+        <h3>Resident screening</h3>
         <p>
-          Families can use a simple first-step assessment to decide whether memory or attention concerns deserve professional follow-up, reducing uncertainty and helping conversations start earlier.
+          Facilities could subscribe per resident or per assessment to support routine cognitive risk check-ins and family communication.
         </p>
       </div>
-      <div class="value-card">
-        <h3>Primary-care clinics</h3>
+
+      <div class="market-card">
+        <span class="market-label">Clinics</span>
+        <h3>Front-end triage</h3>
         <p>
-          Clinics can use a fast digital triage layer to prioritize patients who may need cognitive screening, specialist referral, or closer monitoring.
+          Primary-care clinics could use AlzAware to help identify patients who may need cognitive screening, specialist referral, or closer monitoring.
         </p>
       </div>
-      <div class="value-card">
-        <h3>Senior-care facilities</h3>
+
+      <div class="market-card">
+        <span class="market-label">Research</span>
+        <h3>Future partnerships</h3>
         <p>
-          Care organizations can run repeatable check-ins for residents and track risk signals over time, supporting earlier family and clinician communication.
-        </p>
-      </div>
-      <div class="value-card">
-        <h3>Health systems and insurers</h3>
-        <p>
-          A scalable triage tool could help reduce inefficient care pathways by guiding high-risk users toward evaluation while reassuring lower-risk users that routine follow-up may be enough.
+          Research groups and clinical-trial teams could use responsible pre-screening and longitudinal tracking to identify people for follow-up studies.
         </p>
       </div>
     </div>
@@ -270,13 +353,12 @@
   <section class="section">
     <div class="split">
       <div>
-        <p class="eyebrow">Economic potential</p>
-        <h2>Small efficiency gains can represent large system-level value</h2>
+        <h2>Economic potential</h2>
         <p>
-          Dementia care is already a multi-hundred-billion-dollar annual burden in the United States. If a low-cost digital triage layer helped reduce even 1% of avoidable friction, delayed evaluation, or inefficient care navigation against the projected 2026 cost burden, the implied system-level value would be roughly $4 billion.
+          Dementia care represents a multi-hundred-billion-dollar annual burden in the United States. If a low-cost triage layer helped reduce even 1% of avoidable delays, inefficient navigation, or unnecessary friction against the projected 2026 cost burden, the implied system-level value would be roughly $4 billion.
         </p>
         <p>
-          This is an illustrative scenario, not a guaranteed saving. It shows why scalable early-risk triage has meaningful economic potential.
+          This is an illustrative scenario, not a guaranteed saving. It shows why scalable early-risk triage has meaningful public-health and economic potential.
         </p>
       </div>
 
@@ -290,35 +372,12 @@
     </div>
   </section>
 
-  <section class="section soft sky">
-    <div class="section-head">
-      <p class="eyebrow">Business model</p>
-      <h2>A B2B platform with public-health reach</h2>
+  <section class="section soft">
+    <div class="section-head compact">
+      <h2>From prototype to pilots</h2>
       <p>
-        The strongest early business path is not selling diagnosis to individuals. It is offering a responsible risk-triage platform to organizations that already support older adults.
+        The next step is not immediate medical deployment. It is careful validation of usability, interpretation, and responsible follow-up workflows.
       </p>
-    </div>
-
-    <div class="card-grid">
-      <div class="card">
-        <h3>Senior-care subscriptions</h3>
-        <p>Facilities pay per resident or per assessment to support routine cognitive risk awareness and family communication.</p>
-      </div>
-      <div class="card">
-        <h3>Clinic licensing</h3>
-        <p>Primary-care clinics license the tool as a front-end triage workflow before formal cognitive screening or referral.</p>
-      </div>
-      <div class="card">
-        <h3>Research partnerships</h3>
-        <p>Future partnerships could support clinical-trial pre-screening, longitudinal monitoring, and anonymized model improvement.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-head">
-      <p class="eyebrow">Customer acquisition strategy</p>
-      <h2>From prototype to scalable pilots</h2>
     </div>
 
     <div class="roadmap">
@@ -327,7 +386,7 @@
         <div>
           <h3>Prototype validation</h3>
           <p>
-            Use the website, assessment page, and demo video to validate messaging, usability, result interpretation, and responsible medical boundaries.
+            Use the website, assessment page, and demo video to test whether users understand the score, comparison language, and medical disclaimer.
           </p>
         </div>
       </div>
@@ -337,7 +396,7 @@
         <div>
           <h3>Senior-care and community pilots</h3>
           <p>
-            Partner with senior-care facilities, caregiver groups, and community health programs to test whether AlzAware improves early conversations and follow-up decisions.
+            Partner with senior-care facilities, caregiver groups, and community health programs to evaluate whether AlzAware improves early conversations and follow-up decisions.
           </p>
         </div>
       </div>
@@ -345,46 +404,11 @@
       <div class="roadmap-step">
         <div class="roadmap-number">3</div>
         <div>
-          <h3>Clinic integration</h3>
+          <h3>Clinic and longitudinal expansion</h3>
           <p>
-            Expand into primary-care settings where clinicians need efficient tools to prioritize cognitive screening and specialist referrals.
+            Expand into primary-care settings and develop repeat assessments that track changes over time while preserving the boundary between risk awareness and diagnosis.
           </p>
         </div>
-      </div>
-
-      <div class="roadmap-step">
-        <div class="roadmap-number">4</div>
-        <div>
-          <h3>Longitudinal monitoring</h3>
-          <p>
-            Develop monthly or quarterly check-ins that track score changes over time, making subtle cognitive risk signals easier to notice.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section soft amber">
-    <div class="section-head">
-      <p class="eyebrow">Mission, vision, values</p>
-      <h2>Responsible innovation is part of the product</h2>
-      <p>
-        AlzAware is built around a clear medical boundary. It supports awareness, triage, and follow-up conversations, but it does not diagnose, treat, cure, or prevent Alzheimer's disease.
-      </p>
-    </div>
-
-    <div class="card-grid">
-      <div class="card">
-        <h3>Mission</h3>
-        <p>Make early cognitive risk awareness easier to access through a simple digital assessment and interpretable model output.</p>
-      </div>
-      <div class="card">
-        <h3>Vision</h3>
-        <p>Create a scalable first-step triage layer for families, clinics, senior-care organizations, and community health programs.</p>
-      </div>
-      <div class="card">
-        <h3>Values</h3>
-        <p>Accessibility, transparency, privacy, responsible AI, and respect for the difference between risk awareness and diagnosis.</p>
       </div>
     </div>
   </section>
