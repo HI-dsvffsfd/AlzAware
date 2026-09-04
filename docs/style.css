@@ -145,15 +145,15 @@ a {
 
 h1 {
   margin: 0;
-  font-size: 54px;
-  line-height: 1.03;
+  font-size: 50px;
+  line-height: 1.06;
   letter-spacing: 0;
 }
 
 h2 {
   margin: 0 0 14px;
-  font-size: 34px;
-  line-height: 1.16;
+  font-size: 32px;
+  line-height: 1.18;
 }
 
 h3 {
@@ -165,15 +165,15 @@ h3 {
 p {
   margin: 0;
   color: var(--text);
-  font-size: 18px;
-  line-height: 1.72;
+  font-size: 17px;
+  line-height: 1.68;
 }
 
 .lead {
   margin-top: 22px;
   max-width: 690px;
-  font-size: 21px;
-  line-height: 1.65;
+  font-size: 20px;
+  line-height: 1.62;
 }
 
 .actions {
@@ -496,7 +496,7 @@ p {
 
 .hero-home h1 {
   color: #1463ff;
-  font-size: 72px;
+  font-size: 66px;
   letter-spacing: 0;
 }
 
@@ -653,7 +653,7 @@ p {
 .who-title {
   margin-bottom: 22px;
   color: #1463ff;
-  font-size: 44px;
+  font-size: 40px;
   line-height: 1.05;
   font-weight: 900;
   letter-spacing: 0.04em;
@@ -671,15 +671,15 @@ p {
 
 .mission-head h2 {
   color: #0891b2;
-  font-size: 44px;
+  font-size: 40px;
   margin-bottom: 22px;
 }
 
 .mission-head p {
-  max-width: 940px;
+  max-width: 920px;
   margin: 0 auto;
-  font-size: 21px;
-  line-height: 1.75;
+  font-size: 19px;
+  line-height: 1.68;
 }
 
 .mission-grid {
