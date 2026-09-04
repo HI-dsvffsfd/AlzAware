@@ -389,6 +389,106 @@
         padding: 24px;
       }
     }
+    .model-page .hero {
+      padding: 92px 0 84px;
+    }
+
+    .model-page .section {
+      padding-top: 88px;
+      padding-bottom: 88px;
+    }
+
+    .model-demo-section {
+      padding-top: 78px !important;
+      padding-bottom: 78px !important;
+    }
+
+    .model-facts {
+      padding: 40px;
+    }
+
+    .demo-panel {
+      padding: 42px;
+    }
+
+    .evidence-block {
+      gap: 56px;
+    }
+
+    .chart-placeholder {
+      padding: 32px;
+    }
+
+    .model-bullets {
+      margin-top: 24px;
+      margin-bottom: 28px;
+    }
+
+    .model-bullets li {
+      margin-bottom: 8px;
+    }
+
+    .auc-metrics {
+      margin-top: 30px;
+    }
+
+    .result-modal {
+      width: min(820px, 100%);
+      padding: 40px;
+    }
+
+    .result-summary {
+      padding: 30px;
+    }
+
+    .percent-result {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .percent-result p {
+      background: #ffffff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 18px;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .percent-result strong {
+      display: block;
+      margin-top: 8px;
+      color: #1463ff;
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    @media (max-width: 720px) {
+      .model-page .hero,
+      .model-page .section,
+      .model-demo-section {
+        padding-top: 56px !important;
+        padding-bottom: 56px !important;
+      }
+
+      .percent-result {
+        grid-template-columns: 1fr;
+      }
+
+      .result-modal {
+        padding: 26px;
+      }
+    }
+
+    .percent-result span {
+      display: block;
+      margin-top: 10px;
+      color: #64748b;
+      font-size: 14px;
+      line-height: 1.45;
+    }
   </style>
 </head>
 <body>
@@ -518,10 +618,18 @@
       <p><strong>Higher score means higher model-estimated risk of Alzheimer's disease.</strong></p>
       <p>In our reference dataset:</p>
 
-      <div class="percent-result">
-        <p>The AD group your score is higher than: <strong id="adSummaryPercent">--%</strong></p>
-        <p>The non-AD group your score is higher than: <strong id="nonAdSummaryPercent">--%</strong></p>
-      </div>
+        <div class="percent-result">
+            <p>
+                AD reference group
+                <strong id="adSummaryPercent">--%</strong>
+                <span>Your score is higher than this percentage of the AD group.</span>
+            </p>
+            <p>
+                Non-AD reference group
+                <strong id="nonAdSummaryPercent">--%</strong>
+                <span>Your score is higher than this percentage of the non-AD group.</span>
+            </p>
+        </div>
     </div>
 
     <div class="modal-actions">
