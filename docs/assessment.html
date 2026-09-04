@@ -5,536 +5,542 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Assessment | AlzAware</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #eff8ff;
-      color: #101827;
-    }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eff8ff;
+    color: #101827;
+  }
 
-    .site-header {
-      background: rgba(255, 255, 255, 0.96);
-      border-bottom: 1px solid #d7e6f2;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+  .site-header {
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid #d7e6f2;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
 
+  .nav-shell {
+    max-width: 1220px;
+    min-height: 76px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-weight: 800;
+    color: #1463ff;
+    margin-right: auto;
+  }
+
+  .brand img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .site-nav a {
+    text-decoration: none;
+    color: #101827;
+  }
+
+  .site-nav a:hover,
+  .site-nav .active {
+    color: #1463ff;
+  }
+
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 28px 18px 46px;
+  }
+
+  .hero {
+    margin: 0 0 18px;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #b8dcff;
+    border-radius: 8px;
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+  }
+
+  .heroContent {
+    max-width: 760px;
+  }
+
+  h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #101827;
+  }
+
+  .note {
+    margin: 0;
+    color: #475569;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  form {
+    margin: 0;
+    padding: 0;
+  }
+
+  section:not(.hero) {
+    background: #ffffff;
+    border: 1px solid #d7e6f2;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
+  }
+
+  h2 {
+    margin: 0 0 16px;
+    font-size: 18px;
+    color: #101827;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .field {
+    margin-bottom: 6px;
+  }
+
+  .fieldTitle {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #334155;
+  }
+
+  input[type="number"],
+  select {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+    background: #ffffff;
+    color: #101827;
+  }
+
+  input[type="number"]:focus,
+  select:focus {
+    outline: none;
+    border-color: #1463ff;
+    box-shadow: 0 0 0 3px rgba(20, 99, 255, 0.12);
+  }
+
+  .hint {
+    font-size: 14px;
+    font-weight: 400;
+    color: #64748b;
+  }
+
+  .checkboxItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 42px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .checkboxItem:hover {
+    border-color: #1463ff;
+    background: #f3f9ff;
+  }
+
+  .checkboxItem input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: #1463ff;
+  }
+
+  .checkboxItem span {
+    line-height: 1.3;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: #1463ff;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #0f4ed8;
+  }
+
+  button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .error {
+    display: none;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 18px;
+  }
+
+  .fieldError {
+    display: none;
+    margin-top: 8px;
+    color: #991b1b;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(15, 23, 42, 0.55);
+    z-index: 100;
+  }
+
+  .modal-overlay.show {
+    display: flex;
+  }
+
+  .result-modal {
+    width: min(760px, 100%);
+    max-height: 92vh;
+    overflow: auto;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    border: 0;
+    background: transparent;
+    color: #64748b;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    width: auto;
+    padding: 0;
+  }
+
+  .modal-close:hover {
+    background: transparent;
+    color: #1463ff;
+  }
+
+  .modal-header {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+
+  .modal-header h2 {
+    margin: 0;
+    color: #101827;
+    font-size: 27px;
+    line-height: 1.2;
+  }
+
+  .result-summary {
+    background: #f3f9ff;
+    border: 1px solid #b8dcff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 18px;
+  }
+
+  .result-summary p {
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0 0 14px;
+    color: #2f4156;
+  }
+
+  .percent-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: baseline;
+    padding: 11px 0;
+    border-top: 1px solid #d7e6f2;
+  }
+
+  .percent-row span {
+    color: #2f4156;
+    font-size: 14px;
+    line-height: 1.45;
+    font-weight: 700;
+  }
+
+  .percent-value {
+    color: #1463ff;
+    font-size: 25px;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .score-chart-card {
+    background: #ffffff;
+    border: 1px solid #d7e6f2;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 18px;
+  }
+
+  .score-chart-card h3 {
+    margin: 0 0 8px;
+    color: #101827;
+    font-size: 17px;
+    line-height: 1.25;
+  }
+
+  .score-chart-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .score-chart-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .score-marker {
+    display: none;
+    position: absolute;
+    top: 21%;
+    bottom: 20%;
+    width: 0;
+    pointer-events: none;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+
+  .score-marker.show {
+    display: block;
+  }
+
+  .score-marker::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -1.5px;
+    width: 3px;
+    border-radius: 999px;
+    background: #ef4444;
+    box-shadow: 0 0 14px rgba(239, 68, 68, 0.25);
+  }
+
+  .score-marker::after {
+    content: "";
+    position: absolute;
+    top: 43%;
+    left: -9px;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: #ef4444;
+    border: 4px solid #ffffff;
+    box-shadow: 0 6px 18px rgba(239, 68, 68, 0.3);
+  }
+
+  .guidance-card {
+    border: 1px solid #d7e6f2;
+    border-radius: 8px;
+    padding: 18px;
+    margin-top: 18px;
+    background: #ffffff;
+  }
+
+  .risk-low .guidance-card {
+    border-color: #bbf7d0;
+    background: #f0fdf4;
+  }
+
+  .risk-medium .guidance-card {
+    border-color: #fed7aa;
+    background: #fff7ed;
+  }
+
+  .risk-high .guidance-card {
+    border-color: #fecaca;
+    background: #fef2f2;
+  }
+
+  .guidance-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #101827;
+  }
+
+  .risk-low .guidance-card h3 {
+    color: #166534;
+  }
+
+  .risk-medium .guidance-card h3 {
+    color: #b45309;
+  }
+
+  .risk-high .guidance-card h3 {
+    color: #991b1b;
+  }
+
+  .guidance-card p {
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0;
+    color: #2f4156;
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .modal-actions button {
+    width: auto;
+    min-height: 44px;
+    padding: 0 22px;
+    border-radius: 8px;
+    font-weight: 900;
+    cursor: pointer;
+  }
+
+  .btn-modal-primary {
+    border: 0;
+    background: #1463ff;
+    color: #ffffff;
+  }
+
+  .btn-modal-primary:hover {
+    background: #0f4ed8;
+  }
+
+  .btn-modal-secondary {
+    background: #ffffff;
+    color: #1463ff;
+    border: 1px solid #1463ff;
+  }
+
+  .btn-modal-secondary:hover {
+    background: #edf6ff;
+  }
+
+  @media (max-width: 720px) {
     .nav-shell {
-      max-width: 1220px;
-      min-height: 76px;
-      margin: 0 auto;
-      padding: 0 28px;
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      font-weight: 800;
-      color: #1463ff;
-      margin-right: auto;
-    }
-
-    .brand img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 14px 18px;
     }
 
     .site-nav {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .site-nav a {
-      text-decoration: none;
-      color: #101827;
-    }
-
-    .site-nav a:hover,
-    .site-nav .active {
-      color: #1463ff;
+      order: 3;
+      width: 100%;
+      flex-wrap: wrap;
+      gap: 12px 18px;
     }
 
     main {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 28px 18px 46px;
+      padding: 18px 14px 34px;
     }
 
     .hero {
-      margin: 0 0 18px;
-      padding: 24px;
-      background: #ffffff;
-      border: 1px solid #b8dcff;
-      border-radius: 8px;
-      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
-    }
-
-    .heroContent {
-      max-width: 760px;
+      padding: 18px;
     }
 
     h1 {
-      margin: 0 0 8px;
-      font-size: 30px;
-      line-height: 1.2;
-      font-weight: 800;
-      color: #101827;
+      font-size: 28px;
     }
 
     .note {
-      margin: 0;
-      color: #475569;
-      font-size: 16px;
-      line-height: 1.55;
-    }
-
-    form {
-      margin: 0;
-      padding: 0;
-    }
-
-    section:not(.hero) {
-      background: #ffffff;
-      border: 1px solid #d7e6f2;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.05);
-    }
-
-    h2 {
-      margin: 0 0 16px;
-      font-size: 18px;
-      color: #101827;
+      font-size: 15px;
     }
 
     .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .field {
-      margin-bottom: 6px;
-    }
-
-    .fieldTitle {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #334155;
-    }
-
-    input[type="number"],
-    select {
-      width: 100%;
-      min-height: 42px;
-      padding: 10px 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      font-size: 15px;
-      background: #ffffff;
-      color: #101827;
-    }
-
-    input[type="number"]:focus,
-    select:focus {
-      outline: none;
-      border-color: #1463ff;
-      box-shadow: 0 0 0 3px rgba(20, 99, 255, 0.12);
-    }
-
-    .hint {
-      font-size: 14px;
-      font-weight: 400;
-      color: #64748b;
-    }
-
-    .checkboxItem {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 42px;
-      padding: 10px 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      background: #ffffff;
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    .checkboxItem:hover {
-      border-color: #1463ff;
-      background: #f3f9ff;
-    }
-
-    .checkboxItem input {
-      width: 18px;
-      height: 18px;
-      margin: 0;
-      accent-color: #1463ff;
-    }
-
-    .checkboxItem span {
-      line-height: 1.3;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px 18px;
-      border: 0;
-      border-radius: 8px;
-      background: #1463ff;
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #0f4ed8;
-    }
-
-    button:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
-    .error {
-      display: none;
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #991b1b;
-      border-radius: 8px;
-      padding: 16px;
-      margin-top: 18px;
-    }
-
-    .fieldError {
-      display: none;
-      margin-top: 8px;
-      color: #991b1b;
-      font-size: 14px;
-      line-height: 20px;
-    }
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(15, 23, 42, 0.55);
-      z-index: 100;
-    }
-
-    .modal-overlay.show {
-      display: flex;
+      grid-template-columns: 1fr;
     }
 
     .result-modal {
-      width: min(860px, 100%);
-      max-height: 92vh;
-      overflow: auto;
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 34px;
-      box-shadow: 0 28px 80px rgba(15, 23, 42, 0.28);
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 16px;
-      right: 18px;
-      border: 0;
-      background: transparent;
-      color: #64748b;
-      font-size: 30px;
-      line-height: 1;
-      cursor: pointer;
-      width: auto;
-      padding: 0;
-    }
-
-    .modal-close:hover {
-      background: transparent;
-      color: #1463ff;
-    }
-
-    .modal-header {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .modal-header h2 {
-      margin: 0;
-      color: #101827;
-      font-size: 30px;
-    }
-
-    .result-summary {
-      background: #f3f9ff;
-      border: 1px solid #b8dcff;
-      border-radius: 8px;
       padding: 24px;
-      margin-bottom: 22px;
-    }
-
-    .result-summary p {
-      font-size: 17px;
-      line-height: 1.65;
-      margin: 0 0 14px;
-      color: #2f4156;
-    }
-
-    .result-summary p:last-child {
-      margin-bottom: 0;
     }
 
     .percent-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 16px;
-      align-items: baseline;
-      padding: 13px 0;
-      border-top: 1px solid #d7e6f2;
-    }
-
-    .percent-row span {
-      color: #2f4156;
-      font-size: 16px;
-      line-height: 1.45;
-      font-weight: 700;
+      grid-template-columns: 1fr;
+      gap: 8px;
     }
 
     .percent-value {
-      color: #1463ff;
-      font-size: 28px;
-      font-weight: 900;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .score-chart-card {
-      background: #ffffff;
-      border: 1px solid #d7e6f2;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 22px;
-    }
-
-    .score-chart-card h3 {
-      margin: 0 0 14px;
-      color: #101827;
-      font-size: 19px;
-      line-height: 1.25;
+      font-size: 26px;
     }
 
     .score-chart-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .score-chart-wrap img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
-    }
-
-    .score-marker {
-      display: none;
-      position: absolute;
-      top: 18%;
-      bottom: 17%;
-      width: 0;
-      pointer-events: none;
-      transform: translateX(-50%);
-      z-index: 3;
-    }
-
-    .score-marker.show {
-      display: block;
-    }
-
-    .score-marker::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: -2px;
-      width: 4px;
-      border-radius: 999px;
-      background: #ef4444;
-      box-shadow: 0 0 14px rgba(239, 68, 68, 0.25);
-    }
-
-    .score-marker::after {
-      content: "";
-      position: absolute;
-      top: 42%;
-      left: -10px;
-      width: 20px;
-      height: 20px;
-      border-radius: 999px;
-      background: #ef4444;
-      border: 4px solid #ffffff;
-      box-shadow: 0 6px 18px rgba(239, 68, 68, 0.3);
-    }
-
-    .guidance-card {
-      border: 1px solid #d7e6f2;
-      border-radius: 8px;
-      padding: 20px;
-      margin-top: 22px;
-      background: #ffffff;
-    }
-
-    .risk-low .guidance-card {
-      border-color: #bbf7d0;
-      background: #f0fdf4;
-    }
-
-    .risk-medium .guidance-card {
-      border-color: #fed7aa;
-      background: #fff7ed;
-    }
-
-    .risk-high .guidance-card {
-      border-color: #fecaca;
-      background: #fef2f2;
-    }
-
-    .guidance-card h3 {
-      margin: 0 0 10px;
-      color: #101827;
-    }
-
-    .risk-low .guidance-card h3 {
-      color: #166534;
-    }
-
-    .risk-medium .guidance-card h3 {
-      color: #b45309;
-    }
-
-    .risk-high .guidance-card h3 {
-      color: #991b1b;
-    }
-
-    .guidance-card p {
-      font-size: 16px;
-      line-height: 1.65;
-      margin: 0;
-      color: #2f4156;
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 24px;
+      max-width: 100%;
     }
 
     .modal-actions button {
-      width: auto;
-      min-height: 44px;
-      padding: 0 22px;
-      border-radius: 8px;
-      font-weight: 900;
-      cursor: pointer;
+      width: 100%;
     }
-
-    .btn-modal-primary {
-      border: 0;
-      background: #1463ff;
-      color: #ffffff;
-    }
-
-    .btn-modal-primary:hover {
-      background: #0f4ed8;
-    }
-
-    .btn-modal-secondary {
-      background: #ffffff;
-      color: #1463ff;
-      border: 1px solid #1463ff;
-    }
-
-    .btn-modal-secondary:hover {
-      background: #edf6ff;
-    }
-
-    @media (max-width: 720px) {
-      .nav-shell {
-        align-items: flex-start;
-        flex-wrap: wrap;
-        padding: 14px 18px;
-      }
-
-      .site-nav {
-        order: 3;
-        width: 100%;
-        flex-wrap: wrap;
-        gap: 12px 18px;
-      }
-
-      main {
-        padding: 18px 14px 34px;
-      }
-
-      .hero {
-        padding: 18px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      .note {
-        font-size: 15px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .result-modal {
-        padding: 24px;
-      }
-
-      .percent-row {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-
-      .percent-value {
-        font-size: 26px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 
 <body>
@@ -686,7 +692,7 @@
     </div>
 
     <div class="score-chart-card">
-      <h3>Reference Score Distribution</h3>
+      <h3>Your Score on the Reference Distribution</h3>
       <div class="score-chart-wrap">
         <img src="assets/score_distribution_density_24_newColor.png" alt="Model score density distribution by AD and non-AD reference sample" />
         <div class="score-marker" id="scoreMarker" aria-hidden="true"></div>
