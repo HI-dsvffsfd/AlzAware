@@ -943,3 +943,11 @@ p {
     font-size: 16px;
   }
 }
+
+.home-copy .lead {
+  max-width: 760px;
+}
+
+.hero-home .visual-board {
+  transform: translateX(24px);
+}
