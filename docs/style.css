@@ -654,3 +654,189 @@ p {
   font-size: 14px;
   line-height: 1.35;
 }
+
+/* Home page update: OncoMap-inspired blue/cyan visual direction */
+.hero-home {
+  background: linear-gradient(135deg, #eefbff 0%, #eaf6ff 48%, #e8fbff 100%);
+}
+
+.hero-home h1 {
+  color: #1463ff;
+  font-size: 72px;
+  letter-spacing: 0;
+}
+
+.hero-logo {
+  width: 132px;
+  height: 132px;
+  object-fit: contain;
+  margin-bottom: 24px;
+}
+
+.home-copy .eyebrow,
+.home-mission .eyebrow {
+  color: #0891b2;
+}
+
+.hero-home .btn-primary {
+  background: linear-gradient(135deg, #0891b2, #1463ff);
+  border-color: #1463ff;
+}
+
+.hero-home .btn-primary:hover {
+  background: linear-gradient(135deg, #087ea4, #0f4ed8);
+}
+
+.hero-home .btn-secondary {
+  color: #1463ff;
+  border-color: #1463ff;
+}
+
+.hero-home .btn-secondary:hover {
+  background: #eff6ff;
+}
+
+.hero-home .visual-board {
+  border-color: #bae6fd;
+}
+
+.hero-home .flow-number {
+  background: linear-gradient(135deg, #0891b2, #1463ff);
+}
+
+.hero-home .sample-result {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.hero-home .sample-result p {
+  color: #0891b2;
+}
+
+.hero-home .sample-result span,
+.hero-home .sample-result strong {
+  color: #1e3a8a;
+}
+
+.who-title {
+  margin-bottom: 22px;
+  color: #1463ff;
+  font-size: 44px;
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.home-mission {
+  text-align: center;
+  background: #f0fbff !important;
+}
+
+.mission-head {
+  max-width: 960px;
+  margin: 0 auto 58px;
+}
+
+.mission-head h2 {
+  color: #0891b2;
+  font-size: 44px;
+  margin-bottom: 22px;
+}
+
+.mission-head p {
+  max-width: 940px;
+  margin: 0 auto;
+  font-size: 21px;
+  line-height: 1.75;
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 54px;
+  align-items: start;
+}
+
+.mission-item {
+  text-align: center;
+}
+
+.mission-item h3 {
+  color: #1463ff;
+  font-size: 25px;
+  margin-bottom: 12px;
+}
+
+.mission-item p {
+  max-width: 320px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.mission-icon {
+  width: 82px;
+  height: 82px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0891b2, #1463ff);
+  position: relative;
+}
+
+.prediction-icon::before {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border: 10px solid #ffffff;
+  border-radius: 50%;
+  top: 14px;
+  left: 14px;
+}
+
+.cost-icon::before {
+  content: "";
+  position: absolute;
+  width: 38px;
+  height: 10px;
+  background: #ffffff;
+  border-radius: 999px;
+  top: 36px;
+  left: 22px;
+}
+
+.access-icon::before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 5px solid #ffffff;
+  border-radius: 50%;
+  top: 21px;
+  left: 21px;
+}
+
+@media (max-width: 900px) {
+  .hero-home h1 {
+    font-size: 52px;
+  }
+
+  .hero-logo {
+    width: 104px;
+    height: 104px;
+  }
+
+  .mission-grid {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .who-title,
+  .mission-head h2 {
+    font-size: 36px;
+  }
+
+  .mission-head p {
+    font-size: 18px;
+  }
+}
