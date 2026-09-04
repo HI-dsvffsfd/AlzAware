@@ -1012,3 +1012,11 @@ p {
     font-size: 16px;
   }
 }
+
+.how-title {
+  margin: 0 0 26px;
+  color: #1463ff;
+  font-size: 34px;
+  line-height: 1.15;
+  font-weight: 900;
+}
