@@ -640,10 +640,13 @@
     <section>
       <h2>
         Medical History
-        <span class="hint">Which of the following have you experienced or are currently experiencing? (check <strong>all</strong> that apply)</span>
+        <span class="hint">Select at least one option. If none apply, select <strong>No Listed Conditions</strong>.</span>
       </h2>
 
       <div class="grid" id="medicalGrid"></div>
+      <div class="fieldError" id="medicalError">
+        Please select at least one option. If none apply, select No Listed Conditions.
+      </div>
     </section>
 
     <button id="submitButton" type="submit">Calculate Your Score</button>
@@ -660,32 +663,32 @@
       <h2>AlzAware Assessment Results</h2>
     </div>
 
-      <div class="result-layout">
-          <div class="result-summary">
-              <p><strong>Higher score means higher model-estimated risk of Alzheimer's disease.</strong></p>
-              <p>In our reference dataset:</p>
+    <div class="result-layout">
+      <div class="result-summary">
+        <p><strong>Higher score means higher model-estimated risk of Alzheimer's disease.</strong></p>
+        <p>In our reference dataset:</p>
 
-              <div class="percent-row">
-                  <span>In the AD sample your score is higher than:</span>
-                  <strong class="percent-value" id="adSummaryPercent">--%</strong>
-              </div>
+        <div class="percent-row">
+          <span>In the AD sample your score is higher than:</span>
+          <strong class="percent-value" id="adSummaryPercent">--%</strong>
+        </div>
 
-              <div class="percent-row">
-                  <span>In the non-AD sample your score is higher than:</span>
-                  <strong class="percent-value" id="nonAdSummaryPercent">--%</strong>
-              </div>
-          </div>
-
-          <div class="score-chart-card">
-              <h3>Your Score on the Reference Distribution</h3>
-              <div class="score-chart-wrap">
-                  <img src="assets/score_distribution_density_24_newColor.png"
-                       alt="Model score density distribution by AD and non-AD reference sample"/>
-                  <div class="score-marker" id="scoreMarker" aria-hidden="true"></div>
-              </div>
-                <p class="chart-note">Black line represents your predicted score</p>
-          </div>
+        <div class="percent-row">
+          <span>In the non-AD sample your score is higher than:</span>
+          <strong class="percent-value" id="nonAdSummaryPercent">--%</strong>
+        </div>
       </div>
+
+      <div class="score-chart-card">
+        <h3>Your Score on the Reference Distribution</h3>
+        <div class="score-chart-wrap">
+          <img src="assets/score_distribution_density_24_newColor.png"
+               alt="Model score density distribution by AD and non-AD reference sample" />
+          <div class="score-marker" id="scoreMarker" aria-hidden="true"></div>
+        </div>
+        <p class="chart-note">Black line represents your predicted score</p>
+      </div>
+    </div>
 
     <div class="guidance-card">
       <h3>Interpretation</h3>
@@ -737,6 +740,37 @@
     medicalGrid.appendChild(item);
   });
 
+  const ageInput = document.getElementById("ageInput");
+  const ageError = document.getElementById("ageError");
+  const medicalError = document.getElementById("medicalError");
+  const submitButton = document.getElementById("submitButton");
+  const errorBox = document.getElementById("errorBox");
+
+  const resultModal = document.getElementById("resultModal");
+  const adSummaryPercent = document.getElementById("adSummaryPercent");
+  const nonAdSummaryPercent = document.getElementById("nonAdSummaryPercent");
+  const guidanceText = document.getElementById("guidanceText");
+  const closeModalTop = document.getElementById("closeModalTop");
+  const closeModalBottom = document.getElementById("closeModalBottom");
+  const newAssessmentButton = document.getElementById("newAssessmentButton");
+  const scoreMarker = document.getElementById("scoreMarker");
+
+  function validateMedicalHistory() {
+    const hasSelection = medicalFields.some(([name]) => {
+      const input = document.querySelector(`input[name="${name}"]`);
+      return input && input.checked;
+    });
+
+    if (!hasSelection) {
+      medicalError.style.display = "block";
+      medicalGrid.scrollIntoView({ behavior: "smooth", block: "center" });
+      return false;
+    }
+
+    medicalError.style.display = "none";
+    return true;
+  }
+
   document.getElementById("riskForm").addEventListener("change", (event) => {
     if (event.target.name === "no_conditions" && event.target.checked) {
       medicalFields.forEach(([name]) => {
@@ -751,21 +785,9 @@
       const noConditions = document.querySelector('input[name="no_conditions"]');
       if (noConditions) noConditions.checked = false;
     }
+
+    validateMedicalHistory();
   });
-
-  const ageInput = document.getElementById("ageInput");
-  const ageError = document.getElementById("ageError");
-  const submitButton = document.getElementById("submitButton");
-  const errorBox = document.getElementById("errorBox");
-
-  const resultModal = document.getElementById("resultModal");
-  const adSummaryPercent = document.getElementById("adSummaryPercent");
-  const nonAdSummaryPercent = document.getElementById("nonAdSummaryPercent");
-  const guidanceText = document.getElementById("guidanceText");
-  const closeModalTop = document.getElementById("closeModalTop");
-  const closeModalBottom = document.getElementById("closeModalBottom");
-  const newAssessmentButton = document.getElementById("newAssessmentButton");
-  const scoreMarker = document.getElementById("scoreMarker");
 
   function validateAge() {
     const age = Number(ageInput.value);
@@ -900,6 +922,7 @@
 
     form.reset();
     ageError.style.display = "none";
+    medicalError.style.display = "none";
     ageInput.setCustomValidity("");
 
     errorBox.style.display = "none";
@@ -926,6 +949,10 @@
 
     if (!validateAge()) {
       ageInput.reportValidity();
+      return;
+    }
+
+    if (!validateMedicalHistory()) {
       return;
     }
 
