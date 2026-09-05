@@ -903,7 +903,7 @@ p {
     bottom: 15%;
   left: -2px;
   width: 4px;
-  background: #f59e0b;
+  background: #000000;
   border-radius: 999px;
   box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
 }
