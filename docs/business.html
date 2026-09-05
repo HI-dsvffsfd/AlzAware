@@ -88,6 +88,13 @@
       max-width: 780px;
     }
 
+    .challenge-opportunity {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: stretch;
+    }
+
     .highlight-card,
     .value-card {
       background: #ffffff;
@@ -198,7 +205,8 @@
 
     @media (max-width: 900px) {
       .impact-stats,
-      .market-grid {
+      .market-grid,
+      .challenge-opportunity {
         grid-template-columns: 1fr;
       }
 
@@ -266,21 +274,24 @@
   </section>
 
   <section class="section soft">
-    <div class="split">
-      <div>
-        <h2>The problem</h2>
-        <p>
-          Alzheimer's disease is often recognized after years of subtle cognitive change. Formal evaluation is clinically important, but it can involve appointments, cognitive testing, laboratory work, imaging, or specialist referral.
-        </p>
-        <p>
-          For many families, clinics, and senior-care settings, the first step is the hardest: knowing when a concern deserves follow-up.
-        </p>
+    <div class="challenge-opportunity">
+      <div class="highlight-card">
+        <h3>The Challenge</h3>
+          <p>
+              Alzheimer's disease is often recognized only after subtle cognitive changes have progressed.
+          </p>
+          <p>
+              Families, clinics, and senior-care teams need a simpler first step to decide when professional follow-up
+              may be needed.
+          </p>
       </div>
 
       <div class="highlight-card">
         <h3>The opportunity</h3>
         <p>
-          A low-cost digital reference tool can support earlier conversations, help prioritize limited clinical resources, and guide people toward appropriate professional evaluation without claiming to diagnose disease.
+            A low-cost digital reference tool can support earlier conversations,
+            help prioritize limited clinical resources,
+            and guide people toward appropriate professional evaluation.
         </p>
       </div>
     </div>
