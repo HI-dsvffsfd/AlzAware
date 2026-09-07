@@ -497,20 +497,6 @@ p {
 /*  flex: 0 0 220px !important;*/
 /*}*/
 
-@media (max-width: 800px) {
-  .team-section {
-    grid-template-columns: 1fr;
-  }
-
-  .team-visual {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .team-visual img {
-    height: 260px;
-  }
-}
-
 .educational-note {
   max-width: 900px;
   margin: 0 auto;
