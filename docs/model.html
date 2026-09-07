@@ -561,6 +561,17 @@
         width: 100%;
       }
     }
+
+    .auc-chart-placeholder {
+      padding: 18px;
+      min-height: 420px;
+    }
+
+    .auc-chart-placeholder .auc-roc-image {
+      width: 100%;
+      max-width: none;
+      height: auto;
+    }
   </style>
 </head>
 
@@ -642,9 +653,10 @@
         </div>
       </div>
 
-      <div class="chart-placeholder">
-        <img src="assets/roc_curve_train_test_24.png" alt="ROC curve showing training and testing AUC" />
-      </div>
+        <div class="chart-placeholder auc-chart-placeholder">
+            <img class="auc-roc-image" src="assets/roc_curve_train_test_24.png"
+                 alt="ROC curve showing training and testing AUC"/>
+        </div>
     </div>
   </section>
 
