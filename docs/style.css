@@ -468,21 +468,25 @@ p {
 /*}*/
 
 .team-visual {
-  display: grid !important;
-  grid-template-columns: repeat(2, 220px) !important;
-  justify-content: center;
-  align-items: center;
-  gap: 24px !important;
-  width: 100%;
-  margin-top: 24px;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 28px !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 24px auto 0 auto !important;
 }
 
 .team-visual img {
-  width: 220px !important;
-  height: 330px;
-  object-fit: cover;
-  border-radius: 8px;
-  display: block;
+  width: 260px !important;
+  max-width: 260px !important;
+  min-width: 260px !important;
+  height: 390px !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  display: block !important;
+  flex: 0 0 260px !important;
 }
 
 @media (max-width: 800px) {
