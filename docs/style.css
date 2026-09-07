@@ -469,15 +469,17 @@ p {
 
 .team-visual {
   display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 16px !important;
+  grid-template-columns: repeat(2, 220px) !important;
+  justify-content: center;
+  align-items: center;
+  gap: 24px !important;
   width: 100%;
   margin-top: 24px;
 }
 
 .team-visual img {
-  width: 100% !important;
-  height: 300px;
+  width: 220px !important;
+  height: 330px;
   object-fit: cover;
   border-radius: 8px;
   display: block;
