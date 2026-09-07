@@ -562,15 +562,20 @@
       }
     }
 
+    .auc-evidence-block {
+        grid-template-columns: minmax(0, 0.75fr) minmax(700px, 1.25fr);
+        gap: 42px;
+    }
+
     .auc-chart-placeholder {
-      padding: 18px;
-      min-height: 420px;
+        padding: 18px;
+        min-height: 420px;
     }
 
     .auc-chart-placeholder .auc-roc-image {
-      width: 100%;
-      max-width: none;
-      height: auto;
+        width: 100%;
+        max-width: none;
+        height: auto;
     }
   </style>
 </head>
@@ -629,7 +634,7 @@
   </section>
 
   <section class="section">
-    <div class="evidence-block">
+    <div class="evidence-block auc-evidence-block">
       <div>
         <h2>Model performance</h2>
 
