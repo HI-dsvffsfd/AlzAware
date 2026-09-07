@@ -455,14 +455,14 @@ p {
   background: #eff8ff;
   border: 1px solid #bae6fd;
   border-radius: 8px;
-  padding: 48px;
+  padding: 28px;
   display: grid;
   place-items: center;
   min-height: 360px;
 }
 
 .team-visual img {
-  width: min(260px, 80%);
+  width: min(400px, 95%);
   height: auto;
   object-fit: contain;
 }
