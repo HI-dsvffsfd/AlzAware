@@ -563,12 +563,17 @@
     }
 
     .auc-evidence-block {
-        grid-template-columns: minmax(0, 0.75fr) minmax(700px, 1.25fr);
-        gap: 42px;
+        grid-template-columns: minmax(520px, 0.95fr) minmax(760px, 1.35fr);
+        gap: 36px;
+    }
+
+    .model-page > .section:has(.auc-evidence-block) {
+      padding-left: max(28px, calc(50vw - 760px));
+      padding-right: max(28px, calc(50vw - 760px));
     }
 
     .auc-chart-placeholder {
-        padding: 18px;
+        padding: 14px;
         min-height: 420px;
     }
 
@@ -576,6 +581,7 @@
         width: 100%;
         max-width: none;
         height: auto;
+        display: block;
     }
   </style>
 </head>
