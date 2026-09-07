@@ -462,7 +462,7 @@ p {
 }
 
 .team-visual img {
-  width: min(260px, 80%);
+  width: min(360px, 100%);
   height: auto;
   object-fit: contain;
 }
